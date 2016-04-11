@@ -1,0 +1,18 @@
+{
+  "name": "issue-tracking-system",
+  "version": "0.0.0",
+  "homepage": "https://github.com/DiyanTonchev/Issue-Tracking-System.git",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.5.3",
+    "angular-route": "~1.5.3",
+    "angular-loader": "~1.5.3",
+    "angular-mocks": "~1.5.3",
+    "html5-boilerplate": "~5.2.0",
+    "jquery": "^2.2.3",
+    "bootstrap": "^3.3.6",
+    "angular-cookies": "^1.5.3",
+    "angular-sanitize": "^1.5.3"
+  }
+}

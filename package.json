@@ -1,0 +1,16 @@
+{
+    "name": "issue-tracking-system",
+    "private": true,
+    "version": "0.0.0",
+    "repository": "https://github.com/DiyanTonchev/Issue-Tracking-System.git",
+    "license": "MIT",
+    "devDependencies": {
+        "bower": "^1.3.1",
+        "http-server": "^0.6.1"
+    },
+    "scripts": {
+        "postinstall": "bower install",
+        "prestart": "npm install",
+        "start": "http-server -a localhost -p 8000 -c-1"
+    }
+}
