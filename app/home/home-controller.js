@@ -1,5 +1,6 @@
 angular.module('issueTrackingSystem.home',[
-    'issueTrackingSystem.users.authentication'
+    'issueTrackingSystem.users.authentication',
+    'issueTrackingSystem.home.directives'
 ])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/', {
