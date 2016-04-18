@@ -1,4 +1,4 @@
-angular.module('issueTrackingSystem.home.directives.dashboard', [])
+angular.module('issueTrackingSystem.home.directives')
     .directive('dashboard', [function () {
         return {
             restrict: 'A',
