@@ -7,7 +7,7 @@
     function dashboard() {
         var dashboard = {
             restrict: 'A',
-            templateUrl: 'app/home/templates/dashboard.html'
+            templateUrl: 'app/home/partials/dashboard.html'
         };
         
         return dashboard;

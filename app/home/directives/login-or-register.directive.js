@@ -7,7 +7,7 @@
     function loginOrRegister() {
         var loginOrRegister = {
             restrict: 'A',
-            templateUrl: 'app/home/templates/login-or-register.html'
+            templateUrl: 'app/home/partials/login-or-register.html'
         };
 
         return loginOrRegister;

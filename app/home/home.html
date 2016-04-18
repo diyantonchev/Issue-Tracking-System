@@ -1,2 +1,2 @@
-<div class="row" ng-if="vm.isAuthenticated" login-or-register></div>
-<div class="row" ng-if="!vm.isAuthenticated" dashboard></div>
+<div class="row" ng-show="vm.isAuthenticated" login-or-register></div>
+<div class="row" ng-show="!vm.isAuthenticated" dashboard></div>
