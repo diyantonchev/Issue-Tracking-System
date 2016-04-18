@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('issueTrackingSystem.home', [
-        'issueTrackingSystem.users.authentication',
+        'issueTrackingSystem.users',
         'issueTrackingSystem.home.directives'
     ])
         .config(['$routeProvider', function ($routeProvider) {

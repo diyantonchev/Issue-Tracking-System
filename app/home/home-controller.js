@@ -4,11 +4,11 @@
     angular.module('issueTrackingSystem.home')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = [];
+    HomeController.$inject = ['authentication'];
 
-    function HomeController() {
+    function HomeController(authentication) {
         var vm = this;
         vm.isAuthenticated = true;
     }
-    
+
 } ());
