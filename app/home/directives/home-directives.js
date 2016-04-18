@@ -1,1 +1,0 @@
-angular.module('issueTrackingSystem.home.directives', []);
