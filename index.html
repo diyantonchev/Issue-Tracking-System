@@ -6,8 +6,6 @@
     <title>Issue Tracking System</title>
     <link rel="stylesheet" href="styles/app.css">
     <link rel="stylesheet" href="app/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <script src="app/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="app/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 
 <body ng-controller="HomeController as vm">
@@ -41,12 +39,16 @@
     <div class="container">
         <div ng-view />
     </div>
+    <script src="app/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="app/bower_components/angular/angular.js"></script>
     <script src="app/bower_components/angular-route/angular-route.js"></script>
     <script src="app/bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="app/bower_components/noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+    <script src="app/bower_components/noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>  
+    <script src="app/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="app/app-module.js"></script>
+    <script src="app/config.js"></script>
     <script src="app/home/home-module.js"></script>
+    <script src="app/home/home-route-config.js"></script>
     <script src="app/home/home-controller.js"></script>
     <script src="app/home/directives/home-directives-module.js"></script>
     <script src="app/home/directives/login-or-register-directive.js"></script>
