@@ -2,8 +2,7 @@
     'use strict';
 
     angular.module('issueTrackingSystem.home', [
-        'issueTrackingSystem.users',
-        'issueTrackingSystem.home.directives'
+        'issueTrackingSystem.users'
     ]);
 
 } ());

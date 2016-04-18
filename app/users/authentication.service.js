@@ -7,10 +7,9 @@
     authentication.$inject = ['$http', '$q', 'BASE_URL'];
 
     function authentication($http, $q, BASE_URL) {
+        var authentication = {};
 
-        return {
-
-        };
+        return authentication;
     }
 
 } ());
