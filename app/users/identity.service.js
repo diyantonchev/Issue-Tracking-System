@@ -2,11 +2,11 @@
     'use strict';
 
     angular.module('issueTrackingSystem.users')
-        .factory('authService', authService);
+        .factory('identity', identity);
 
-    authService.$inject = ['$http', '$q', 'BASE_URL'];
+    identity.$inject = ['$http', '$q', 'BASE_URL'];
 
-    function authService($http, $q, BASE_URL) {
+    function identity($http, $q, BASE_URL) {
         var service = {
             isLoggedIn: isLoggedIn
         };

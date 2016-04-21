@@ -2,6 +2,5 @@
     'use strict';
 
     angular
-    .module('issueTrackingSystem.layout', []);
+        .module('issueTrackingSystem.layout', []);
 } ());
-

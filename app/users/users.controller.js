@@ -4,12 +4,12 @@
     angular.module('issueTrackingSystem.users')
         .controller('UsersController', UsersController);
 
-    UsersController.$inject = ['authService'];
+    UsersController.$inject = ['identity'];
 
-    function UsersController(authService) {
+    function UsersController(identity) {
         var vm = this;
         
-        vm.authService = authService;
+        vm.identity = identity;
     }
 
 } ());
