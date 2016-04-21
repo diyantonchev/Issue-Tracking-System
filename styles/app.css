@@ -25,3 +25,10 @@ body {
   border: 1px solid gray;
   border-radius: 10px;    
 }
+
+@media all and (max-width: 990px) {
+    .home-form {
+         height: 350px;
+    }
+   
+}
