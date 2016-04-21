@@ -17,6 +17,10 @@ body {
     margin-right: 10px;
 }
 
+.form-control.ng-invalid.ng-touched {
+    border-color:#E1231b;
+}
+
 .home-form .checkbox {
     margin-left: 10px;
 }

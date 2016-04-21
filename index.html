@@ -15,8 +15,8 @@
     <!-- endinject -->
 </head>
 
-<body ng-controller="HomeController as vm">
-    <div class="navbar navbar-default navbar-fixed-top">
+<body>
+    <div class="navbar navbar-default navbar-fixed-top"  ng-controller="UsersController as vm">
         <div class="container">
             <div class="navbar-header">
                 <a href="#/" class="navbar-brand">Issue Tracking System</a>
@@ -63,15 +63,15 @@
     <script src="app/app.config.js"></script>
 
     <!-- layout -->
-    <script src="app/layout/home.module.js"></script>
-    <script src="app/layout/home.config.route.js"></script>
-    <script src="app/layout/home.controller.js"></script>
-    <script src="app/layout/directives/login-or-register.directive.js"></script>
-    <script src="app/layout/directives/dashboard.directive.js"></script>
+    <script src="app/layout/layout.module.js"></script>
+    <script src="app/layout/layout.config.route.js"></script>
 
     <!-- users -->
     <script src="app/users/users.module.js"></script>
+    <script src="app/users/users.controller.js"></script>
     <script src="app/users/authentication.service.js"></script>
+    <script src="app/users/login.controller.js"></script>
+    <script src="app/users/register.controller.js"></script>
     <!-- endinject -->
 </body>
 
