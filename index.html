@@ -4,8 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Issue Tracking System</title>
-    <link rel="stylesheet" href="styles/app.css">
+    <!-- inject-vendor:css -->
+    <link rel="stylesheet" href="app/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="app/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="app/bower_components/loading-bar/loadingbar.css">
+    <!-- endinject -->
+
+    <!-- inject:css -->
+    <link rel="stylesheet" href="styles/app.css">
+    <!-- endinject -->
 </head>
 
 <body ng-controller="HomeController as vm">
@@ -39,21 +46,33 @@
     <div class="container">
         <div ng-view />
     </div>
+    <!-- inject-vendor:js -->
     <script src="app/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="app/bower_components/angular/angular.js"></script>
     <script src="app/bower_components/angular-route/angular-route.js"></script>
     <script src="app/bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="app/bower_components/noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>  
+    <script src="app/bower_components/noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
     <script src="app/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="app/bower_components/toastr/toastr.min.js"></script>
+    <script src="app/bower_components/loading-bar/jquery.loadingbar.min.js"></script>
+    <!-- endinject -->
+
+    <!-- inject:js -->
+    <!-- Bootstrapping -->
     <script src="app/app.module.js"></script>
     <script src="app/app.config.js"></script>
-    <script src="app/home/home.module.js"></script>
-    <script src="app/home/home.config.route.js"></script>
-    <script src="app/home/home.controller.js"></script>
-    <script src="app/home/directives/login-or-register.directive.js"></script>
-    <script src="app/home/directives/dashboard.directive.js"></script>
+
+    <!-- layout -->
+    <script src="app/layout/home.module.js"></script>
+    <script src="app/layout/home.config.route.js"></script>
+    <script src="app/layout/home.controller.js"></script>
+    <script src="app/layout/directives/login-or-register.directive.js"></script>
+    <script src="app/layout/directives/dashboard.directive.js"></script>
+
+    <!-- users -->
     <script src="app/users/users.module.js"></script>
     <script src="app/users/authentication.service.js"></script>
+    <!-- endinject -->
 </body>
 
 </html>
