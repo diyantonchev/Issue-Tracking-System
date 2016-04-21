@@ -16,32 +16,8 @@
 </head>
 
 <body>
-    <div class="navbar navbar-default navbar-fixed-top"  ng-controller="UsersController as vm">
-        <div class="container">
-            <div class="navbar-header">
-                <a href="#/" class="navbar-brand">Issue Tracking System</a>
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse" id="navbar-main">
-                <ul class="nav navbar-nav" ng-show="vm.isAuthenticated">
-                    <li>
-                        <a href="#/">Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="#/friendRequests">Projects</a>
-                    </li>
-                    <li>
-                        <a href="#/logout">Logout</a>
-                    </li>
-                </ul>
-
-            </div>
-        </div>
-    </div>
+    <header ng-include="'app/layout/partials/navbar.html'" ng-controller="UsersController as vm">
+    </header>
 
     <div class="container">
         <div ng-view />
@@ -69,7 +45,7 @@
     <!-- users -->
     <script src="app/users/users.module.js"></script>
     <script src="app/users/users.controller.js"></script>
-    <script src="app/users/authentication.service.js"></script>
+    <script src="app/users/auth.service.js"></script>
     <script src="app/users/login.controller.js"></script>
     <script src="app/users/register.controller.js"></script>
     <!-- endinject -->
