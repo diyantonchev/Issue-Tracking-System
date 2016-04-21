@@ -7,10 +7,13 @@
     authService.$inject = ['$http', '$q', 'BASE_URL'];
 
     function authService($http, $q, BASE_URL) {
-        var service = {};
+        var service = {
+            isLoggedIn: isLoggedIn
+        };
 
-        function ifLoggedIn() {
-            return sessionStorage.currentUser !== null;
+        function isLoggedIn() {
+           return sessionStorage.currentUser !== undefined;
+           //return true;
         }
 
         return service;

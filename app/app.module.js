@@ -4,7 +4,7 @@
     angular.module('issueTrackingSystem', [
         'ngRoute',
         'issueTrackingSystem.layout',
-        'issueTrackingSystem.users'
+        'issueTrackingSystem.users',
     ])
         .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/');
         

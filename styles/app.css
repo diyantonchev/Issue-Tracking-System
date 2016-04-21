@@ -30,9 +30,50 @@ body {
   border-radius: 10px;    
 }
 
-@media all and (max-width: 990px) {
+.jumbotron {
+    height: 270px;
+    padding-top: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.jumbotron > h1 {
+    font-size: 50px;
+    margin-bottom: 40px;   
+}
+
+.jumbotron > h2 {
+    font-size: 40px;
+}
+
+.jumbotron > .project-name {
+    margin-top: 15px;
+    font-size: 28px;
+    color: #36b4d8;
+}
+
+.table-container {
+    margin-top: 50px;
+}
+
+.table {
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.table  td:nth-child(odd) {
+    color: #36b4d8;
+}
+
+@media all and (max-width: 990px) {        
     .home-form {
          height: 350px;
     }
-   
+    
+    .jumbotron {
+        text-align: center;
+    }
+    
+   .table-container {   
+         margin-top: 10px;
+    }
 }
