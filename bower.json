@@ -16,6 +16,7 @@
     "angular-sanitize": "^1.5.3",
     "noty": "^2.3.8",
     "toastr": "^2.1.2",
-    "loading-bar": "*"
+    "loading-bar": "*",
+    "components-font-awesome": "^4.5.0"
   }
 }
