@@ -4,9 +4,9 @@
     angular.module('issueTrackingSystem.users')
         .controller('RegisterController', RegisterController);
 
-    RegisterController.$inject = ['$location', 'identity'];
+    RegisterController.$inject = ['$q', 'authentication'];
 
-    function RegisterController($location, identity) {
+    function RegisterController($q, authentication) {
         var vm = this;
 
         vm.userData = {
@@ -16,11 +16,10 @@
         };
 
         vm.savePassword = false;
-
         vm.register = register;
 
         function register() {
-            identity.register(vm.userData, success, error);
+            authentication.register(vm.userData, vm.savePassword, success, error);
         }
 
         function success(data) {
@@ -29,7 +28,9 @@
         }
 
         function error(errObj) {
+            //TODO toastr notify
             console.log(errObj.data.ModelState[""]);
+            return $q.reject(errObj);
         }
     }
 

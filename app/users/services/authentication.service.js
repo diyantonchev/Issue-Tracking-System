@@ -1,23 +1,21 @@
-(function () {
+(function name(params) {
     'use strict';
 
     angular.module('issueTrackingSystem.users')
-        .factory('identity', identity);
+        .factory('authentication', authentication);
 
-    identity.$inject = ['$http', '$q', 'BASE_SERVICE_URL'];
+    authentication.$inject = ['$http', 'BASE_SERVICE_URL'];
 
-    function identity($http, $q, BASE_SERVICE_URL) {
-
+    function authentication($http, BASE_SERVICE_URL) {
         var service = {
             register: register,
             login: login,
             logout: logout,
-            isLoggedIn: isLoggedIn
         };
 
         return service;
 
-        function register(userData, success, error) {
+        function register(userData, savePassword, success, error) {
             var registerUrl = BASE_SERVICE_URL + '/api/Account/Register/';
 
             var request = {
@@ -30,10 +28,10 @@
             };
 
             return $http(request)
-                .then(success, error)
-                .catch(function (err) {
-                    return $q.reject(err);
-                });
+                .then(function (response) {
+                    login(userData, savePassword, success, error);
+                })
+                .catch(error);
         }
 
         function login(userData, keepMeLogin, success, error) {
@@ -55,9 +53,7 @@
                         sessionStorage.currentUser = JSON.stringify(response.data);
                     }
                 })
-                .catch(function (err) {
-                    return $q.reject(err);
-                });
+                .catch(error);
         }
 
         function logout() {
@@ -67,12 +63,6 @@
                 delete localStorage.currentUser;
             }
         }
-
-        function isLoggedIn() {
-            return sessionStorage.currentUser !== undefined ||
-                localStorage.currentUser !== undefined;
-        }
-
     }
 
 } ());

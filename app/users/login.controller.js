@@ -4,9 +4,9 @@
     angular.module('issueTrackingSystem.users')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$location', 'identity'];
+    LoginController.$inject = ['$q', 'authentication'];
 
-    function LoginController($location, identity) {
+    function LoginController($q, authentication) {
         var vm = this;
 
         vm.userData = {
@@ -15,11 +15,10 @@
         };
 
         vm.keepMeLogin = false;
-
         vm.login = login;
 
         function login() {
-            identity.login(vm.userData, vm.keepMeLogin, success, error);
+            authentication.login(vm.userData, vm.keepMeLogin, success, error);
         }
 
         function success(data) {
@@ -28,7 +27,9 @@
         }
 
         function error(errObj) {
+            //TODO toastr notify
             console.log(errObj.data.error_description);
+            return $q.reject(errObj);
         }
     }
 } ());
