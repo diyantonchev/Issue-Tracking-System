@@ -1,2 +1,2 @@
-<div class="row" ng-show="!vm.identity.isLoggedIn()" ng-include="'app/users/partials/login-or-register.html'"></div>
-<div class="row" ng-show="vm.identity.isLoggedIn()" ng-include="'app/layout/partials/dashboard.html'"></div>
+<div class="row" ng-show="!vm.isLoggedIn()" ng-include="'app/users/partials/login-or-register.html'"></div>
+<div class="row" ng-show="vm.isLoggedIn()" ng-include="'app/layout/partials/dashboard.html'"></div>

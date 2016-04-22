@@ -61,7 +61,11 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.table  td:nth-child(odd) {
+.table thead {
+    font-weight: bold;
+}
+
+.table tbody td:nth-child(odd) {
     color: #36b4d8;
 }
 

@@ -4,21 +4,31 @@
     angular.module('issueTrackingSystem.users')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$location'];
+    LoginController.$inject = ['$location', 'identity'];
 
-    function LoginController($location) {
+    function LoginController($location, identity) {
         var vm = this;
 
         vm.userData = {
-            username: null,
+            email: null,
             password: null,
-            keepMeLogin: false
         };
+
+        vm.keepMeLogin = false;
 
         vm.login = login;
 
         function login() {
-            console.log(vm.userData);
+            identity.login(vm.userData, vm.keepMeLogin, success, error);
+        }
+
+        function success(data) {
+            //TODO toastr notify
+            console.log(data);
+        }
+
+        function error(errObj) {
+            console.log(errObj.data.error_description);
         }
     }
 } ());

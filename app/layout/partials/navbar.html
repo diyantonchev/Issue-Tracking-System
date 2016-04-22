@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-fixed-top">
+<div class="navbar navbar-default navbar-fixed-top" ng-controller="UsersController as vm">
     <div class="container">
         <div class="navbar-header">
             <a href="#/" class="navbar-brand">Issue Tracking System</a>
@@ -9,15 +9,15 @@
                 </button>
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
-            <ul class="nav navbar-nav" ng-show="vm.identity.isLoggedIn()">
+            <ul class="nav navbar-nav" ng-show="vm.isLoggedIn()">
                 <li>
                     <a href="#/">Dashboard</a>
                 </li>
                 <li>
-                    <a href="#/friendRequests">Projects</a>
+                    <a href="#/projects">Projects</a>
                 </li>
                 <li>
-                    <a href="#/logout">Logout</a>
+                    <a href="#/logout" ng-click="vm.logout()">Logout</a>
                 </li>
             </ul>
 

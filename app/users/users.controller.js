@@ -8,8 +8,18 @@
 
     function UsersController(identity) {
         var vm = this;
-        
-        vm.identity = identity;
+
+        vm.isLoggedIn = isLoggedIn;
+        vm.logout = logout;
+
+        function isLoggedIn() {
+            return identity.isLoggedIn();
+        }
+
+        function logout() {
+            identity.logout();
+        }
+
     }
 
 } ());
