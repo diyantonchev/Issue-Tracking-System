@@ -15,7 +15,7 @@
     <!-- endinject -->
 </head>
 
-<body>
+<body ng-controller="AccountController as vm">
     <header ng-include="'app/layout/partials/navbar.html'">
     </header>
 
@@ -48,10 +48,9 @@
     <script src="app/users/users.module.js"></script>
     <script src="app/users/services/identity.service.js"></script>
     <script src="app/users/services/authentication.service.js"></script>
-    <script src="app/users/services/users.service.js"></script>
-    <script src="app/users/users.controller.js"></script>
-    <script src="app/users/login.controller.js"></script>
-    <script src="app/users/register.controller.js"></script>
+    <script src="app/users/services/users-data.service.js"></script>
+    <script src="app/users/account.controller.js"></script>
+    <script src="app/users/users-data.controller.js"></script>
     <!-- endinject -->
 </body>
 

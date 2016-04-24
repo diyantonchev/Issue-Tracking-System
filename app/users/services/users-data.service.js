@@ -2,21 +2,19 @@
     'use strict';
 
     angular.module('issueTrackingSystem.users')
-        .factory('users', users);
+        .factory('usersData', usersData);
 
-    users.$inject = ['$http', 'BASE_SERVICE_URL'];
+    usersData.$inject = ['$http', 'BASE_SERVICE_URL', 'identity'];
 
-    function users($http, BASE_SERVICE_URL) {
+    function usersData($http, BASE_SERVICE_URL, identity) {
 
         var service = {
             getUsers: getUsers,
-            makeAdmin: makeAdmin,
-            changePassword: changePassword
         };
 
         return service;
 
-        function getUsers(authorizationHeader) {
+        function getUsers() {
             var url = BASE_SERVICE_URL + '/users/';
 
             var request = {
@@ -24,7 +22,7 @@
                 url: url,
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': authorizationHeader
+                    'Authorization': identity.getAuthorizationHeader
                 }
             };
 
@@ -33,15 +31,7 @@
             function getUsersComplete(response) {
                 return response.data;
             }
-        }
-
-        function makeAdmin() {
-
-        }
-
-        function changePassword() {
-
-        }
+        }    
     }
 
 } ());

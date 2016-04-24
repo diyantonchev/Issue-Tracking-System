@@ -9,17 +9,11 @@
     function identity($http, $resource, $q, BASE_SERVICE_URL) {
 
         var service = {
-            isLoggedIn: isLoggedIn,
             getCurrentUser: getCurrentUser,
             getAuthorizationHeader: getAuthorizationHeader,
         };
 
         return service;
-
-        function isLoggedIn() {
-            return sessionStorage.currentUser !== undefined ||
-                localStorage.currentUser !== undefined;
-        }
 
         function getCurrentUser() {
             var url = BASE_SERVICE_URL + '/users/me';
@@ -38,7 +32,6 @@
             function currentUserComplete(response) {
                 return response.data;
             }
-
         }
 
         function getAuthorizationHeader() {
