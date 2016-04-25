@@ -4,9 +4,9 @@
     angular.module('issueTrackingSystem.users')
         .factory('identity', identity);
 
-    identity.$inject = ['$http', '$resource', '$q', 'BASE_SERVICE_URL'];
+    identity.$inject = ['$http', '$q', 'BASE_SERVICE_URL'];
 
-    function identity($http, $resource, $q, BASE_SERVICE_URL) {
+    function identity($http, $q, BASE_SERVICE_URL) {
 
         var service = {
             getCurrentUser: getCurrentUser,

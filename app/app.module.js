@@ -3,7 +3,6 @@
 
     angular.module('issueTrackingSystem', [
         'ngRoute',
-        'ngResource',
         'angular-loading-bar',
         'ui.bootstrap.pagination',
         'issueTrackingSystem.layout',
