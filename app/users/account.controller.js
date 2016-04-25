@@ -53,7 +53,10 @@
         }
 
         function makeAdmin(user) {
-            authentication.makeAdmin(user);
+            authentication.makeAdmin(user)
+                .then(function () {
+                    //TODO
+                });
         }
 
         function logout() {

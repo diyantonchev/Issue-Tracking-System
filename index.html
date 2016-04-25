@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="issueTrackingSystem">
+<html lang="en" data-ng-app="issueTrackingSystem">
 
 <head>
     <meta charset="UTF-8">
@@ -15,12 +15,41 @@
     <!-- endinject -->
 </head>
 
-<body ng-controller="AccountController as vm">
-    <header ng-include="'app/layout/partials/navbar.html'">
+<body data-ng-controller="AccountController as vm">
+    <header>
+        <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="#/" class="navbar-brand">Issue Tracking System</a>
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                </div>
+                <div class="navbar-collapse collapse" id="navbar-main">
+                    <ul class="nav navbar-nav" ng-show="vm.isLoggedIn()">
+                        <li>
+                            <a href="#/">Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="#/projects">Projects</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#/profile/password">Change Password</a></li>
+                                <li><a href="#/logout" data-ng-click="vm.logout()">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </header>
 
     <main class="container main-view">
-        <div ng-view />
+        <div data-ng-view />
     </main>
     <!-- inject-vendor:js -->
     <script src="app/bower_components/jquery/dist/jquery.min.js"></script>
@@ -42,7 +71,6 @@
 
     <!-- layout -->
     <script src="app/layout/layout.module.js"></script>
-    <script src="app/layout/layout.config.route.js"></script>
 
     <!-- users -->
     <script src="app/users/users.module.js"></script>
@@ -51,6 +79,11 @@
     <script src="app/users/services/users-data.service.js"></script>
     <script src="app/users/account.controller.js"></script>
     <script src="app/users/users-data.controller.js"></script>
+
+    <!-- pojects -->
+    <script src="app/projects/projects.module.js"></script>
+    <script src="app/projects/services/projects.service.js"></script>
+    <script src="app/projects/projects.controller.js"></script>
     <!-- endinject -->
 </body>
 

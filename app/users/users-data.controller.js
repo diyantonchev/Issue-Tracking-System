@@ -19,6 +19,7 @@
             var promises = [getCurrentUser(), getUsers()];
 
             return $q.all(promises).then(function () {
+                //TODO
                 console.log(vm.currentUser.isAdmin);
                 console.log(vm.currentUser);
                 console.log(vm.users);
