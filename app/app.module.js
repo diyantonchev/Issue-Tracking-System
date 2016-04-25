@@ -4,7 +4,6 @@
     angular.module('issueTrackingSystem', [
         'ngRoute',
         'ngResource',
-        'ngSanitize',
         'angular-loading-bar',
         'ui.bootstrap.pagination',
         'issueTrackingSystem.layout',
