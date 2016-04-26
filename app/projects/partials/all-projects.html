@@ -1,0 +1,6 @@
+<ul>
+    <li data-ng-cloak data-ng-repeat="project in vm.projects">
+        {{project.Name}} <button class="btn btn-info">View</button>
+    </li>
+</ul>
+<button class="btn btn-primary" data-ng-click="vm.addProject()">Add New Project</button>

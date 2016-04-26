@@ -36,9 +36,11 @@ body {
 }
 
 .jumbotron {
-    height: 270px;
+    height: 430px;
     padding-top: 15px;
+    padding-bottom: 10px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
 }
 
 .jumbotron > h1 {
@@ -56,8 +58,12 @@ body {
     color: #36b4d8;
 }
 
+.jumbotron > .project-name:hover {
+    cursor: pointer;
+}
+
 .table-container {
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .table {

@@ -1,10 +1,16 @@
 <div class="row">
-    <div class="jumbotron col-md-6">
+    <div class="jumbotron col-md-7" data-ng-controller="DashboardController as vm">
         <h1>Dashboard</h1>
         <h2>Affiliated Projects</h2>
-        <div class="project-name">entirely new project</div>
+        <div class="project-name" data-ng-cloak data-ng-repeat="project in vm.userProjects.Projects">
+            &nbsp;{{project.Name}}
+        </div>
+        <pagination total-items="vm.userProjects.TotalCount" data-ng-model="vm.projectsParams.pageNumber" items-per-page="vm.projectsParams.pageSize"
+            ng-change="vm.reloadProjects()" max-size="9" boundary-links="true">
+        </pagination>
     </div>
-    <div class="table-container col-md-6">
+
+    <div class="table-container col-md-5">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -15,18 +21,6 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Problem title</td>
-                    <td>Procect Description</td>
-                    <td>Entirely new project</td>
-                    <td>28/03/2016(date)</td>
-                </tr>
-                <tr>
-                    <td>Problem title</td>
-                    <td>Procect Description</td>
-                    <td>Entirely new project</td>
-                    <td>28/03/2016(date)</td>
-                </tr>
                 <tr>
                     <td>Problem title</td>
                     <td>Procect Description</td>

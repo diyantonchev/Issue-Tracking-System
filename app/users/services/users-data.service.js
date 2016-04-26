@@ -4,9 +4,9 @@
     angular.module('issueTrackingSystem.users')
         .factory('usersData', usersData);
 
-    usersData.$inject = ['$http', 'BASE_SERVICE_URL', 'identity'];
+    usersData.$inject = ['$http', 'BASE_SERVICE_URL'];
 
-    function usersData($http, BASE_SERVICE_URL, identity) {
+    function usersData($http, BASE_SERVICE_URL) {
 
         var service = {
             getUsers: getUsers,
@@ -22,7 +22,6 @@
                 url: url,
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': identity.getAuthorizationHeader
                 }
             };
 
@@ -31,7 +30,7 @@
             function getUsersComplete(response) {
                 return response.data;
             }
-        }    
+        }
     }
 
 } ());

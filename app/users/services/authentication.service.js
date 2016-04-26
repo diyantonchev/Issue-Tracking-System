@@ -7,13 +7,13 @@
     authentication.$inject = ['$http', '$q', 'identity', 'BASE_SERVICE_URL'];
 
     function authentication($http, $q, identity, BASE_SERVICE_URL) {
+
         var service = {
             register: register,
             login: login,
             isLoggedIn: isLoggedIn,
             logout: logout,
             changePassword: changePassword,
-            makeAdmin: makeAdmin
         };
 
         return service;
@@ -51,29 +51,35 @@
 
             return $http(request)
                 .then(function (response) {
+
                     if (keepMeLogin) {
-                        localStorage.currentUser = JSON.stringify(response.data);
+                        localStorage.authenticationData = JSON.stringify(response.data);
                     } else {
-                        sessionStorage.currentUser = JSON.stringify(response.data);
+                        sessionStorage.authenticationData = JSON.stringify(response.data);
                     }
 
-                    return response;
+                    var accessToken = response.data.access_token;
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + accessToken;
+
+                    return response.data;
                 }).catch(function err(response) {
                     return $q.reject(response.data);
                 });
         }
 
         function isLoggedIn() {
-            return sessionStorage.currentUser !== undefined ||
-                localStorage.currentUser !== undefined;
+            return sessionStorage.authenticationData !== undefined ||
+                localStorage.authenticationData !== undefined;
         }
 
         function logout() {
-            if (sessionStorage.currentUser) {
-                delete sessionStorage.currentUser;
+            if (sessionStorage.authenticationData) {
+                 sessionStorage.removeItem('authenticationData');
             } else if (localStorage.currentUser) {
-                delete localStorage.currentUser;
+                localStorage.removeItem('authenticationData');
             }
+
+            $http.defaults.headers.common.Authorization = undefined;
         }
 
         function changePassword(data) {
@@ -83,24 +89,8 @@
                 url: url,
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': identity.getAuthorizationHeader
                 },
                 data: data
-            };
-
-            return $http(request);
-        }
-
-        function makeAdmin(user) {
-            var url = BASE_SERVICE_URL + '/users/makeadmin';
-            var request = {
-                method: 'PUT',
-                url: url,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': identity.getAuthorizationHeader
-                },
-                data: user
             };
 
             return $http(request);

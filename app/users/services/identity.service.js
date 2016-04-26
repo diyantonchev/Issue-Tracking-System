@@ -10,7 +10,7 @@
 
         var service = {
             getCurrentUser: getCurrentUser,
-            getAuthorizationHeader: getAuthorizationHeader,
+            makeadmin: makeAdmin
         };
 
         return service;
@@ -23,7 +23,6 @@
                 url: url,
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': getAuthorizationHeader()
                 }
             };
 
@@ -33,18 +32,20 @@
                 return response.data;
             }
         }
+        
+         function makeAdmin(user) {
+            var url = BASE_SERVICE_URL + '/users/makeadmin';
+            var request = {
+                method: 'PUT',
+                url: url,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: user
+            };
 
-        function getAuthorizationHeader() {
-            var header;
-            if (sessionStorage.currentUser) {
-                header = 'Bearer ' + JSON.parse(sessionStorage.currentUser).access_token;
-            } else if (localStorage.currentUser) {
-                header = 'Bearer ' + JSON.parse(localStorage.currentUser).access_token;
-            }
-
-            return header;
+            return $http(request);
         }
-
     }
 
 } ());

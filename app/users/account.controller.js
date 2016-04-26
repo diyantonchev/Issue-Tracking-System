@@ -53,7 +53,7 @@
         }
 
         function makeAdmin(user) {
-            authentication.makeAdmin(user)
+            identity.makeAdmin(user)
                 .then(function () {
                     //TODO
                 });
@@ -61,6 +61,7 @@
 
         function logout() {
             authentication.logout();
+            $location.path('#/');
         }
     }
 
