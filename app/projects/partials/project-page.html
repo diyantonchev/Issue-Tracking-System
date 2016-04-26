@@ -27,18 +27,18 @@
         <hr />
         <div class="form-group row">
             <label for="projectLabels" class="col-md-4">Labels</label>
-            <span class="col-md-6">
+            <div class="col-md-6">
                 <input type="text" data-ng-repeat="label in vm.project.Labels" class="form-control" id="projectLabels"
                 placeholder="{{label.Name}}" readonly>
-            </span>
+            </div>
         </div>
         <hr />
         <div class="form-group row">
             <label for="projectPriorities" class="col-md-4">Priorities</label>
-            <span class="col-md-6">
+            <div class="col-md-6">
                 <input type="text" data-ng-repeat="priority in vm.project.Priorities" class="form-control" id="projectPriorities"
                 placeholder="{{priority.Name}}" readonly>
-            </span>
+            </div>
         </div>
         <hr />
         <div class="form-group row">
@@ -53,7 +53,8 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <h3>Project Issues</h3></tr>
+                    <h3>Project Issues</h3>
+                </tr>
                 <tr>
                     <td>Title</td>
                     <td>Description</td>
