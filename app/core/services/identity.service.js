@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('issueTrackingSystem.users')
+    angular.module('issueTrackingSystem.core')
         .factory('identity', identity);
 
     identity.$inject = ['$http', '$q', 'BASE_SERVICE_URL'];

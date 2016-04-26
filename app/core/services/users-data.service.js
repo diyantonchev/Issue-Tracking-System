@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('issueTrackingSystem.users')
+    angular.module('issueTrackingSystem.core')
         .factory('usersData', usersData);
 
     usersData.$inject = ['$http', 'BASE_SERVICE_URL'];

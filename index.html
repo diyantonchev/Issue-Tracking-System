@@ -15,7 +15,7 @@
     <!-- endinject -->
 </head>
 
-<body data-ng-controller="AccountController as vm">
+<body data-ng-controller="MainController as vm">
     <header>
         <div class="navbar navbar-default navbar-fixed-top">
             <div class="container">
@@ -36,7 +36,7 @@
                             <a href="#/projects">Projects</a>
                         </li>
                         <li class="dropdown">
-                            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#/profile/password">Change Password</a></li>
                                 <li><a href="#/logout" data-ng-click="vm.logout()">Logout</a></li>
@@ -67,25 +67,20 @@
     <script src="app/app.module.js"></script>
     <script src="app/app.config.js"></script>
 
-    <!-- layout -->
-    <script src="app/layout/layout.module.js"></script>
-
-    <!-- users -->
-    <script src="app/users/users.module.js"></script>
-    <script src="app/users/services/identity.service.js"></script>
-    <script src="app/users/services/authentication.service.js"></script>
-    <script src="app/users/services/users-data.service.js"></script>
-    <script src="app/users/account.controller.js"></script>
-
-    <!-- pojects -->
-    <script src="app/projects/projects.module.js"></script>
-    <script src="app/projects/services/projects.service.js"></script>
-    <script src="app/projects/dashboard.controller.js"></script>
-    <!-- endinject -->
+    <!-- core -->
+    <script src="app/core/core.module.js"></script>
+    <script src="app/core/constants.js"></script>
+    <script src="app/core/main.controller.js"></script>
+    <script src="app/core/services/authentication.service.js"></script>
+    <script src="app/core/services/identity.service.js"></script>
+    <script src="app/core/services/issues.service.js"></script>
+    <script src="app/core/services/projects.service.js"></script>
+    <script src="app/core/services/users-data.service.js"></script>
     
-    <!-- issues -->
-    <script src="app/issues/issues.module.js"></script>
-    <script src="app/issues/services/issues.service.js"></script>
+    <!-- home -->
+    <script src="app/home/home.module.js"></script>
+    <script src="app/home/dashboard.controller.js"></script>
+    <!-- endinject -->
 </body>
 
 </html>

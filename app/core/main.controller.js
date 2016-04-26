@@ -1,12 +1,12 @@
 (function () {
     'use strict';
 
-    angular.module('issueTrackingSystem.users')
-        .controller('AccountController', AccountController);
+    angular.module('issueTrackingSystem.core')
+        .controller('MainController', MainController);
 
-    AccountController.$inject = ['$q', '$location', 'identity', 'authentication'];
+    MainController.$inject = ['$q', '$location', 'identity', 'authentication'];
 
-    function AccountController($q, $location, identity, authentication) {
+    function MainController($q, $location, identity, authentication) {
         var vm = this;
 
         vm.isLoggedIn = isLoggedIn;

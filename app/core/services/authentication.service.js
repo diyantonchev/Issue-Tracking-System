@@ -1,7 +1,7 @@
 (function name(params) {
     'use strict';
 
-    angular.module('issueTrackingSystem.users')
+    angular.module('issueTrackingSystem.core')
         .factory('authentication', authentication);
 
     authentication.$inject = ['$http', '$q', 'identity', 'BASE_SERVICE_URL'];
@@ -74,8 +74,8 @@
 
         function logout() {
             if (sessionStorage.authenticationData) {
-                 sessionStorage.removeItem('authenticationData');
-            } else if (localStorage.currentUser) {
+                sessionStorage.removeItem('authenticationData');
+            } else if (localStorage.authenticationData) {
                 localStorage.removeItem('authenticationData');
             }
 

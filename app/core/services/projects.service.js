@@ -1,12 +1,12 @@
 (function () {
     'use strict';
 
-    angular.module('issueTrackingSystem.issues')
+    angular.module('issueTrackingSystem.core')
         .factory('projects', projects);
 
-    projects.$inject = ['$http', '$q', 'identity', 'BASE_SERVICE_URL'];
+    projects.$inject = ['$http', '$q', 'BASE_SERVICE_URL'];
 
-    function projects($http, $q, identity, BASE_SERVICE_URL) {
+    function projects($http, $q, BASE_SERVICE_URL) {
         var service = {
             getAllProjects: getAllProjects,
             getUserProjects: getUserProjects,

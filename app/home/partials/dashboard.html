@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="jumbotron col-md-6">
+        <h2>Affiliated Projects</h2>
+        <div class="project-name" data-ng-if="vm.userProjects.TotalCount === 0">No projects</div>
+        <div class="project-name" data-ng-cloak data-ng-repeat="project in vm.userProjects.Projects">
+            &nbsp;{{project.Name}}
+        </div>
+        <pagination total-items="vm.userProjects.TotalCount" data-ng-model="vm.projectsParams.pageNumber" items-per-page="vm.projectsParams.pageSize"
+            ng-change="vm.reloadProjects()" max-size="5" boundary-links="true">
+        </pagination>
+    </div>
+
+    <div class="table-container col-md-6">
+        <table class="table table-striped">
+            <thead>
+                <tr><h2>My Issues</h2></tr>
+                <tr>
+                    <td>Title</td>
+                    <td>Description</td>
+                    <td>Project</td>
+                    <td>Due Date</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-if="vm.issuesCount === 0">
+                    <td>No Data</td>
+                    <td>No Data</td>
+                    <td>No Data</td>
+                    <td>No Data</td>
+                </tr>
+                <tr data-ng-repeat="issue in vm.userIssues.Issues">
+                    <td data-ng-cloak>{{issue.Title}}</td>
+                    <td data-ng-cloak>{{issue.Description}}</td>
+                    <td data-ng-cloak>{{issue.Project.Name}}</td>
+                    <td data-ng-cloak>{{issue.DueDate}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination total-items="vm.issuesCount" data-ng-model="vm.issuesParams.pageNumber" items-per-page="vm.issuesParams.pageSize"
+            ng-change="vm.reloadIssues()" max-size="5" boundary-links="true">
+        </pagination>
+    </div>
+</div>

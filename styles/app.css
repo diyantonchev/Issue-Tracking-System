@@ -36,24 +36,19 @@ body {
 }
 
 .jumbotron {
-    height: 430px;
     padding-top: 15px;
     padding-bottom: 10px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     box-sizing: border-box;
 }
 
-.jumbotron > h1 {
-    font-size: 50px;
-    margin-bottom: 40px;   
-}
-
 .jumbotron > h2 {
-    font-size: 40px;
+    font-size: 42px;
+    margin-bottom: 20px;
 }
 
 .jumbotron > .project-name {
-    margin-top: 15px;
+    margin-top: 5px;
     font-size: 28px;
     color: #36b4d8;
 }
@@ -63,13 +58,13 @@ body {
 }
 
 .table-container {
-    margin-top: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
 }
 
 .table {
     margin-bottom: 10px;
     font-size: 16px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .table thead {

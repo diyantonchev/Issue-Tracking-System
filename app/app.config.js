@@ -10,22 +10,22 @@
 
     function config($routeProvider) {
         $routeProvider.when('/', {
-            templateUrl: 'app/layout/partials/home.html',
-            controller: 'AccountController',
+            templateUrl: 'app/home/partials/home.html',
+            controller: 'MainController',
             controllerAs: 'vm'
         });
 
         $routeProvider.when('/profile/password', {
-            templateUrl: 'app/users/partials/change-password.html',
-            controller: 'AccountController',
+            templateUrl: 'app/home/partials/change-password.html',
+            controller: 'MainController',
             controllerAs: 'vm'
         });
 
-        $routeProvider.when('/projects', {
-            templateUrl: 'app/projects/partials/all-projects.html',
-            controller: 'ProjectsController',
+       /* $routeProvider.when('/projects', {
+            templateUrl: 'app/all-projects.html',
+            controller: '',
             controllerAs: 'vm'
-        });
+        });*/
 
         $routeProvider.otherwise({ redirectTo: '/' });
     }
