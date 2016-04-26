@@ -34,14 +34,14 @@
                 // console.log(user);
                 getUserProjects(vm.projectsParams, user.Id)
                     .then(function (data) {
-                        console.log(data.Projects);
+                     //   console.log(data.Projects);
                     });
             });
         }
 
         function reloadIssues() {
             getUserIssues(vm.issuesParams).then(function (data) {
-               console.log(data.Issues);
+              // console.log(data.Issues);
             });
         }
 

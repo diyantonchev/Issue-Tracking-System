@@ -11,6 +11,7 @@
             getAllProjects: getAllProjects,
             getUserProjects: getUserProjects,
             getProjectById: getProjectById,
+            getProjectIssues: getProjectIssues,
             addProject: addProject,
             editProject: editProject
         };
@@ -41,6 +42,13 @@
         function getProjectById(id) {
             var url = BASE_SERVICE_URL + '/projects/' + id;
 
+            return $http.get(url).then(function (response) {
+                return response.data;
+            });
+        }
+
+        function getProjectIssues(id) {
+            var url = BASE_SERVICE_URL + '/projects/' + id + '/issues';
             return $http.get(url).then(function (response) {
                 return response.data;
             });

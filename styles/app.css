@@ -5,6 +5,7 @@ html {
 
 body {
     padding-top: 70px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;    
 }
 
 .home-form  {
@@ -38,7 +39,6 @@ body {
 .jumbotron, .table-container {
     padding-top: 15px;
     padding-bottom: 10px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     box-sizing: border-box;
 }
 
@@ -61,6 +61,15 @@ body {
 
 .table tbody td:nth-child(odd) {
     color: #36b4d8;
+}
+
+hr {
+    width: 85%;
+    margin-left: 0;
+    margin-right: 0;
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
 
 @media all and (max-width: 990px) {        

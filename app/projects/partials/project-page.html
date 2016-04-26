@@ -1,14 +1,64 @@
 <div class="row">
+    <h3 ng-cloak>&nbsp;&nbsp;{{vm.project.Name}}</h3>
+    <form name="projectInfo" class="col-md-6 project-info" novalidate>
+        <hr />
+        <div class="form-group row">
+            <label for="projectName" class="col-md-4 form-control-label">Name</label>
+            <div class="col-md-6">
+                <input type="text" ng-model="vm.project.Name" class="form-control" id="Name" placeholder="{{vm.project.Name}}" readonly>
+            </div>
+        </div>
+        <hr />
+        <div class="form-group row">
+            <label for="description" class="col-md-4 form-control-label">Description</label>
+            <div class="col-md-6">
+                <input type="text" ng-model="vm.project.Description" class="form-control" id="newPassword" placeholder="{{vm.project.Description}}"
+                    readonly>
+            </div>
+        </div>
+        <hr />
+        <div class="form-group row">
+            <label for="projectLeadId" class="col-md-4 form-control-label">Lead ID (current: {{vm.project.Lead.Username}})</label>
+            <div class="col-md-6">
+                <input type="text" ng-model="vm.project.Lead.Id" class="form-control" id="projectLeadId" placeholder="{{vm.project.Lead.Id}}"
+                    readonly>
+            </div>
+        </div>
+        <hr />
+        <div class="form-group row">
+            <label for="projectLabels" class="col-md-4">Labels</label>
+            <span class="col-md-6">
+                <input type="text" data-ng-repeat="label in vm.project.Labels" class="form-control" id="projectLabels"
+                placeholder="{{label.Name}}" readonly>
+            </span>
+        </div>
+        <hr />
+        <div class="form-group row">
+            <label for="projectPriorities" class="col-md-4">Priorities</label>
+            <span class="col-md-6">
+                <input type="text" data-ng-repeat="priority in vm.project.Priorities" class="form-control" id="projectPriorities"
+                placeholder="{{priority.Name}}" readonly>
+            </span>
+        </div>
+        <hr />
+        <div class="form-group row">
+            <div class="col-md-6">
+                <button class="btn btn-primary">Edit</button>
+                <button class="btn btn-primary">Add Issue</button>
+            </div>
+        </div>
+        <hr />
+    </form>
     <div class="table-container col-md-6">
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <h2>Project Issues</h2></tr>
+                    <h3>Project Issues</h3></tr>
                 <tr>
                     <td>Title</td>
                     <td>Description</td>
-                    <td>Due Date</td>
                     <td>Asignee</td>
+                    <td>Due Date</td>
                 </tr>
             </thead>
             <tbody>
@@ -18,16 +68,13 @@
                     <td>No Data</td>
                     <td>No Data</td>
                 </tr>
-                <tr data-ng-repeat="issue in vm.userIssues.Issues">
-                    <td data-ng-cloak>{{issue.Title}}</td>
+                <tr data-ng-repeat="issue in vm.issues">
+                    <td data-ng-cloak><a href="#/issues/{{issue.Id}}">{{issue.Title}}</a></td>
                     <td data-ng-cloak>{{issue.Description}}</td>
-                    <td data-ng-cloak>{{issue.Project.Name}}</td>
-                    <td data-ng-cloak>{{issue.DueDate}}</td>
+                    <td data-ng-cloak>{{issue.Assignee.Username}}</td>
+                    <td data-ng-cloak>{{issue.DueDate | date:'yyyy-MM-dd HH:mm:ss' }}</td>
                 </tr>
             </tbody>
         </table>
-        <pagination total-items="vm.issuesCount" data-ng-model="vm.issuesParams.pageNumber" items-per-page="vm.issuesParams.pageSize"
-            ng-change="vm.reloadIssues()" max-size="5" boundary-links="true">
-        </pagination>
     </div>
 </div>

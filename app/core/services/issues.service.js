@@ -8,7 +8,7 @@
 
     function issues($http, $q, BASE_SERVICE_URL) {
         var service = {
-            getUserIssues: getUserIssues
+            getUserIssues: getUserIssues,
         };
 
         return service;
