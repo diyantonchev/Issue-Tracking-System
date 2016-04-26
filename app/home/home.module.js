@@ -1,6 +1,6 @@
 (function () {
     'use strict';
 
-    angular.module('issueTrackingSystem.home', []);       
+    angular.module('issueTrackingSystem.home', []);
 
 } ());

@@ -20,13 +20,19 @@
             controller: 'MainController',
             controllerAs: 'vm'
         });
-
-       /* $routeProvider.when('/projects', {
-            templateUrl: 'app/all-projects.html',
-            controller: '',
+        
+         $routeProvider.when('/projects/:id', {
+            templateUrl: 'app/projects/partials/project-page.html',
+            controller: 'ProjectController',
+            controllerAs: 'vm'
+        });
+        
+     /*   $routeProvider.when('/issues/:id', {
+            templateUrl: 'app/issues/partials/issue-page.html',
+            controller: 'IssueController',
             controllerAs: 'vm'
         });*/
-
+        
         $routeProvider.otherwise({ redirectTo: '/' });
     }
 

@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="table-container col-md-6">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <h2>Project Issues</h2></tr>
+                <tr>
+                    <td>Title</td>
+                    <td>Description</td>
+                    <td>Due Date</td>
+                    <td>Asignee</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-if="vm.issuesCount === 0">
+                    <td>No Data</td>
+                    <td>No Data</td>
+                    <td>No Data</td>
+                    <td>No Data</td>
+                </tr>
+                <tr data-ng-repeat="issue in vm.userIssues.Issues">
+                    <td data-ng-cloak>{{issue.Title}}</td>
+                    <td data-ng-cloak>{{issue.Description}}</td>
+                    <td data-ng-cloak>{{issue.Project.Name}}</td>
+                    <td data-ng-cloak>{{issue.DueDate}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination total-items="vm.issuesCount" data-ng-model="vm.issuesParams.pageNumber" items-per-page="vm.issuesParams.pageSize"
+            ng-change="vm.reloadIssues()" max-size="5" boundary-links="true">
+        </pagination>
+    </div>
+</div>

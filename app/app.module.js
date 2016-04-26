@@ -3,6 +3,7 @@
 
     angular.module('issueTrackingSystem', [
         'issueTrackingSystem.core',
-        'issueTrackingSystem.home'
+        'issueTrackingSystem.home',
+        'issueTrackingSystem.projects'
     ]);
 } ());

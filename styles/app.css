@@ -35,31 +35,19 @@ body {
     padding: 30px;
 }
 
-.jumbotron {
+.jumbotron, .table-container {
     padding-top: 15px;
     padding-bottom: 10px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     box-sizing: border-box;
 }
 
-.jumbotron > h2 {
-    font-size: 42px;
-    margin-bottom: 20px;
-}
-
-.jumbotron > .project-name {
-    margin-top: 5px;
-    font-size: 28px;
+.jumbotron a, .table-container a {
     color: #36b4d8;
 }
 
-.jumbotron > .project-name:hover {
-    cursor: pointer;
-}
-
-.table-container {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    box-sizing: border-box;
+.jumbotron > h2 {
+    margin-bottom: 20px;
 }
 
 .table {
@@ -79,11 +67,7 @@ body {
     .home-form {
          height: 350px;
     }
-    
-    .jumbotron {
-        text-align: center;
-    }
-    
+        
    .table-container {   
          margin-top: 10px;
     }
