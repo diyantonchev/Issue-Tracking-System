@@ -68,8 +68,10 @@
         }
 
         function isLoggedIn() {
-            return sessionStorage.authenticationData !== undefined ||
+            var result = sessionStorage.authenticationData !== undefined ||
                 localStorage.authenticationData !== undefined;
+
+            return result;
         }
 
         function logout() {

@@ -28,12 +28,12 @@
                 </button>
                 </div>
                 <div class="navbar-collapse collapse" id="navbar-main">
-                    <ul class="nav navbar-nav" data-ng-show="vm.isLoggedIn()">
+                    <ul class="nav navbar-nav" data-ng-if="vm.isLoggedIn">
                         <li>
                             <a href="#/">Dashboard</a>
                         </li>
                         <li>
-                            <a data-ng-show="currentUser.isAdmin" href="#/projects">Projects</a>
+                            <a data-ng-if="currentUser.isAdmin()" href="#/projects">Projects</a>
                         </li>
                         <li class="dropdown">
                             <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile <span class="caret"></span></a>

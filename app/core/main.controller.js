@@ -25,7 +25,20 @@
 
         vm.makeAdmin = makeAdmin;
 
-        getCurrentUser();
+        // getCurrentUser();
+       // activate();
+
+        function activate() {
+            authentication.isLoggedIn().then(function (result) {
+                console.log(result);
+                if (result) {
+                    getCurrentUser();
+                } else {
+                    console.log($scope.currentUser);
+                  //  $location.path('#/');
+                }
+            });
+        }
 
         function register(registerData, keepMeLogin) {
             authentication.register(registerData, keepMeLogin)
@@ -45,39 +58,36 @@
                 });
         }
 
-        function isLoggedIn() {
-            return authentication.isLoggedIn();
-        }
+         function isLoggedIn() {
+             var result = authentication.isLoggedIn();
+             return result;
+         }
 
         function getCurrentUser() {
-            var result = isLoggedIn();
-            if (result) {
-                identity.getCurrentUser()
-                    .then(function (data) {
-                        $scope.currentUser = data;
-                        return vm.currentUser;
-                    });
-            }
-        }
-
-        function changePassword(data) {
-            authentication.changePassword(data).then(function () {
-                //TODO notify
-                $location.path('#/');
-            });
-        }
-
-        function makeAdmin(user) {
-            identity.makeAdmin(user)
-                .then(function () {
-                    //TODO
+            identity.getCurrentUser()
+                .then(function (data) {
+                    $scope.currentUser = data;
+                    return vm.currentUser;
                 });
         }
+    }
 
-        function logout() {
-            authentication.logout();
+    function changePassword(data) {
+        authentication.changePassword(data).then(function () {
+            //TODO notify
             $location.path('#/');
-        }
+        });
+    }
+
+    function makeAdmin(user) {
+        identity.makeAdmin(user)
+            .then(function () {
+                //TODO
+            });
+    }
+
+    function logout() {
+        authentication.logout();
     }
 
 } ());
