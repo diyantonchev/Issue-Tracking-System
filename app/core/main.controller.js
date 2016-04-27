@@ -4,9 +4,9 @@
     angular.module('issueTrackingSystem.core')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['$q', '$location', 'identity', 'authentication'];
+    MainController.$inject = ['$scope', '$q', '$location', 'identity', 'authentication'];
 
-    function MainController($q, $location, identity, authentication) {
+    function MainController($scope, $q, $location, identity, authentication) {
         var vm = this;
 
         vm.isLoggedIn = isLoggedIn;
@@ -18,10 +18,14 @@
         vm.login = login;
         vm.logout = logout;
 
+        $scope.currentUser = {};
+
         vm.newPasswordData = {};
         vm.changePassword = changePassword;
 
         vm.makeAdmin = makeAdmin;
+
+        getCurrentUser();
 
         function register(registerData, keepMeLogin) {
             authentication.register(registerData, keepMeLogin)
@@ -43,6 +47,17 @@
 
         function isLoggedIn() {
             return authentication.isLoggedIn();
+        }
+
+        function getCurrentUser() {
+            var result = isLoggedIn();
+            if (result === true) {
+                return identity.getCurrentUser()
+                    .then(function (data) {
+                        $scope.currentUser = data;
+                        return vm.currentUser;
+                    });
+            }
         }
 
         function changePassword(data) {

@@ -1,6 +1,28 @@
-<ul>
-    <li data-ng-cloak data-ng-repeat="project in vm.projects">
-        {{project.Name}} <button class="btn btn-info">View</button>
-    </li>
-</ul>
-<button class="btn btn-primary" data-ng-click="vm.addProject()">Add New Project</button>
+<div class="all-projects row">
+    <div ng-if="vm.projects.length==0">
+        <strong>No Projects found</strong>
+    </div>
+    <ul class="col-md-4">
+        <li data-ng-cloak data-ng-repeat="project in vm.projects | orderBy: vm.order | filter: vm.search">
+            <span>{{project.Name}} </span><a href="#/projects/{{project.Id}}"><button class="btn btn-info">View</button></a>
+        </li>
+    </ul>
+    <form class="col-md-offset-2 col-md-3">
+        <div class="form-group">
+            <label for="sort">Order by: </label>
+            <select class="form-control" ng-model="vm.order" id="sort">
+					<option value="">Not Sorted</option>
+					<option value="Name">Name</option>
+					<option value="Lead.Username">Lead</option>
+				</select>
+        </div>
+        <div class="form-group">
+            <label for="search">Search: </label>
+            <input type="text" class="form-control" id="search" ng-model="vm.search" placeholder="Search">
+        </div>
+        <p>Or:</p>
+        <a href="#/projects/add">
+            <button class="btn btn-primary">Add New Project</button>
+        </a>
+    </form>
+</div>

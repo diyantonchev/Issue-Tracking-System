@@ -1,53 +1,81 @@
 <div class="row">
-    <h3 ng-cloak>&nbsp;&nbsp;{{vm.project.Name}}</h3>
     <form name="projectInfo" class="col-md-6 project-info" novalidate>
-        <hr />
+        <h3 data-ng-cloak class="project-name">{{vm.project.Name}}</h3>
+        <hr>
         <div class="form-group row">
-            <label for="projectName" class="col-md-4 form-control-label">Name</label>
+            <label for="projectName" class="col-md-4 form-control-label">Name:</label>
             <div class="col-md-6">
-                <input type="text" ng-model="vm.project.Name" class="form-control" id="Name" placeholder="{{vm.project.Name}}" readonly>
+                <input type="text" class="form-control" id="Name" placeholder="{{vm.project.Name}}" readonly="readonly">
             </div>
         </div>
-        <hr />
+        <hr>
         <div class="form-group row">
-            <label for="description" class="col-md-4 form-control-label">Description</label>
+            <label for="description" class="col-md-4 form-control-label">Description:</label>
             <div class="col-md-6">
-                <input type="text" ng-model="vm.project.Description" class="form-control" id="newPassword" placeholder="{{vm.project.Description}}"
-                    readonly>
+                <input type="text" class="form-control" id="newPassword" placeholder="{{vm.project.Description}}" readonly="readonly">
             </div>
         </div>
-        <hr />
+        <hr>
         <div class="form-group row">
             <label for="projectLeadId" class="col-md-4 form-control-label">Lead ID (current: {{vm.project.Lead.Username}})</label>
             <div class="col-md-6">
-                <input type="text" ng-model="vm.project.Lead.Id" class="form-control" id="projectLeadId" placeholder="{{vm.project.Lead.Id}}"
-                    readonly>
+                <input type="text" class="form-control" id="projectLeadId" placeholder="{{vm.project.Lead.Id}}" readonly="readonly">
             </div>
         </div>
-        <hr />
+        <hr>
         <div class="form-group row">
-            <label for="projectLabels" class="col-md-4">Labels</label>
+            <label class="col-md-4">Labels:</label>
             <div class="col-md-6">
-                <input type="text" data-ng-repeat="label in vm.project.Labels" class="form-control" id="projectLabels"
-                placeholder="{{label.Name}}" readonly>
+                <span data-ng-if="vm.project.Labels.length === 0">No labels</span>
+                <span type="text" data-ng-repeat="label in vm.project.Labels">{{label.Name}} {{$last ? '' : ', '}}</span>
             </div>
         </div>
-        <hr />
+        <hr>
         <div class="form-group row">
-            <label for="projectPriorities" class="col-md-4">Priorities</label>
+            <label class="col-md-4">Priorities:</label>
             <div class="col-md-6">
-                <input type="text" data-ng-repeat="priority in vm.project.Priorities" class="form-control" id="projectPriorities"
-                placeholder="{{priority.Name}}" readonly>
+                <span data-ng-if="vm.project.Priorities.length === 0">No Priorities</span>
+                <span type="text" data-ng-repeat="priority in vm.project.Priorities">{{priority.Name}} {{$last ? '' : ', '}}</span>
             </div>
         </div>
-        <hr />
+        <hr>
+        <div class="form-group row" ng-show="$parent.currentUser.isAdmin || $parent.currentUser.Id === vm.project.Lead.Id">
+            <div class="col-md-6 btn-container">
+                <a href="#/projects/{{vm.project.Id}}/edit"><button class="btn btn-primary">Edit</button></a>
+                <a href="#/projects/{{vm.project.Id}}/add-issue"><button class="btn btn-primary">Add Issue</button></a>
+            </div>
+        </div>
+        <hr>
         <div class="form-group row">
+            <label for="selectStatus" class="col-md-4">Filter by status</label>
             <div class="col-md-6">
-                <button class="btn btn-primary">Edit</button>
-                <button class="btn btn-primary">Add Issue</button>
+                <select class="form-control" id="selectStatus" data-ng-model="vm.statusFilter">
+                    <option value="" selected="selected">Select status</option>
+                    <option value="1">Closed</option>
+                    <option value="2">Open</option>
+                    <option value="3">In progress</option>
+                    <option value="4">Stoped progress</option>
+                </select>
             </div>
         </div>
-        <hr />
+        <div class="form-group row">
+            <label for="authorSelect" class="col-md-4">Filter by author</label>
+            <div class="col-md-6">
+                <select class="form-control" id="authorSelect" data-ng-model="vm.authorFilter">
+                    <option value="" selected="selected">Select author</option>
+                    <option data-ng-repeat="author in vm.authors|orderBy" value="{{author}}" data-ng-cloak>{{author}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="assigneeSelect" class="col-md-4">Filter by assignee</label>
+            <div class="col-md-6">
+                <select class="form-control" id="assigneeSelect" data-ng-model="vm.assigneeFilter">
+                    <option value="" selected="selected">Select assignee</option>
+                    <option data-ng-repeat="assignee in vm.assignees|orderBy" value="{{assignee}}" data-ng-cloak>{{assignee}}</option>
+                </select>
+            </div>
+        </div>
     </form>
     <div class="table-container col-md-6">
         <table class="table table-striped">
@@ -69,7 +97,10 @@
                     <td>No Data</td>
                     <td>No Data</td>
                 </tr>
-                <tr data-ng-repeat="issue in vm.issues">
+                <tr data-ng-repeat="issue in vm.issues 
+                |filter: {Status: {Id: vm.statusFilter}}
+                |filter: {Assignee: {Username: vm.assigneeFilter}}
+                |filter: {Author: {Username: vm.authorFilter}}">
                     <td data-ng-cloak><a href="#/issues/{{issue.Id}}">{{issue.Title}}</a></td>
                     <td data-ng-cloak>{{issue.Description}}</td>
                     <td data-ng-cloak>{{issue.Assignee.Username}}</td>

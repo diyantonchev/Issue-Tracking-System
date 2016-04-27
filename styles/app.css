@@ -5,7 +5,8 @@ html {
 
 body {
     padding-top: 70px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+    font-size: 17x;  
 }
 
 .home-form  {
@@ -52,7 +53,7 @@ body {
 
 .table {
     margin-bottom: 10px;
-    font-size: 16px;
+    font-size: 1.1em;
 }
 
 .table thead {
@@ -63,6 +64,22 @@ body {
     color: #36b4d8;
 }
 
+.project-name {
+     width: 65%;
+}
+
+.row {
+    font-size: 1em;
+}
+
+.project-info input, .project-info span {
+    font-size: 1.1em;
+}
+
+.project-info h3 {
+    overflow: hidden;
+}
+
 hr {
     width: 85%;
     margin-left: 0;
@@ -70,6 +87,45 @@ hr {
     border: 0;
     height: 1px;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.btn-container > a {
+    color: white;
+    text-decoration: none;
+}
+
+.all-projects span {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.all-projects li {
+    margin-bottom: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid grey;
+    list-style:  none;
+}
+
+
+.all-projects a {
+    text-decoration: none;
+    color: white;
+}
+
+.all-projects p {
+   font-size: 1em;
+   font-weight: bold;
+}
+
+.edit-project-form {
+    padding: 30px;
+}
+
+.edit-project-form input {
+   margin-top: 5px;
+   margin-bottom: 5px;
 }
 
 @media all and (max-width: 990px) {        

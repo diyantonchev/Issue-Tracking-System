@@ -20,19 +20,37 @@
             controller: 'MainController',
             controllerAs: 'vm'
         });
-        
-         $routeProvider.when('/projects/:id', {
+
+        $routeProvider.when('/projects/:id', {
             templateUrl: 'app/projects/partials/project-page.html',
             controller: 'ProjectController',
             controllerAs: 'vm'
         });
-        
-     /*   $routeProvider.when('/issues/:id', {
-            templateUrl: 'app/issues/partials/issue-page.html',
-            controller: 'IssueController',
+
+        $routeProvider.when('/projects/:id/edit', {
+            templateUrl: 'app/projects/partials/edit-project.html',
+            controller: 'ProjectController',
             controllerAs: 'vm'
-        });*/
+        });
         
+        $routeProvider.when('/projects/:id/add-issue', {
+            templateUrl: 'app/projects/partials/add-issue.html',
+            controller: 'AddIssueController',
+            controllerAs: 'vm'
+        });
+        
+        $routeProvider.when('/projects', {
+            templateUrl: 'app/projects/partials/all-projects.html',
+            controller: 'AllProjectsController',
+            controllerAs: 'vm'
+        });
+
+        /*   $routeProvider.when('/issues/:id', {
+               templateUrl: 'app/issues/partials/issue-page.html',
+               controller: 'IssueController',
+               controllerAs: 'vm'
+           });*/
+
         $routeProvider.otherwise({ redirectTo: '/' });
     }
 
