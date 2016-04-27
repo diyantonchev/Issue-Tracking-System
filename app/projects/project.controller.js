@@ -14,15 +14,14 @@
 
         vm.authors = [];
         vm.assignees = [];
-        
+
         vm.editProject = editProject;
 
         activate();
 
         function activate() {
             var id = getProjectId();
-            getProjectById(id);
-
+            getProjectById(id);    
             getProjectIssues(id)
                 .then(function (issues) {
                     issues.forEach(function (issue) {
@@ -58,8 +57,11 @@
             });
         }
 
-        function editProject() {
-            //TODO
+        function editProject(data) {
+            projects.editProject(data, vm.project.Id).then(function (response) {
+                console.log(response);
+                $location.path('/projects/' + vm.project.Id);
+            });
         }
     }
 

@@ -60,7 +60,7 @@
 
                     var accessToken = response.data.access_token;
                     $http.defaults.headers.common.Authorization = 'Bearer ' + accessToken;
-
+                    
                     return response.data;
                 }).catch(function err(response) {
                     return $q.reject(response.data);

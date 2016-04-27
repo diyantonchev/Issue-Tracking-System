@@ -58,8 +58,17 @@
 
         }
 
-        function editProject() {
+        function editProject(data, id) {
 
+            var request = {
+                method: 'PUT',
+                url: BASE_SERVICE_URL + '/projects/' + id,
+                data: data
+            };
+
+            return $http(request).then(function (response) {
+                return response;
+            });
         }
     }
 

@@ -17,28 +17,13 @@
         vm.loginData = {};
         vm.login = login;
         vm.logout = logout;
-
-        $scope.currentUser = {};
+        
+        getCurrentUser();
 
         vm.newPasswordData = {};
         vm.changePassword = changePassword;
 
         vm.makeAdmin = makeAdmin;
-
-        // getCurrentUser();
-       // activate();
-
-        function activate() {
-            authentication.isLoggedIn().then(function (result) {
-                console.log(result);
-                if (result) {
-                    getCurrentUser();
-                } else {
-                    console.log($scope.currentUser);
-                  //  $location.path('#/');
-                }
-            });
-        }
 
         function register(registerData, keepMeLogin) {
             authentication.register(registerData, keepMeLogin)
@@ -52,42 +37,45 @@
         function login(loginData, keepMeLogin) {
             authentication.login(loginData, keepMeLogin)
                 .then(function success(data) {
-                    console.log(data);
+                    console.log(data);                       
                 }, function error(err) {
                     console.log(err.error_description);
                 });
         }
 
-         function isLoggedIn() {
-             var result = authentication.isLoggedIn();
-             return result;
-         }
+        function isLoggedIn() {
+            return authentication.isLoggedIn();
+        }
 
         function getCurrentUser() {
-            identity.getCurrentUser()
-                .then(function (data) {
-                    $scope.currentUser = data;
-                    return vm.currentUser;
+            var result = isLoggedIn();
+            if (result) {
+                return identity.getCurrentUser()
+                    .then(function (data) {
+                       $scope.currentUser = data;
+                        return $scope.currentUser;
+                    });
+            }
+        }
+
+        function changePassword(data) {
+            authentication.changePassword(data).then(function () {
+                //TODO notify
+                $location.path('#/');
+            });
+        }
+
+        function makeAdmin(user) {
+            identity.makeAdmin(user)
+                .then(function () {
+                    //TODO
                 });
         }
-    }
 
-    function changePassword(data) {
-        authentication.changePassword(data).then(function () {
-            //TODO notify
+        function logout() {
+            authentication.logout();
             $location.path('#/');
-        });
-    }
-
-    function makeAdmin(user) {
-        identity.makeAdmin(user)
-            .then(function () {
-                //TODO
-            });
-    }
-
-    function logout() {
-        authentication.logout();
+        }
     }
 
 } ());

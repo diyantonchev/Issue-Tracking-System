@@ -1,22 +1,23 @@
+{{$parent.currentUser.Id}}
 <form name="editProject" class="col-md-6 edit-project-form border">
     <div class="form-group row">
         <label for="projectName" class="col-md-4 form-control-label">Name:</label>
         <div class="col-md-6">
-            <input type="text" data-ng-model="vm.project.Name" class="form-control" id="Name" placeholder="{{vm.project.Name}}" required="required">
+            <input type="text" data-ng-model="vm.projectData.Name" class="form-control" id="Name" placeholder="{{vm.project.Name}}" required="required">
         </div>
     </div>
     <hr>
     <div class="form-group row">
         <label for="description" class="col-md-4 form-control-label">Description:</label>
         <div class="col-md-6">
-            <input type="text" data-ng-model="vm.project.Description" class="form-control" id="newPassword" placeholder="{{vm.project.Description}}" required="required">
+            <input type="text" data-ng-model="vm.projectData.Description" class="form-control" id="newPassword" placeholder="{{vm.project.Description}}" required="required">
         </div>
     </div>
     <hr>
     <div class="form-group row">
         <label for="projectLeadId" class="col-md-4 form-control-label">Lead ID (current: {{vm.project.Lead.Username}})</label>
         <div class="col-md-6">
-            <input type="text" data-ng-model="vm.project.Lead.Id" class="form-control" id="projectLeadId" placeholder="{{vm.project.Lead.Id}}" required="required">
+            <input type="text" data-ng-model="vm.projectData.LeadId" class="form-control" id="projectLeadId" placeholder="{{vm.project.Lead.Id}}" required="required">
         </div>
     </div>
     <hr>
@@ -36,7 +37,7 @@
     <hr>
     <div class="form-group row">
         <div class="col-md-6">
-            <button type="submit" data-ng-disabled="editProject.$invalid" ng-click="vm.editProject()" class="btn btn-success">Edit Project</button>
+            <button type="submit" data-ng-disabled="editProject.$invalid" ng-click="vm.editProject(vm.projectData)" class="btn btn-success">Edit Project</button>
         </div>
     </div>
 </form>
