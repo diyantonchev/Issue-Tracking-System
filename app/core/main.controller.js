@@ -51,8 +51,8 @@
 
         function getCurrentUser() {
             var result = isLoggedIn();
-            if (result === true) {
-                return identity.getCurrentUser()
+            if (result) {
+                identity.getCurrentUser()
                     .then(function (data) {
                         $scope.currentUser = data;
                         return vm.currentUser;

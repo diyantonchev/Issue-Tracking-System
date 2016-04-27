@@ -32,13 +32,13 @@
             controller: 'ProjectController',
             controllerAs: 'vm'
         });
-        
+
         $routeProvider.when('/projects/:id/add-issue', {
             templateUrl: 'app/projects/partials/add-issue.html',
             controller: 'AddIssueController',
             controllerAs: 'vm'
         });
-        
+
         $routeProvider.when('/projects', {
             templateUrl: 'app/projects/partials/all-projects.html',
             controller: 'AllProjectsController',
