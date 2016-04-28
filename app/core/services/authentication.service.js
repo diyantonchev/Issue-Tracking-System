@@ -4,9 +4,9 @@
     angular.module('issueTrackingSystem.core')
         .factory('authentication', authentication);
 
-    authentication.$inject = ['$http', '$q', 'identity', 'BASE_SERVICE_URL'];
+    authentication.$inject = ['$http', '$q', 'BASE_SERVICE_URL'];
 
-    function authentication($http, $q, identity, BASE_SERVICE_URL) {
+    function authentication($http, $q, BASE_SERVICE_URL) {
 
         var service = {
             register: register,
@@ -60,7 +60,7 @@
 
                     var accessToken = response.data.access_token;
                     $http.defaults.headers.common.Authorization = 'Bearer ' + accessToken;
-                    
+
                     return response.data;
                 }).catch(function err(response) {
                     return $q.reject(response.data);

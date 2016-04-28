@@ -1,12 +1,12 @@
 (function () {
     'use strict';
 
-    angular.module('issueTrackingSystem.core')
+    angular.module('issueTrackingSystem.layout')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['$scope', '$q', '$location', 'identity', 'authentication'];
+    MainController.$inject = ['$location', 'identity', 'authentication'];
 
-    function MainController($scope, $q, $location, identity, authentication) {
+    function MainController($location, identity, authentication) {
         var vm = this;
 
         vm.isLoggedIn = isLoggedIn;
@@ -17,27 +17,36 @@
         vm.loginData = {};
         vm.login = login;
         vm.logout = logout;
-        
-        getCurrentUser();
 
         vm.newPasswordData = {};
         vm.changePassword = changePassword;
 
         vm.makeAdmin = makeAdmin;
 
+        activate();
+
+        function activate() {
+            return identity.getCurrentUser().then(function (user) {
+                vm.currentUser = user;
+            });
+        }
+
         function register(registerData, keepMeLogin) {
             authentication.register(registerData, keepMeLogin)
                 .then(function success(data) {
                     console.log(data);
+                    activate();
                 }, function error(err) {
                     console.log(err.ModelState[""][0]);
                 });
         }
 
         function login(loginData, keepMeLogin) {
+            activate();
             authentication.login(loginData, keepMeLogin)
                 .then(function success(data) {
-                    console.log(data);                       
+                    console.log(data);    
+                    activate();  
                 }, function error(err) {
                     console.log(err.error_description);
                 });
@@ -45,17 +54,6 @@
 
         function isLoggedIn() {
             return authentication.isLoggedIn();
-        }
-
-        function getCurrentUser() {
-            var result = isLoggedIn();
-            if (result) {
-                return identity.getCurrentUser()
-                    .then(function (data) {
-                       $scope.currentUser = data;
-                        return $scope.currentUser;
-                    });
-            }
         }
 
         function changePassword(data) {
@@ -73,6 +71,7 @@
         }
 
         function logout() {
+            vm.currentUser = undefined;
             authentication.logout();
             $location.path('#/');
         }

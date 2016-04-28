@@ -1,0 +1,2 @@
+<div class="row" data-ng-if="!vm.isLoggedIn()" data-ng-include="'app/layout/partials/login-or-register.html'"></div>
+<div class="row" data-ng-controller="DashboardController as vm" data-ng-if="vm.isLoggedIn()" data-ng-include="'app/layout/partials/dashboard.html'"></div>

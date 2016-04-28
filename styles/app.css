@@ -128,6 +128,27 @@ hr {
    margin-bottom: 5px;
 }
 
+.label-container {
+    display: flex;
+    box-sizing: border-box;
+}
+
+.label-container img {
+    height: 18px;
+    margin-top: 12px;
+    margin-left: 3px;
+}
+
+.label-container img:hover {
+    cursor: pointer;
+}
+
+.info {
+    padding-left: 2px;
+    color: red;
+    font-size: 0.9em;
+}
+
 @media all and (max-width: 990px) {        
     .home-form {
          height: 350px;

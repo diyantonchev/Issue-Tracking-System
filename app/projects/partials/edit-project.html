@@ -1,43 +1,53 @@
-{{$parent.currentUser.Id}}
 <form name="editProject" class="col-md-6 edit-project-form border">
     <div class="form-group row">
         <label for="projectName" class="col-md-4 form-control-label">Name:</label>
         <div class="col-md-6">
-            <input type="text" data-ng-model="vm.projectData.Name" class="form-control" id="Name" placeholder="{{vm.project.Name}}" required="required">
+            <input type="text" data-ng-model="project.Name" class="form-control" id="Name" placeholder="{{vm.project.Name}}" required="required">
         </div>
     </div>
     <hr>
     <div class="form-group row">
         <label for="description" class="col-md-4 form-control-label">Description:</label>
         <div class="col-md-6">
-            <input type="text" data-ng-model="vm.projectData.Description" class="form-control" id="newPassword" placeholder="{{vm.project.Description}}" required="required">
+            <input type="text" data-ng-model="project.Description" class="form-control" id="newPassword" placeholder="{{vm.project.Description}}"
+                required="required">
         </div>
     </div>
     <hr>
     <div class="form-group row">
-        <label for="projectLeadId" class="col-md-4 form-control-label">Lead ID (current: {{vm.project.Lead.Username}})</label>
+        <label for="projectLeadId" class="col-md-4 form-control-label">Lead ID (current: {{vm.project.Lead.Id}})</label>
         <div class="col-md-6">
-            <input type="text" data-ng-model="vm.projectData.LeadId" class="form-control" id="projectLeadId" placeholder="{{vm.project.Lead.Id}}" required="required">
+            <input type="text" data-ng-model="project.LeadId" class="form-control" id="projectLeadId" placeholder="{{vm.project.Lead.Id}}"
+                required="required">
+                <div data-ng-if="!currentUser.isAdmin && (project.LeadId !== vm.project.Lead.Id)" class="info">You cannot change the Lead ID</div>
         </div>
     </div>
     <hr>
     <div class="form-group row">
         <label for="projectLabels" class="col-md-4">Labels:</label>
         <div class="col-md-6">
-            <input type="text" data-ng-repeat="label in vm.project.Labels" class="form-control" id="projectLabels" placeholder="{{label.Name}}">
+            <div class="label-container" data-ng-repeat="label in vm.project.Labels">
+                <input type="text" data-ng-model="label.Name" class="form-control" placeholder="{{label.Name}}">
+                <img src="img/delete.png" class="delete-bullet" alt="delete" remove-label>
+            </div>
+            <buton class="btn btn-success">Add Labels</buton>
         </div>
     </div>
     <hr>
     <div class="form-group row">
         <label for="projectPriorities" class="col-md-4">Priorities:</label>
         <div class="col-md-6">
-            <input type="text" data-ng-repeat="priority in vm.project.Priorities" class="form-control" id="projectPriorities" placeholder="{{priority.Name}}">
+            <div class="label-container" data-ng-repeat="priority in vm.project.Priorities">
+                <input type="text" data-ng-model="priority.Name" class="form-control">
+                <img src="img/delete.png" class="delete-bullet" alt="delete" remove-priority>
+            </div>
+            <buton class="btn btn-success">Add Priorities</buton>
         </div>
     </div>
     <hr>
     <div class="form-group row">
         <div class="col-md-6">
-            <button type="submit" data-ng-disabled="editProject.$invalid" ng-click="vm.editProject(vm.projectData)" class="btn btn-success">Edit Project</button>
+            <button type="submit" data-ng-disabled="editProject.$invalid || (!currentUser.isAdmin && (project.LeadId !== vm.project.Lead.Id))" ng-click="vm.editProject()" class="btn btn-success">Edit Project</button>
         </div>
     </div>
 </form>

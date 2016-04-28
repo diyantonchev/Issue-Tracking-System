@@ -4,9 +4,9 @@
     angular.module('issueTrackingSystem.projects')
         .controller('ProjectController', ProjectController);
 
-    ProjectController.$inject = ['$q', '$location', 'projects'];
+    ProjectController.$inject = ['$scope', '$q', '$location', 'identity', 'projects'];
 
-    function ProjectController($q, $location, projects) {
+    function ProjectController($scope, $q, $location, identity, projects) {
         var vm = this;
 
         vm.project = {};
@@ -21,7 +21,8 @@
 
         function activate() {
             var id = getProjectId();
-            getProjectById(id);    
+            getCurrentUser();
+            getProjectById(id);
             getProjectIssues(id)
                 .then(function (issues) {
                     issues.forEach(function (issue) {
@@ -46,6 +47,7 @@
             return projects.getProjectById(id)
                 .then(function (data) {
                     vm.project = data;
+                    $scope.project = data;
                     return vm.project;
                 });
         }
@@ -57,10 +59,16 @@
             });
         }
 
-        function editProject(data) {
-            projects.editProject(data, vm.project.Id).then(function (response) {
-                console.log(response);
+        function editProject() {
+            projects.editProject($scope.project, vm.project.Id).then(function (response) {
+                console.log(response); //TODO Notify
                 $location.path('/projects/' + vm.project.Id);
+            });
+        }
+
+        function getCurrentUser() {
+            return identity.getCurrentUser().then(function (user) {
+                $scope.currentUser = user;
             });
         }
     }

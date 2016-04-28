@@ -9,13 +9,22 @@
     function identity($http, $q, BASE_SERVICE_URL) {
 
         var service = {
+            isLoggedIn: isLoggedIn,
+            requestUserProfile: requestUserProfile,
             getCurrentUser: getCurrentUser,
             makeadmin: makeAdmin
         };
 
         return service;
 
-        function getCurrentUser() {
+        function isLoggedIn() {
+            var result = sessionStorage.authenticationData !== undefined ||
+                localStorage.authenticationData !== undefined;
+
+            return result;
+        }
+
+        function requestUserProfile() {
             var url = BASE_SERVICE_URL + '/users/me';
 
             var request = {
@@ -26,14 +35,23 @@
                 }
             };
 
-            return $http(request).then(currentUserComplete);
-
-            function currentUserComplete(response) {
+            return $http(request).then(function (response) {
                 return response.data;
+            });
+
+        }
+
+        function getCurrentUser() {
+            if (isLoggedIn()) {
+                return requestUserProfile().then(function (user) {
+                    return user;
+                });
+            } else {
+                return $q.resolve(undefined);
             }
         }
-        
-         function makeAdmin(user) {
+
+        function makeAdmin(user) {
             var url = BASE_SERVICE_URL + '/users/makeadmin';
             var request = {
                 method: 'PUT',
