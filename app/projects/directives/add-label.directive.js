@@ -17,8 +17,7 @@
 
         function link(scope, element) {
             element.on('click', function (event) {
-                var label = this.val();
-                vm.editedProject.labels.push(this.val());
+                
             });
         }
     }
