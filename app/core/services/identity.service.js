@@ -47,7 +47,7 @@
                     return user;
                 });
             } else {
-                return $q.resolve(undefined);
+                return $q.reject(undefined);
             }
         }
 

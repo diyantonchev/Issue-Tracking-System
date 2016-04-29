@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="app/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="app/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="app/bower_components/angular-loading-bar/src/loading-bar.css">
+    <link rel="stylesheet" href="app/bower_components/AngularJS-Toaster/toaster.min.css">
     <!-- endinject -->
 
     <!-- inject:css -->
@@ -28,36 +29,23 @@
                 </button>
                 </div>
                 <div class="navbar-collapse collapse" id="navbar-main">
-                    <ul class="nav navbar-nav" data-ng-if="vm.isLoggedIn()">
-                        <li>
-                            <a href="#/">Dashboard</a>
-                        </li>
-                        <li>
-                            <a data-ng-if="vm.currentUser.isAdmin"  href="#/projects">Projects</a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#/profile/password">Change Password</a></li>
-                                <li><a href="#/logout" data-ng-click="vm.logout()">Logout</a></li>
-                            </ul>
-                        </li>
+                    <ul class="nav navbar-nav" data-ng-show="vm.isLoggedIn()" data-ng-include="'app/layout/partials/navbar-list.html'">
                     </ul>
                 </div>
             </div>
         </div>
     </header>
-
     <main class="container main-view">
+        <toaster-container toaster-options="{'time-out': 5000}"></toaster-container>
         <div data-ng-view />
     </main>
     <!-- inject-vendor:js -->
     <script src="app/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="app/bower_components/angular/angular.js"></script>
     <script src="app/bower_components/angular-route/angular-route.js"></script>
-    <script src="app/bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="app/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="app/bower_components/toastr/toastr.min.js"></script>
+    <script src="app/bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="app/bower_components/AngularJS-Toaster/toaster.min.js"></script>
     <script src="app/bower_components/angular-loading-bar/src/loading-bar.js"></script>
     <script src="app/bower_components/angular-ui-bootstrap-pagination/pagination.js"></script>
     <!-- endinject -->

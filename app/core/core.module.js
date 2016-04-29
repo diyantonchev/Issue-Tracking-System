@@ -3,8 +3,8 @@
 
     angular.module('issueTrackingSystem.core', [
         'ngRoute',
-        'ngCookies',
         'angular-loading-bar',
+        'toaster',
         'ui.bootstrap.pagination',
     ]);
 

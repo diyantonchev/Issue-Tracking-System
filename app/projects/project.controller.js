@@ -4,9 +4,9 @@
     angular.module('issueTrackingSystem.projects')
         .controller('ProjectController', ProjectController);
 
-    ProjectController.$inject = ['$scope', '$q', '$location', 'identity', 'projects'];
+    ProjectController.$inject = ['$scope', '$q', '$location', 'identity', 'projects', 'toaster'];
 
-    function ProjectController($scope, $q, $location, identity, projects) {
+    function ProjectController($scope, $q, $location, identity, projects, toaster) {
         var vm = this;
 
         vm.project = {};
@@ -21,8 +21,11 @@
 
         function activate() {
             var id = getProjectId();
+
             getCurrentUser();
+
             getProjectById(id);
+
             getProjectIssues(id)
                 .then(function (issues) {
                     issues.forEach(function (issue) {
@@ -61,7 +64,7 @@
 
         function editProject() {
             projects.editProject($scope.project, vm.project.Id).then(function (response) {
-                console.log(response); //TODO Notify
+                toaster.pop('success', 'Success', 'Project successfullty edited');
                 $location.path('/projects/' + vm.project.Id);
             });
         }

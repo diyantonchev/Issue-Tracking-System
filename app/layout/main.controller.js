@@ -4,9 +4,9 @@
     angular.module('issueTrackingSystem.layout')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['$location', 'identity', 'authentication'];
+    MainController.$inject = ['$location', 'identity', 'authentication', 'toaster'];
 
-    function MainController($location, identity, authentication) {
+    function MainController($location, identity, authentication, toaster) {
         var vm = this;
 
         vm.isLoggedIn = isLoggedIn;
@@ -23,32 +23,17 @@
 
         vm.makeAdmin = makeAdmin;
 
-        activate();
-
-        function activate() {
-            return identity.getCurrentUser().then(function (user) {
-                vm.currentUser = user;
-            });
-        }
-
         function register(registerData, keepMeLogin) {
             authentication.register(registerData, keepMeLogin)
                 .then(function success(data) {
-                    console.log(data);
-                    activate();
-                }, function error(err) {
-                    console.log(err.ModelState[""][0]);
+                    toaster.pop('success', 'Success', 'User successfully registered');
                 });
         }
 
         function login(loginData, keepMeLogin) {
-            activate();
-            authentication.login(loginData, keepMeLogin)
+            return authentication.login(loginData, keepMeLogin)
                 .then(function success(data) {
-                    console.log(data);    
-                    activate();  
-                }, function error(err) {
-                    console.log(err.error_description);
+                    toaster.pop('success', 'Success', 'Successfully logged in');
                 });
         }
 
@@ -58,7 +43,7 @@
 
         function changePassword(data) {
             authentication.changePassword(data).then(function () {
-                //TODO notify
+                toaster.pop('success', 'Success', 'Password successfully changed');
                 $location.path('#/');
             });
         }
@@ -73,6 +58,7 @@
         function logout() {
             vm.currentUser = undefined;
             authentication.logout();
+            toaster.pop('success', 'Success', 'Successfully logged out');
             $location.path('#/');
         }
     }

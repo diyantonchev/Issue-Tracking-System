@@ -30,7 +30,8 @@
             controller: 'AllProjectsController',
             controllerAs: 'vm',
             resolve: {
-                getAllPojectsService: getAllPojectsService
+                getAllPojectsService: getAllPojectsService,
+                isAdminCheck: isAdminCheck
             }
         });
 
@@ -42,4 +43,13 @@
         return projects.getAllProjects();
     }
 
+    isAdminCheck.$inject = ['identity', '$location'];
+    function isAdminCheck(identity, $location) {
+        return identity.getCurrentUser().then(function (user) {
+            if (!user.isAdmin) {
+                $location.path('#/');
+                //TODO notify
+            }
+        });
+    }
 } ());

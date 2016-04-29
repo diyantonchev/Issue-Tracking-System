@@ -5,10 +5,9 @@
         .config(config)
         .run(authorization);
 
-    config.$inject = ['$routeProvider'];
-    authorization.$inject = ['$http', '$location', 'authentication'];
+    config.$inject = ['$routeProvider', '$httpProvider'];
 
-    function config($routeProvider) {
+    function config($routeProvider, $httpProvider) {
         /*   $routeProvider.when('/issues/:id', {
                templateUrl: 'app/issues/partials/issue-page.html',
                controller: 'IssueController',
@@ -16,8 +15,11 @@
            });*/
 
         $routeProvider.otherwise({ redirectTo: '/' });
+
+        $httpProvider.interceptors.push(interceptor);
     }
 
+    authorization.$inject = ['$http', '$location', 'authentication'];
     function authorization($http, $location, authentication) {
         if (authentication.isLoggedIn()) {
             var accessToken;
@@ -29,6 +31,24 @@
 
             $http.defaults.headers.common.Authorization = 'Bearer ' + accessToken;
         }
+    }
+
+    interceptor.$inject = ['$q', 'toaster'];
+    function interceptor($q, toaster) {
+        return {
+            'responseError': function (rejection) {
+                if (rejection.data && rejection.data.error_description) {
+                    toaster.pop('error', 'Error', rejection.data.error_description);
+                } else if (rejection.data && rejection.data.ModelState && rejection.data.ModelState['']) {
+                    var errors = rejection.data.ModelState[''];
+                    if (errors.length > 0) {
+                        toaster.pop('error', 'Error', errors[0]);
+                    }
+                }
+
+                return $q.reject(rejection);
+            }
+        };
     }
 
 } ());
