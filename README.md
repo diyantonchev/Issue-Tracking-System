@@ -9,4 +9,5 @@ A status transition scheme describes the workflow of an issue. See the image bel
    Issue Tracker REST Services
 
 Services base URL (in the Windows Azure cloud): http://softuni-issue-tracker.azurewebsites.net
+
 Services help page (online documentation): http://softuni-issue-tracker.azurewebsites.net/help 
