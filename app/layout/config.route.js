@@ -17,15 +17,30 @@
             templateUrl: 'app/layout/partials/change-password.html',
             controller: 'MainController',
             controllerAs: 'vm',
+            resolve: {
+                isAuthenticated: isAuthenticated
+            }
         });
 
         $routeProvider.when('#/logout', {
             templateUrl: "",
             controller: 'MainController',
-            controllerAs: 'vm'
+            controllerAs: 'vm',
+            resolve: {
+                isAuthenticated: isAuthenticated
+            }
         });
 
         $routeProvider.otherwise({ redirectTo: '/' });
+    }
+
+    isAuthenticated.$inject = ['$q', 'authentication'];
+    function isAuthenticated($q, authentication) {
+        if (authentication.isLoggedIn()) {
+            return $q.when(true);
+        }
+
+        return $q.reject('Unauthorized Access');
     }
 
 } ());

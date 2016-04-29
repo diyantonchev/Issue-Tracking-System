@@ -3,6 +3,7 @@
 
     angular.module('issueTrackingSystem')
         .config(config)
+        .run(authenticationCheck)
         .run(authorization);
 
     config.$inject = ['$routeProvider', '$httpProvider'];
@@ -17,6 +18,15 @@
         $routeProvider.otherwise({ redirectTo: '/' });
 
         $httpProvider.interceptors.push(interceptor);
+    }
+
+    authenticationCheck.$inject = ['$rootScope', '$location'];
+    function authenticationCheck($rootScope, $location) {
+        $rootScope.$on('$routeChangeError', function (ev, current, previous, rejection) {
+            if (rejection == 'Unauthorized Access') {
+                $location.path('#/');
+            }
+        });
     }
 
     authorization.$inject = ['$http', '$location', 'authentication'];
