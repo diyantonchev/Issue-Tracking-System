@@ -7,17 +7,17 @@ A status transition scheme describes the workflow of an issue. See the image bel
 
 ![Status transition sheme](img/status-transition-scheme.png?raw=true)
 
-  ### Issue Tracker REST Services
+### Issue Tracker REST Services
 
 Services base URL (in the Windows Azure cloud): http://softuni-issue-tracker.azurewebsites.net
 
 Services help page (online documentation): http://softuni-issue-tracker.azurewebsites.net/help 
 
- ## Getting Started
+## Getting Started
 
 To get you started you can simply clone the repository and install the dependencies:
 
- ### Prerequisites
+### Prerequisites
 
 You need git to clone the Issue-Tracking-System repository. You can get git from [http://git-scm.com/](http://git-scm.com/)..
 
@@ -25,7 +25,7 @@ It also used a number of node.js tools to initialize. You must have node.js and 
 
 ### Clone Issue-Tracking-System
 
-Clone the Issue-Tracking-System repository using [git][git]:
+Clone the Issue-Tracking-System repository using [git]:
 
 ```
 git clone https://github.com/DiyanTonchev/Issue-Tracking-System.git
@@ -49,4 +49,4 @@ The simplest way to start this server is:
 npm start
 ```
 
-Now browse to the app at `http://localhost:8000/index.html`.
+Now browse to the app at `http://localhost:8000`.
