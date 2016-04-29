@@ -31,7 +31,8 @@
             controller: 'AddIssueController',
             controllerAs: 'vm',
             resolve: {
-                isAuthenticated: isAuthenticated
+                isAuthenticated: isAuthenticated,
+                getAllUsersService: getAllUsersService
             }
         });
 
@@ -71,5 +72,10 @@
                 //TODO notify
             }
         });
+    }
+
+    getAllUsersService.$inject = ['usersData'];
+    function getAllUsersService(usersData) {
+       return usersData.getUsers();
     }
 } ());

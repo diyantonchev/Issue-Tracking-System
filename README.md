@@ -36,7 +36,7 @@ git clone https://github.com/DiyanTonchev/Issue-Tracking-System.git
 ```
 npm install
 ```
-Behind the scenes this will also call bower install. You should find that you have two new folders in your project.
+Behind the scenes this will also call `bower install`. You should find that you have two new folders in your project.
 
 * `node_modules` - contains the npm packages for the needed tools 
 * `app/bower_components` - contains the angular framework files

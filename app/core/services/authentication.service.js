@@ -95,7 +95,9 @@
                 data: data
             };
 
-            return $http(request);
+            return $http(request).catch(function err(response) {
+                return $q.reject(response.data);
+            });
         }
     }
 

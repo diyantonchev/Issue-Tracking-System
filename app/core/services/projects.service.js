@@ -27,6 +27,8 @@
 
             return $http(request).then(function (response) {
                 return response.data;
+            }).catch(function err(response) {
+                return $q.reject(response.data);
             });
 
         }
@@ -36,6 +38,8 @@
 
             return $http.get(url).then(function (response) {
                 return response.data;
+            }).catch(function err(response) {
+                return $q.reject(response.data);
             });
         }
 
@@ -44,6 +48,8 @@
 
             return $http.get(url).then(function (response) {
                 return response.data;
+            }).catch(function err(response) {
+                return $q.reject(response.data);
             });
         }
 
@@ -51,6 +57,8 @@
             var url = BASE_SERVICE_URL + '/projects/' + id + '/issues';
             return $http.get(url).then(function (response) {
                 return response.data;
+            }).catch(function err(response) {
+                return $q.reject(response.data);
             });
         }
 
@@ -68,6 +76,8 @@
 
             return $http(request).then(function (response) {
                 return response;
+            }).catch(function err(response) {
+                return $q.reject(response.data);
             });
         }
     }

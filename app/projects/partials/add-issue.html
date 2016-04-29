@@ -1,1 +1,56 @@
-<div>zdr</div>
+<form name="addIssue" class="col-md-6 add-issue-form border">
+    <div class="form-group row">
+        <label for="issueTitle" class="col-md-4 form-control-label">Title:</label>
+        <div class="col-md-6">
+            <input type="text" data-ng-model="vm.issue.Title" class="form-control" id="issueTitle" placeholder="Title" required="required">
+        </div>
+    </div>
+    <hr>
+    <div class="form-group row">
+        <label for="issueDescription" class="col-md-4 form-control-label">Description:</label>
+        <div class="col-md-6">
+            <textarea class="form-control" data-ng-model="vm.issue.Description" rows="4" id="issueDescription" placeholder="Description"
+                required="required"></textarea>
+        </div>
+    </div>
+    <hr>
+    <div class="form-group row">
+        <label for="assigneeId" class="col-md-4 ">AssigneeID:</label>
+        <div class="col-md-6">
+            <select id="assigneeId" class="form-control" data-ng-model="vm.issue.AssigneeId">
+              <option value="">Choose assignee</option>
+              <option data-ng-repeat="user in vm.users | orderBy:'Username'" value="{{vm.user.Id}}">{{vm.user.Username}}</option>
+           </select>
+        </div>
+    </div>
+    <hr>
+    <div class="form-group row">
+        <label class="col-md-4" for="issueDate">Due Date:</label>
+        <div class="col-md-6">
+            <input type="datetime-local" class="form-control" data-ng-model="vm.issue.DueDate" id="issueDate" required="required">
+        </div>
+    </div>
+    <hr>
+    <div class="form-group row">
+        <label for="prioritiy" class="col-md-4">Priority:</label>
+        <div class="col-md-6">
+            <select id="priority" class="form-control" data-ng-model="vm.issue.PriorityId" required="required">
+                <option value="">Choose priority</option>
+                <option data-ng-repeat="priority in vm.project.Priorities" value="{{priority.Id}}">{{priority.Name}}</option>
+            </select>
+        </div>
+    </div>
+    <hr>
+    <div class="form-group row">
+        <label class="col-md-4" for="issueLabels">Labels:</label>
+        <div class="col-md-6">
+            <input type="text" data-ng-model="vm.labels" class="form-control">
+        </div>
+    </div>
+    <hr>
+    <div class="form-group row">
+        <div class="col-md-6">
+            <button type="submit" data-ng-disabled="addIssue.$invalid" data-ng-click="vm.addIssue(vm.issue)" class="btn btn-success">Add Issue</button>
+        </div>
+    </div>
+</form>

@@ -9,6 +9,7 @@
     function issues($http, $q, BASE_SERVICE_URL) {
         var service = {
             getUserIssues: getUserIssues,
+            addIssue: addIssue
         };
 
         return service;
@@ -22,6 +23,22 @@
 
             return $http(request).then(function (response) {
                 return response.data;
+            }).catch(function err(response) {
+                return $q.reject(response.data);
+            });
+        }
+
+        function addIssue(data) {
+            var request = {
+                method: 'POST',
+                url: BASE_SERVICE_URL + '/issues',
+                data: data
+            };
+
+            return $http(request).then(function (response) {
+                return response.data;
+            }).catch(function err(response) {
+                return $q.reject(response.data);
             });
         }
     }

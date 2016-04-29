@@ -149,6 +149,22 @@ hr {
     font-size: 0.9em;
 }
 
+textarea {
+    max-width: 100%;
+    max-height: 200px;
+}
+
+.add-issue-form {
+    margin-bottom: 20px;
+    padding: 30px;
+}
+
+.add-issue-form .btn-success {
+    width: 55%;
+    height: 45px;
+    font-size: 1.2em;
+}
+
 @media all and (max-width: 990px) {        
     .home-form {
          height: 350px;

@@ -37,6 +37,8 @@
 
             return $http(request).then(function (response) {
                 return response.data;
+            }).catch(function err(response) {
+                return $q.reject(response.data);
             });
 
         }
@@ -62,7 +64,9 @@
                 data: user
             };
 
-            return $http(request);
+            return $http(request).catch(function err(response) {
+                return $q.reject(response.data);
+            });
         }
     }
 

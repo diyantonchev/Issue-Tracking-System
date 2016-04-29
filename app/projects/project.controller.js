@@ -4,9 +4,9 @@
     angular.module('issueTrackingSystem.projects')
         .controller('ProjectController', ProjectController);
 
-    ProjectController.$inject = ['$scope', '$q', '$location', 'identity', 'projects', 'toaster'];
+    ProjectController.$inject = ['$scope', '$routeParams', '$location', 'identity', 'projects', 'toaster'];
 
-    function ProjectController($scope, $q, $location, identity, projects, toaster) {
+    function ProjectController($scope, $routeParams, $location, identity, projects, toaster) {
         var vm = this;
 
         vm.project = {};
@@ -20,7 +20,7 @@
         activate();
 
         function activate() {
-            var id = getProjectId();
+            var id = $routeParams.id;
 
             getCurrentUser();
 
@@ -40,12 +40,6 @@
                 });
         }
 
-        function getProjectId() {
-            var regex = /[0-9]+/;
-            var id = regex.exec($location.path())[0];
-            return id;
-        }
-
         function getProjectById(id) {
             return projects.getProjectById(id)
                 .then(function (data) {
@@ -63,9 +57,9 @@
         }
 
         function editProject() {
-            projects.editProject($scope.project, vm.project.Id).then(function (response) {
+            projects.editProject($scope.project, $routeParams.id).then(function (response) {
                 toaster.pop('success', 'Success', 'Project successfullty edited');
-                $location.path('/projects/' + vm.project.Id);
+                $location.path('/projects/' + $routeParams.id);
             });
         }
 
