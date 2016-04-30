@@ -1,4 +1,4 @@
-<form name="addIssue" class="col-md-6 add-issue-form border">
+<form name="addIssue" class="col-md-7 add-issue-form border">
     <div class="form-group row">
         <label for="issueTitle" class="col-md-4 form-control-label">Title:</label>
         <div class="col-md-6">
@@ -15,12 +15,9 @@
     </div>
     <hr>
     <div class="form-group row">
-        <label for="assigneeId" class="col-md-4 ">AssigneeID:</label>
+        <label for="assigneeId" class="col-md-4 ">Assignee:</label>
         <div class="col-md-6">
-            <select id="assigneeId" class="form-control" data-ng-model="vm.issue.AssigneeId">
-              <option value="">Choose assignee</option>
-              <option data-ng-repeat="user in vm.users | orderBy:'Username'" value="{{vm.user.Id}}">{{vm.user.Username}}</option>
-           </select>
+            <input type="text" autocomplete-users id="assigneeId" class="form-control" required="required">
         </div>
     </div>
     <hr>
@@ -30,6 +27,24 @@
             <input type="datetime-local" class="form-control" data-ng-model="vm.issue.DueDate" id="issueDate" required="required">
         </div>
     </div>
+    <hr>
+    <tag-manager tags="tags">
+        <div class="form-group row">
+            <label class="col-md-4 form-control-label" for="labels">Labels:</label>
+            <div class="col-md-6">
+                <div class="tags">
+                    <div ng-repeat="(index, tag) in vm.tags" class="tag label label-success">{{tag}} <a href="" class="close" ng-click="vm.removeLabel(index)">×</a></div>
+                </div>
+                <div class="input-group">
+                    <input type="text" autocomplete-labels data-ng-model="vm.newLabel" class="form-control" id="labels" placeholder="Add Label..."
+                    />
+                    <span class="input-group-btn">
+                        <button class="btn btn-success" ng-click="vm.addLabel(vm.newLabel)" type="button">Add</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </tag-manager>
     <hr>
     <div class="form-group row">
         <label for="prioritiy" class="col-md-4">Priority:</label>
@@ -42,15 +57,9 @@
     </div>
     <hr>
     <div class="form-group row">
-        <label class="col-md-4" for="issueLabels">Labels:</label>
-        <div class="col-md-6">
-            <input type="text" data-ng-model="vm.labels" class="form-control">
-        </div>
-    </div>
-    <hr>
-    <div class="form-group row">
-        <div class="col-md-6">
-            <button type="submit" data-ng-disabled="addIssue.$invalid" data-ng-click="vm.addIssue(vm.issue)" class="btn btn-success">Add Issue</button>
+        <div class="col-md-9 btn-container">
+            <button type="submit" data-ng-disabled="addIssue.$invalid" data-ng-click="vm.submitIssue(vm.issue)" class="btn btn-success">Add Issue</button>
+            <a href="#/projects/{{vm.project.Id}}"><button class="btn btn-primary">Back To Project</button></a>
         </div>
     </div>
 </form>

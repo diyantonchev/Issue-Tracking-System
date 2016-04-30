@@ -8,8 +8,6 @@
         var directive = {
             restrict: 'EA',
             link: link,
-            controller: 'ProjectController',
-            controllerAs: 'vm',
         };
 
         return directive;
@@ -19,8 +17,8 @@
             element.on('click', function (event) {
                 var input = this.previousElementSibling;
                 var priorityForRemove = input.value;
-                var priorities = scope.$parent.project.Priorities;
-                scope.$parent.project.Priorities = priorities.filter(function (priority) {
+                var priorities = scope.project.Priorities;
+                scope.project.Priorities = priorities.filter(function (priority) {
                     return priority.Name !== priorityForRemove;
                 });
 

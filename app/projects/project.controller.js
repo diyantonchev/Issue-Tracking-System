@@ -4,29 +4,23 @@
     angular.module('issueTrackingSystem.projects')
         .controller('ProjectController', ProjectController);
 
-    ProjectController.$inject = ['$scope', '$routeParams', '$location', 'identity', 'projects', 'toaster'];
+    ProjectController.$inject = ['$scope', '$routeParams', '$location', 'identity', 'projects', 'usersData', 'getAllUsersService', 'toaster'];
 
-    function ProjectController($scope, $routeParams, $location, identity, projects, toaster) {
+    function ProjectController($scope, $routeParams, $location, identity, projects, usersData, getAllUsersService, toaster) {
         var vm = this;
 
-        vm.project = {};
         vm.issues = [];
-
         vm.authors = [];
         vm.assignees = [];
+        $scope.users = getAllUsersService;
 
-        vm.editProject = editProject;
-
+        vm.submitEditedProject = submitEditedProject;
         activate();
 
         function activate() {
-            var id = $routeParams.id;
-
             getCurrentUser();
-
-            getProjectById(id);
-
-            getProjectIssues(id)
+            getProjectById($routeParams.id);
+            getProjectIssues($routeParams.id)
                 .then(function (issues) {
                     issues.forEach(function (issue) {
                         if (issue.Author && (vm.authors.indexOf(issue.Author.Username) === -1)) {
@@ -43,9 +37,8 @@
         function getProjectById(id) {
             return projects.getProjectById(id)
                 .then(function (data) {
-                    vm.project = data;
                     $scope.project = data;
-                    return vm.project;
+                    return data;
                 });
         }
 
@@ -56,10 +49,32 @@
             });
         }
 
-        function editProject() {
-            projects.editProject($scope.project, $routeParams.id).then(function (response) {
+        function submitEditedProject() {
+            if ($scope.currentUser.isAdmin) {
+                var username = $('#projectLeadId').val();
+                if (username) {
+                    usersData.getUserByUsername(username).then(function (userId) {
+                        $scope.project.LeadId = userId;
+                        editProject($scope.project, $routeParams.id);
+                    });
+                } else {
+                    $scope.project.LeadId = $scope.project.Lead.Id;
+                    editProject($scope.project, $routeParams.id);
+                }
+
+            } else {
+                $scope.project.LeadId = $scope.project.Lead.Id;
+                editProject($scope.project, $routeParams.id);
+            }
+        }
+
+        function editProject(project, id) {
+            projects.editProject(project, id).then(function (response) {
                 toaster.pop('success', 'Success', 'Project successfullty edited');
+                console.log(response.data);
                 $location.path('/projects/' + $routeParams.id);
+            }).catch(function (err) {
+                toaster.pop('error', 'Error', err.Message);
             });
         }
 

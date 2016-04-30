@@ -10,6 +10,7 @@
 
         var service = {
             getUsers: getUsers,
+            getUserByUsername: getUserByUserame
         };
 
         return service;
@@ -25,11 +26,22 @@
                 }
             };
 
-            return $http(request).then(getUsersComplete);
-
-            function getUsersComplete(response) {
+            return $http(request).then(function (response) {
                 return response.data;
-            }
+            });
+        }
+
+        function getUserByUserame(username) {
+            var url = BASE_SERVICE_URL + '/Users/?filter=Username.Contains("' + username + '")';
+
+            var request = {
+                method: 'GET',
+                url: url
+            };
+
+           return $http(request).then(function (response) {
+                return response.data[0].Id;
+            });
         }
     }
 

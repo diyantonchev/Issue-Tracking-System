@@ -7,6 +7,7 @@
     <!-- inject-vendor:css -->
     <link rel="stylesheet" href="app/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="app/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="app/bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css">
     <link rel="stylesheet" href="app/bower_components/angular-loading-bar/src/loading-bar.css">
     <link rel="stylesheet" href="app/bower_components/AngularJS-Toaster/toaster.min.css">
     <!-- endinject -->
@@ -45,6 +46,8 @@
     <script src="app/bower_components/angular-route/angular-route.js"></script>
     <script src="app/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="app/bower_components/angular-animate/angular-animate.min.js"></script>
+    <scrpit src="app/bower_components/jquery-ui/jquery-ui.js"></scrpit>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="app/bower_components/AngularJS-Toaster/toaster.min.js"></script>
     <script src="app/bower_components/angular-loading-bar/src/loading-bar.js"></script>
     <script src="app/bower_components/angular-ui-bootstrap-pagination/pagination.js"></script>
@@ -57,13 +60,13 @@
 
     <!-- core -->
     <script src="app/core/core.module.js"></script>
-
     <script src="app/core/constants.js"></script>
     <script src="app/core/services/authentication.service.js"></script>
     <script src="app/core/services/identity.service.js"></script>
     <script src="app/core/services/issues.service.js"></script>
     <script src="app/core/services/projects.service.js"></script>
     <script src="app/core/services/users-data.service.js"></script>
+    <script src="app/core/services/labels.service.js"></script>
 
     <!-- layout -->
     <script src="app/layout/layout.module.js"></script>
@@ -79,6 +82,8 @@
     <script src="app/projects/all-projects.controller.js"></script>
     <script src="app/projects/directives/remove-label.directive.js"></script>
     <script src="app/projects/directives/remove-priority.directive.js"></script>
+    <script src="app/projects/directives/autocomplete-users.directive.js"></script>
+    <script src="app/projects/directives/autocomplete-labels.directive.js"></script>
     <!-- endinject -->
 </body>
 

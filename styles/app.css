@@ -60,6 +60,13 @@ body {
     font-weight: bold;
 }
 
+td {
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .table tbody td:nth-child(odd) {
     color: #36b4d8;
 }
@@ -157,12 +164,22 @@ textarea {
 .add-issue-form {
     margin-bottom: 20px;
     padding: 30px;
+    box-sizing: border-box;
 }
 
-.add-issue-form .btn-success {
-    width: 55%;
-    height: 45px;
-    font-size: 1.2em;
+.tags {
+   margin-bottom: 5px;
+} 
+
+.tags .tag {
+   display: inline-block;
+   margin-right: 5px;
+   font-size: 13px;
+}
+  
+.tag .close {
+   font-size: 14px;
+   margin-left: 5px;
 }
 
 @media all and (max-width: 990px) {        

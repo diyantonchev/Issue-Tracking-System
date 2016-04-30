@@ -1,4 +1,4 @@
-<form name="editProject" class="col-md-6 edit-project-form border">
+<form name="editProject" class="col-md-7 edit-project-form border">
     <div class="form-group row">
         <label for="projectName" class="col-md-4 form-control-label">Name:</label>
         <div class="col-md-6">
@@ -10,21 +10,20 @@
         <label for="description" class="col-md-4 form-control-label">Description:</label>
         <div class="col-md-6">
             <textarea type="text" data-ng-model="project.Description" class="form-control" id="description" placeholder="{{project.Description}}"
-                required="required"></textarea>
-        </div>
-    </div>
-    <hr>
-    <div class="form-group row">
-        <label for="projectLeadId" class="col-md-4 form-control-label">Lead ID (current: {{vm.project.Lead.Id}})</label>
-        <div class="col-md-6">
-            <input type="text" data-ng-model="project.LeadId" class="form-control" id="projectLeadId" placeholder="{{vm.project.Lead.Id}}"
                 required="required">
-            <div data-ng-if="!currentUser.isAdmin && (project.LeadId !== vm.project.Lead.Id)" class="info">You cannot change the Lead ID</div>
+            </textarea>
+        </div>
+    </div>
+    <hr>
+    <div class="form-group row" data-ng-if="currentUser.isAdmin">
+        <label for="projectLeadId" class="col-md-4 form-control-label">Lead (current: {{project.Lead.Username}})</label>
+        <div class="col-md-6">
+            <input type="text" autocomplete-users class="form-control" id="projectLeadId">
         </div>
     </div>
     <hr>
     <div class="form-group row">
-        <label for="projectLabels" class="col-md-4">Current Labels:</label>
+        <label for="projectLabels" class="col-md-4">Labels:</label>
         <div class="col-md-6">
             <div class="label-container" data-ng-repeat="label in project.Labels">
                 <input type="text" id="projectLabels" data-ng-model="label.Name" class="form-control" placeholder="{{label.Name}}">
@@ -34,7 +33,7 @@
     </div>
     <hr>
     <div class="form-group row">
-        <label for="projectPriorities" class="col-md-4">Current Priorities:</label>
+        <label for="projectPriorities" class="col-md-4">Priorities:</label>
         <div class="col-md-6">
             <div class="label-container" data-ng-repeat="priority in project.Priorities">
                 <input type="text" data-ng-model="priority.Name" class="form-control">
@@ -44,9 +43,9 @@
     </div>
     <hr>
     <div class="form-group row">
-        <div class="col-md-6">
-            <button type="submit" data-ng-disabled="editProject.$invalid || (!currentUser.isAdmin && (project.LeadId !== vm.project.Lead.Id))"
-                ng-click="vm.editProject()" class="btn btn-success">Edit Project</button>
+        <div class="col-md-7 btn-container">
+            <button type="submit" data-ng-disabled="editProject.$invalid" ng-click="vm.submitEditedProject()" class="btn btn-success">Edit Project</button>
+            <a href="#/projects/{{project.Id}}"><button class="btn btn-primary">Back To Project</button></a>
         </div>
     </div>
 </form>

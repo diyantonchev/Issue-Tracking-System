@@ -12,7 +12,7 @@
             isLoggedIn: isLoggedIn,
             requestUserProfile: requestUserProfile,
             getCurrentUser: getCurrentUser,
-            makeadmin: makeAdmin
+            makeAdmin: makeAdmin
         };
 
         return service;

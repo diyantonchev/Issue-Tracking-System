@@ -51,7 +51,7 @@
         function makeAdmin(user) {
             identity.makeAdmin(user)
                 .then(function () {
-                    //TODO
+                    toaster.notify('success','Success', '');
                 });
         }
 

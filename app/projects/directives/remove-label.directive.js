@@ -8,8 +8,6 @@
         var directive = {
             restrict: 'EA',
             link: link,
-            controller: 'ProjectController',
-            controllerAs: 'vm',
         };
 
         return directive;
@@ -19,8 +17,8 @@
             element.on('click', function (event) {
                 var input = this.previousElementSibling;
                 var labelForRemove = input.value;            
-                var labels = scope.$parent.project.Labels;
-                scope.$parent.project.Labels = labels.filter(function (label) {
+                var labels = scope.project.Labels;
+                scope.project.Labels = labels.filter(function (label) {
                     return label.Name !== labelForRemove;
                 });
 

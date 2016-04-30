@@ -13,7 +13,8 @@
             controller: 'ProjectController',
             controllerAs: 'vm',
             resolve: {
-                isAuthenticated: isAuthenticated
+                isAuthenticated: isAuthenticated,
+                getAllUsersService: getAllUsersService
             }
         });
 
@@ -22,7 +23,8 @@
             controller: 'ProjectController',
             controllerAs: 'vm',
             resolve: {
-                isAuthenticated: isAuthenticated
+                isAuthenticated: isAuthenticated,
+                getAllUsersService: getAllUsersService
             }
         });
 
@@ -64,18 +66,19 @@
         return projects.getAllProjects();
     }
 
-    isAdminCheck.$inject = ['identity', '$location'];
-    function isAdminCheck(identity, $location) {
+    isAdminCheck.$inject = ['identity', '$location', 'toaster'];
+    function isAdminCheck(identity, $location, toaster) {
         return identity.getCurrentUser().then(function (user) {
             if (!user.isAdmin) {
                 $location.path('#/');
-                //TODO notify
+                toaster.pop('info', 'Admins only', 'you cannot access this page');
             }
         });
     }
 
     getAllUsersService.$inject = ['usersData'];
     function getAllUsersService(usersData) {
-       return usersData.getUsers();
+        return usersData.getUsers();
     }
+
 } ());

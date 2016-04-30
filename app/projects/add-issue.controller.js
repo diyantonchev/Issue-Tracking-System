@@ -4,9 +4,9 @@
     angular.module('issueTrackingSystem.projects')
         .controller('AddIssueController', AddIssueController);
 
-    AddIssueController.$inject = ['$routeParams', '$q', 'issues', 'projects', 'getAllUsersService', 'toaster'];
+    AddIssueController.$inject = ['$scope', '$routeParams', '$q', 'issues', 'usersData', 'projects', 'getAllUsersService', 'labels', 'toaster'];
 
-    function AddIssueController($routeParams, $q, issues, projects, getAllUsersService, toaster) {
+    function AddIssueController($scope, $routeParams, $q, issues, usersData, projects, getAllUsersService, labels, toaster) {
         var vm = this;
 
         vm.issue = {
@@ -14,25 +14,35 @@
         };
 
         vm.project = {};
-        // vm.users = getAllUsersService;
+        $scope.users = getAllUsersService;
+        $scope.allLabels = [];
+        vm.tags = [];
+        vm.addLabel = addLabel;
+        vm.removeLabel = removeLabel;
+        vm.submitIssue = submitIssue;
 
-        getProjectById($routeParams.id);
+        activate();
 
-        vm.addIssue = addIssue;
+        function activate() {
+            var promises = [getProjectById($routeParams.id), getAvailableLabels()];
+            return $q.all(promises);
+        }
 
-        function addIssue(data) {
-            if (vm.labels) {
-                vm.issue.labels = [];
-                var labelNames = vm.labels.split(/\W+/);
-                labelNames.forEach(function (name, index) {
-                    vm.issue.labels[index] = { name: name };
-                });
+        function submitIssue(data) {
+            if (vm.labels) {                
+                vm.issue.labels = convertLabelsToObjects(vm.labels);
+                console.log(vm.issue.labels);
             }
-            
-            vm.issue.AssigneeId = '8a2c98e0-8e6c-4d00-81b4-36e10dc62966';
 
-            issues.addIssue(vm.issue).then(function () {
-                toaster.pop('success', 'Success', 'Issue successfully created');
+            var username = $('#assigneeId').val();
+            usersData.getUserByUsername(username).then(function (userId) {
+                vm.issue.AssigneeId = userId;
+                issues.addIssue(vm.issue).then(function (data) {
+                    console.log(data);
+                    toaster.pop('success', 'Success', 'Issue successfully added');
+                }).catch(function () {
+                    toaster.pop('error', 'Error', 'Chosen Assigne does not exists. Please choose Assignee from the list provided!');
+                });
             });
         }
 
@@ -42,6 +52,36 @@
                     vm.project = data;
                     return vm.project;
                 });
+        }
+
+        function getAvailableLabels() {
+            labels.getAvailableLabels().then(function (data) {
+                $scope.allLabels = data;
+            });
+        }
+
+        function convertLabelsToObjects(labels) {
+            var labelObjects = [];
+            var labelNames = labels.split(',');
+            labelNames.forEach(function (name, index) {
+                labelObjects[index] = { name: name };
+            });
+            
+            return labelObjects;
+        }
+
+        function addLabel(newLabel) {
+            if (newLabel !== '' && vm.tags.indexOf(newLabel) === -1) {
+                vm.tags.push($('#labels').val());
+                vm.labels = vm.tags.join();
+            }
+
+            vm.newLabel = '';
+        }
+
+        function removeLabel(index) {
+            vm.tags.splice(index, 1);
+            vm.labels = vm.tags.join();
         }
 
     }

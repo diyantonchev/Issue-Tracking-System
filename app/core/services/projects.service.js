@@ -67,7 +67,6 @@
         }
 
         function editProject(data, id) {
-
             var request = {
                 method: 'PUT',
                 url: BASE_SERVICE_URL + '/projects/' + id,
