@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('issueTrackingSystem.layout')
+    angular.module('issueTrackingSystem.home')
         .controller('DashboardController', DashboardController);
 
     DashboardController.$inject = ['$q', 'projects', 'issues', 'identity', 'PAGE_SIZE'];
@@ -39,9 +39,10 @@
         }
 
         function reloadIssues() {
-            getUserIssues(vm.issuesParams).then(function (data) {
-                // console.log(data.Issues);
-            });
+            getUserIssues(vm.issuesParams)
+                .then(function (data) {
+                    // console.log(data.Issues);
+                });
         }
 
         function getUserProjects(params, id) {

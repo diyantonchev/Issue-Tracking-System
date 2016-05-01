@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('issueTrackingSystem.layout')
+    angular.module('issueTrackingSystem.home')
         .controller('MainController', MainController);
 
     MainController.$inject = ['$location', 'identity', 'authentication', 'toaster'];

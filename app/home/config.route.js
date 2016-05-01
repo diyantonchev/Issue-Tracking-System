@@ -1,20 +1,20 @@
 (function () {
     'use strict';
 
-    angular.module('issueTrackingSystem.layout')
+    angular.module('issueTrackingSystem.home')
         .config(config);
 
     config.$inject = ['$routeProvider'];
 
     function config($routeProvider) {
         $routeProvider.when('/', {
-            templateUrl: 'app/layout/partials/home.html',
+            templateUrl: 'app/home/partials/home.html',
             controller: 'MainController',
             controllerAs: 'vm'
         });
 
         $routeProvider.when('/profile/password', {
-            templateUrl: 'app/layout/partials/change-password.html',
+            templateUrl: 'app/home/partials/change-password.html',
             controller: 'MainController',
             controllerAs: 'vm',
             resolve: {

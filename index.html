@@ -30,7 +30,7 @@
                 </button>
                 </div>
                 <div class="navbar-collapse collapse" id="navbar-main">
-                    <ul class="nav navbar-nav" data-ng-show="vm.isLoggedIn()" data-ng-include="'app/layout/partials/navbar-list.html'">
+                    <ul class="nav navbar-nav" data-ng-show="vm.isLoggedIn()" data-ng-include="'app/home/partials/navbar-list.html'">
                     </ul>
                 </div>
             </div>
@@ -69,11 +69,11 @@
     <script src="app/core/services/users-data.service.js"></script>
     <script src="app/core/services/labels.service.js"></script>
 
-    <!-- layout -->
-    <script src="app/layout/layout.module.js"></script>
-    <script src="app/layout/config.route.js"></script>
-    <script src="app/layout/main.controller.js"></script>
-    <script src="app/layout/dashboard.controller.js"></script>
+    <!-- home -->
+    <script src="app/home/home.module.js"></script>
+    <script src="app/home/config.route.js"></script>
+    <script src="app/home/main.controller.js"></script>
+    <script src="app/home/dashboard.controller.js"></script>
 
     <!-- projects -->
     <script src="app/projects/projects.module.js"></script>
