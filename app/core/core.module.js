@@ -5,6 +5,7 @@
         'ngRoute',
         'angular-loading-bar',
         'toaster',
+        'ui.autocomplete',
         'ui.bootstrap.pagination',
     ]);
 

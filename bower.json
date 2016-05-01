@@ -15,6 +15,7 @@
     "angular-loading-bar": "^0.9.0",
     "angular-ui-bootstrap-pagination": "^0.12.0",
     "AngularJS-Toaster": "angularjs-toaster#^2.0.0",
-    "jquery-ui": "^1.11.4"
+    "jquery-ui": "^1.11.4",
+    "ui-autocomplete": "^0.6.1"
   }
 }

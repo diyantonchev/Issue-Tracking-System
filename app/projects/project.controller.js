@@ -12,13 +12,32 @@
         vm.issues = [];
         vm.authors = [];
         vm.assignees = [];
-        $scope.users = getAllUsersService;
+        vm.users = getAllUsersService;
 
         vm.submitEditedProject = submitEditedProject;
         activate();
 
+        vm.usersAutocomplete = {
+            options: {
+                onlySelect: true,
+                source: function (request, response) {
+                    var data = vm.usernames;
+                    data = vm.usersAutocomplete.methods.filter(data, request.term);
+
+                    if (!data.length) {
+                        data.push({
+                            label: 'not found',
+                            value: ''
+                        });
+                    }
+                    response(data);
+                },
+            }
+        };
+
         function activate() {
             getCurrentUser();
+            getUsernames();
             getProjectById($routeParams.id);
             getProjectIssues($routeParams.id)
                 .then(function (issues) {
@@ -38,6 +57,7 @@
             return projects.getProjectById(id)
                 .then(function (data) {
                     $scope.project = data;
+                    $scope.project.LeadId = data.Lead.Id;
                     return data;
                 });
         }
@@ -50,28 +70,23 @@
         }
 
         function submitEditedProject() {
-            if ($scope.currentUser.isAdmin) {
-                var username = $('#projectLeadId').val();
-                if (username) {
-                    usersData.getUserByUsername(username).then(function (userId) {
-                        $scope.project.LeadId = userId;
-                        editProject($scope.project, $routeParams.id);
-                    });
-                } else {
-                    $scope.project.LeadId = $scope.project.Lead.Id;
-                    editProject($scope.project, $routeParams.id);
-                }
+            if (vm.leadUsername) {
+                var lead = vm.users.filter(function (user) {
+                    return user.Username === vm.leadUsername;
+                })[0];
 
-            } else {
-                $scope.project.LeadId = $scope.project.Lead.Id;
-                editProject($scope.project, $routeParams.id);
+                if (lead) {
+                    $scope.project.LeadId = lead.Id;
+                }
             }
+
+            editProject($scope.project, $routeParams.id);
         }
 
         function editProject(project, id) {
             projects.editProject(project, id).then(function (response) {
+                console.log(response);
                 toaster.pop('success', 'Success', 'Project successfullty edited');
-                console.log(response.data);
                 $location.path('/projects/' + $routeParams.id);
             }).catch(function (err) {
                 toaster.pop('error', 'Error', err.Message);
@@ -81,6 +96,13 @@
         function getCurrentUser() {
             return identity.getCurrentUser().then(function (user) {
                 $scope.currentUser = user;
+            });
+        }
+
+        function getUsernames() {
+            vm.usernames = [];
+            vm.users.forEach(function (user) {
+                vm.usernames.push(user.Username);
             });
         }
     }

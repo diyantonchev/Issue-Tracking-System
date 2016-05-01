@@ -13,12 +13,12 @@
         return directive;
 
         function link(scope, element) {
-            element.on('keyup', function (event) {                
+            element.on('keyup', function (event) {
                 var labels = [];
                 scope.allLabels.forEach(function (label) {
                     labels.push(label.Name);
                 });
-                
+
                 element.autocomplete({
                     source: labels
                 });

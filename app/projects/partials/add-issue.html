@@ -15,9 +15,10 @@
     </div>
     <hr>
     <div class="form-group row">
-        <label for="assigneeId" class="col-md-4 ">Assignee:</label>
+        <label for="assigneeId" class="col-md-4">Assignee:</label>
         <div class="col-md-6">
-            <input type="text" autocomplete-users id="assigneeId" class="form-control" required="required">
+            <input type="text" data-ng-model="vm.assigneeUsername" id="assigneeId" class="form-control" ui-autocomplete="vm.usersAutocomplete"
+                required="required">
         </div>
     </div>
     <hr>

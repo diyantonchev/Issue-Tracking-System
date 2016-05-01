@@ -4,13 +4,14 @@
     angular.module('issueTrackingSystem.core')
         .factory('usersData', usersData);
 
-    usersData.$inject = ['$http', 'BASE_SERVICE_URL'];
+    usersData.$inject = ['$http', '$q', 'BASE_SERVICE_URL'];
 
-    function usersData($http, BASE_SERVICE_URL) {
+    function usersData($http, $q, BASE_SERVICE_URL) {
 
         var service = {
             getUsers: getUsers,
-            getUserByUsername: getUserByUserame
+            getUserByUsername: getUserByUsername,
+            getUserIdByUsername: getUserIdByUserame
         };
 
         return service;
@@ -31,7 +32,7 @@
             });
         }
 
-        function getUserByUserame(username) {
+        function getUserByUsername(username) {
             var url = BASE_SERVICE_URL + '/Users/?filter=Username.Contains("' + username + '")';
 
             var request = {
@@ -39,8 +40,20 @@
                 url: url
             };
 
-           return $http(request).then(function (response) {
-                return response.data[0].Id;
+            return $http(request).then(function (response) {
+                return response.data;
+            });
+        }
+
+        function getUserIdByUserame(username) {
+            return getUserByUsername(username).then(function (data) {
+                console.log(data);
+                if (data.length > 1) {
+                    console.log(data.lenght);
+                    return $q.reject(response);
+                } else {
+                    return data[0].Id;
+                }
             });
         }
     }

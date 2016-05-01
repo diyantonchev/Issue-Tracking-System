@@ -4,9 +4,9 @@
     angular.module('issueTrackingSystem.projects')
         .controller('AddIssueController', AddIssueController);
 
-    AddIssueController.$inject = ['$scope', '$routeParams', '$q', 'issues', 'usersData', 'projects', 'getAllUsersService', 'labels', 'toaster'];
+    AddIssueController.$inject = ['$scope', '$routeParams', '$q', '$location', 'issues', 'usersData', 'projects', 'getAllUsersService', 'labels', 'toaster'];
 
-    function AddIssueController($scope, $routeParams, $q, issues, usersData, projects, getAllUsersService, labels, toaster) {
+    function AddIssueController($scope, $routeParams, $q, $location, issues, usersData, projects, getAllUsersService, labels, toaster) {
         var vm = this;
 
         vm.issue = {
@@ -14,8 +14,7 @@
         };
 
         vm.project = {};
-        $scope.users = getAllUsersService;
-        $scope.allLabels = [];
+        vm.users = getAllUsersService;
         vm.tags = [];
         vm.addLabel = addLabel;
         vm.removeLabel = removeLabel;
@@ -23,27 +22,45 @@
 
         activate();
 
+        vm.usersAutocomplete = {
+            options: {
+                onlySelect: true,
+                source: function (request, response) {
+                    var data = vm.usernames;
+                    data = vm.usersAutocomplete.methods.filter(data, request.term);
+
+                    if (!data.length) {
+                        data.push({
+                            label: 'not found',
+                            value: ''
+                        });
+                    }
+                    response(data);
+                },
+            }
+        };
+
         function activate() {
-            var promises = [getProjectById($routeParams.id), getAvailableLabels()];
+            var promises = [getProjectById($routeParams.id), getAvailableLabels(), getUsernames()];
             return $q.all(promises);
         }
 
         function submitIssue(data) {
-            if (vm.labels) {                
+            if (vm.labels) {
                 vm.issue.labels = convertLabelsToObjects(vm.labels);
-                console.log(vm.issue.labels);
             }
 
-            var username = $('#assigneeId').val();
-            usersData.getUserByUsername(username).then(function (userId) {
-                vm.issue.AssigneeId = userId;
-                issues.addIssue(vm.issue).then(function (data) {
-                    console.log(data);
-                    toaster.pop('success', 'Success', 'Issue successfully added');
-                }).catch(function () {
-                    toaster.pop('error', 'Error', 'Chosen Assigne does not exists. Please choose Assignee from the list provided!');
-                });
-            });
+            if (vm.assigneeUsername) {
+                var assignee = vm.users.filter(function (user) {
+                    return user.Username === vm.assigneeUsername;
+                })[0];
+
+                if (assignee) {
+                    vm.issue.AssigneeId = assignee.Id;
+                }
+            }
+
+            addIssue(vm.issue);
         }
 
         function getProjectById(id) {
@@ -54,9 +71,25 @@
                 });
         }
 
+        function addIssue(issue) {
+            return issues.addIssue(issue).then(function (data) {
+                toaster.pop('success', 'Success', 'Issue successfully added');
+                $location.path('/projects/' + $routeParams.id);
+            }).catch(function () {
+                toaster.pop('error', 'Error', 'Chosen Assigne does not exists. Please choose Assignee from the list provided!');
+            });
+        }
+
         function getAvailableLabels() {
             labels.getAvailableLabels().then(function (data) {
                 $scope.allLabels = data;
+            });
+        }
+
+        function getUsernames() {
+            vm.usernames = [];
+            vm.users.forEach(function (user) {
+                vm.usernames.push(user.Username);
             });
         }
 
@@ -66,7 +99,7 @@
             labelNames.forEach(function (name, index) {
                 labelObjects[index] = { name: name };
             });
-            
+
             return labelObjects;
         }
 
