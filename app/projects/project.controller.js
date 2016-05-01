@@ -13,8 +13,8 @@
         vm.authors = [];
         vm.assignees = [];
         vm.users = getAllUsersService;
-
         vm.submitEditedProject = submitEditedProject;
+       
         activate();
 
         vm.usersAutocomplete = {

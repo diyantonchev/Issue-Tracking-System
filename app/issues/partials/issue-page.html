@@ -1,0 +1,84 @@
+<div class="row">
+    <form name="issueInfo" class="col-md-7 issue-info">
+        <h3 data-ng-cloak class="issue-title">{{vm.issue.Title}}</h3>
+        <hr>
+        <div class="form-group row">
+            <label for="issueTitle" class="col-md-4 form-control-label">Title:</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="issueTitle" placeholder="{{vm.issue.Title}}" readonly="readonly">
+            </div>
+        </div>
+        <hr>
+        <div class="form-group row">
+            <label for="description" class="col-md-4 form-control-label">Description:</label>
+            <div class="col-md-6">
+                <textarea type="text" rows="4" class="form-control" id="description" placeholder="{{vm.issue.Description}}" readonly="readonly"></textarea>
+            </div>
+        </div>
+        <hr>
+        <div class="form-group row">
+            <label for="assigneeId" class="col-md-4 form-control-label">Assignee: </label>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="assigneeId" placeholder="{{vm.issue.Assignee.Username}}" readonly="readonly">
+            </div>
+        </div>
+        <hr>
+        <div class="form-group row">
+            <label for="priorityId" class="col-md-4 form-control-label">PriorityID (current:{{vm.issue.Priority.Id}} )</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="assigneeId" placeholder="{{vm.issue.Priority.Name}}" readonly="readonly">
+            </div>
+        </div>
+        <hr>
+        <div class="form-group row">
+            <label for="assigneeId" class="col-md-4 form-control-label">Due Date:</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="assigneeId" placeholder="{{vm.issue.DueDate}}" readonly="readonly">
+            </div>
+        </div>
+        <hr>
+        <div class="form-group row">
+            <label class="col-md-4 form-control-label">Author:</label>
+            <div class="col-md-6">
+                <span data-ng-cloak>{{vm.issue.Author.Username}}</span>
+            </div>
+        </div>
+        <hr>
+        <div class="form-group row">
+            <label class="col-md-4 form-control-label">Project:</label>
+            <div class="col-md-6">
+                <span data-ng-cloak>{{vm.issue.Project.Name}}</span>
+            </div>
+        </div>
+        <hr>
+        <div class="form-group row">
+            <label class="col-md-4 form-control-label">Status:</label>
+            <div class="col-md-6">
+                <span data-ng-cloak>{{vm.issue.Status.Name}}</span>
+            </div>
+        </div>
+        <hr>
+        <div class="form-group row">
+            <label class="col-md-4">Labels:</label>
+            <div class="col-md-6">
+                <span data-ng-if="vm.issue.Labels.length === 0">No labels</span>
+                <span data-ng-repeat="label in vm.issue.Labels" data-ng-cloak>{{label.Name}} {{$last ? '' : ', '}}</span>
+            </div>
+        </div>
+        <hr>
+        <div class="form-group row" data-ng-if="vm.currentUser.Id === vm.issue.Author.Id">
+            <div class="col-md-6 btn-container">
+                <a href="#/issues/{{vm.issue.Id}}/edit"><button class="btn btn-primary">Edit Issue</button></a>
+            </div>
+        </div>
+    </form>
+    <aside class="col-md-3 col-md-offset-1 available-statuses">
+        <header>
+            <h4>Available statuses:</h4>
+        </header>
+        <div class="status" data-ng-repeat="status in vm.issue.AvailableStatuses" data-ng-cloak>
+            -----{{status.Name}}
+            <button class="btn btn-success" type="button" data-ng-if="vm.currentUser.Id === vm.issue.Assignee.Id" data-ng-click="vm.changeStatus()">Change</button>
+        </div>
+    </aside>
+</div>

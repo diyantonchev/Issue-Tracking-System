@@ -27,7 +27,7 @@
             <label class="col-md-4">Labels:</label>
             <div class="col-md-6">
                 <span data-ng-if="project.Labels.length === 0">No labels</span>
-                <span type="text" data-ng-repeat="label in project.Labels">{{label.Name}} {{$last ? '' : ', '}}</span>
+                <span data-ng-repeat="label in project.Labels">{{label.Name}} {{$last ? '' : ', '}}</span>
             </div>
         </div>
         <hr>
@@ -35,7 +35,7 @@
             <label class="col-md-4">Priorities:</label>
             <div class="col-md-6">
                 <span data-ng-if="project.Priorities.length === 0">No Priorities</span>
-                <span type="text" data-ng-repeat="priority in project.Priorities">{{priority.Name}} {{$last ? '' : ', '}}</span>
+                <span data-ng-repeat="priority in project.Priorities">{{priority.Name}} {{$last ? '' : ', '}}</span>
             </div>
         </div>
         <hr>

@@ -8,11 +8,21 @@
 
     function issues($http, $q, BASE_SERVICE_URL) {
         var service = {
+            getIssueById: getIssueById,
             getUserIssues: getUserIssues,
             addIssue: addIssue
         };
 
         return service;
+
+        function getIssueById(id) {
+            var url = BASE_SERVICE_URL + '/issues/' + id;
+            return $http.get(url).then(function (response) {
+                return response.data;
+            }).catch(function err(response) {
+                return $q.reject(response.data);
+            });
+        }
 
         function getUserIssues(params) {
             var request = {
@@ -29,9 +39,25 @@
         }
 
         function addIssue(data) {
+            var url = BASE_SERVICE_URL + '/issues';
             var request = {
                 method: 'POST',
-                url: BASE_SERVICE_URL + '/issues',
+                url: url,
+                data: data
+            };
+
+            return $http(request).then(function (response) {
+                return response.data;
+            }).catch(function err(response) {
+                return $q.reject(response.data);
+            });
+        }
+
+        function editIssue(data, id) {
+            var url = BASE_SERVICE_URL + '/issues' + id;
+            var request = {
+                method: 'PUT',
+                url: url,
                 data: data
             };
 
