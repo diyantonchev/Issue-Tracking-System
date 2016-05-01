@@ -14,7 +14,7 @@
 
         return service;
 
-        function getAvailableLabels(success) {
+        function getAvailableLabels() {
             var request = {
                 method: 'GET',
                 url: BASE_SERVICE_URL + '/labels/?filter=',

@@ -10,8 +10,7 @@
 
         var service = {
             getUsers: getUsers,
-            getUserByUsername: getUserByUsername,
-            getUserIdByUsername: getUserIdByUserame
+            getUserByUsername: getUserByUsername
         };
 
         return service;
@@ -42,18 +41,6 @@
 
             return $http(request).then(function (response) {
                 return response.data;
-            });
-        }
-
-        function getUserIdByUserame(username) {
-            return getUserByUsername(username).then(function (data) {
-                console.log(data);
-                if (data.length > 1) {
-                    console.log(data.lenght);
-                    return $q.reject(response);
-                } else {
-                    return data[0].Id;
-                }
             });
         }
     }

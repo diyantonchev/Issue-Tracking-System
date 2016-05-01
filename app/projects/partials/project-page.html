@@ -87,11 +87,13 @@
                     <td>Title</td>
                     <td>Description</td>
                     <td>Asignee</td>
+                    <td>Author</td>
                     <td>Due Date</td>
                 </tr>
             </thead>
             <tbody>
                 <tr data-ng-if="vm.issuesCount === 0">
+                    <td>No Data</td>
                     <td>No Data</td>
                     <td>No Data</td>
                     <td>No Data</td>
@@ -104,6 +106,7 @@
                     <td data-ng-cloak><a href="#/issues/{{issue.Id}}">{{issue.Title}}</a></td>
                     <td data-ng-cloak>{{issue.Description}}</td>
                     <td data-ng-cloak>{{issue.Assignee.Username}}</td>
+                    <td data-ng-cloak>{{issue.Author.Username}}</td>
                     <td data-ng-cloak>{{issue.DueDate | date:'yyyy-MM-dd HH:mm:ss' }}</td>
                 </tr>
             </tbody>
