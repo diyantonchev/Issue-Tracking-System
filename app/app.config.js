@@ -9,11 +9,6 @@
     config.$inject = ['$routeProvider', '$httpProvider'];
 
     function config($routeProvider, $httpProvider) {
-        /*   $routeProvider.when('/issues/:id', {
-               templateUrl: 'app/issues/partials/issue-page.html',
-               controller: 'IssueController',
-               controllerAs: 'vm'
-           });*/
 
         $routeProvider.otherwise({ redirectTo: '/' });
 
