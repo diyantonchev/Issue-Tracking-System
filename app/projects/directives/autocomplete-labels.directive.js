@@ -7,7 +7,7 @@
     function autocompleteLabels() {
         var directive = {
             restrict: 'EA',
-            link: link,
+            link: link
         };
 
         return directive;

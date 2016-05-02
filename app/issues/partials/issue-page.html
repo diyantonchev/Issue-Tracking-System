@@ -66,7 +66,7 @@
             </div>
         </div>
         <hr>
-        <div class="form-group row" data-ng-if="vm.currentUser.Id === vm.issue.Author.Id">
+        <div class="form-group row" data-ng-if="(vm.currentUser.Id === vm.issue.Author.Id) || vm.currentUser.isAdmin">
             <div class="col-md-6 btn-container">
                 <a href="#/issues/{{vm.issue.Id}}/edit"><button class="btn btn-primary">Edit Issue</button></a>
             </div>
@@ -78,7 +78,7 @@
         </header>
         <div class="status" data-ng-repeat="status in vm.issue.AvailableStatuses" data-ng-cloak>
             -----{{status.Name}}
-            <button class="btn btn-success" type="button" data-ng-if="vm.currentUser.Id === vm.issue.Assignee.Id" data-ng-click="vm.changeStatus()">Change</button>
+            <button class="btn btn-success" type="button" data-ng-if="(vm.currentUser.Id === vm.issue.Assignee.Id) || vm.currentUser.isAdmin" data-ng-click="vm.changeStatus()">Change</button>
         </div>
     </aside>
 </div>
