@@ -1,9 +1,9 @@
 <div class="all-projects row">
-    <div ng-if="vm.projects.length==0">
+    <div data-ng-if="vm.projects.length==0">
         <strong>No Projects found</strong>
     </div>
     <ul class="col-md-4">
-        <li data-ng-cloak data-ng-repeat="project in vm.projects | orderBy: vm.order | filter: vm.search">
+        <li class="box-shadow" data-ng-cloak data-ng-repeat="project in vm.projects | orderBy: vm.order | filter: vm.search">
             <span>{{project.Name}} </span><a href="#/projects/{{project.Id}}"><button class="btn btn-info">View</button></a>
         </li>
     </ul>

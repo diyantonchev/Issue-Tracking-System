@@ -41,6 +41,7 @@
 
         function addComment(text) {
             var comment = { text: text };
+            vm.text = '';
             issues.addComment(comment, $routeParams.id).then(function (data) {
                 getComments($routeParams.id);
                 toaster.pop('success', 'Success', 'You successfully added a comment');

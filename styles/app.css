@@ -102,14 +102,15 @@ hr {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
 
-.form-div {
-    max-height: 90px;
+.box-shadow {
+    max-height: 120px;
     padding: 15px;
     overflow-x: hidden;
     overflow-y: auto;
    -webkit-box-shadow: 3px 3px 6px 5px rgba(0,0,0,0.42);
    -moz-box-shadow: 3px 3px 6px 5px rgba(0,0,0,0.42);
    box-shadow: 3px 3px 6px 5px rgba(0,0,0,0.42);
+   background-color: #fcfcfc;
 }
 
 .btn-container > a {
@@ -123,11 +124,10 @@ hr {
 }
 
 .all-projects li {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     padding: 10px;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid grey;
     list-style:  none;
 }
 
@@ -208,6 +208,29 @@ textarea {
     margin-bottom: 5px;
 }
 
+.comments {
+    margin-top:10px;
+    margin-bottom: 20px;
+}
+
+.comment {
+   margin-bottom: 20px;             
+}
+
+.comment > .author {
+   margin-bottom: 5px;
+   color: #337ab7;
+   font-weight: bold;
+}
+
+.comment > .author > .date {
+   font-style: italic;
+}
+
+.add-comment > .btn {
+    margin-top: 10px;
+}
+
 @media all and (max-width: 990px) {        
     .home-form {
          height: 350px;
@@ -220,4 +243,9 @@ textarea {
     .ui-autocomplete {
         max-width: 100%;
     }
+    
+    label > .btn {
+    margin-bottom: 10px;
+    }
+
 }

@@ -5,7 +5,7 @@
         <div class="form-group row">
             <label class="col-md-4 form-control-label">Title:</label>
             <div class="col-md-6">
-                <div class="form-div" data-ng-cloak>{{vm.issue.Title}}</div>
+                <div class="box-shadow" data-ng-cloak>{{vm.issue.Title}}</div>
             </div>
         </div>
         <hr>
@@ -15,56 +15,56 @@
                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#descriptionModal">Show Full</button>
              </label>
             <div class="col-md-6">
-                <div class="form-div">{{vm.issue.Description}}</div>
+                <div class="box-shadow">{{vm.issue.Description}}</div>
             </div>
         </div>
         <hr>
         <div class="form-group row">
             <label for="assigneeId" class="col-md-4 form-control-label">Assignee: </label>
             <div class="col-md-6">
-                <div class="form-div" data-ng-cloak>{{vm.issue.Assignee.Username}}</div>
+                <div class="box-shadow" data-ng-cloak>{{vm.issue.Assignee.Username}}</div>
             </div>
         </div>
         <hr>
         <div class="form-group row">
             <label for="priorityId" class="col-md-4 form-control-label">Priority</label>
             <div class="col-md-6">
-                <div class="form-div" data-ng-cloak>{{vm.issue.Priority.Name}}</div>
+                <div class="box-shadow" data-ng-cloak>{{vm.issue.Priority.Name}}</div>
             </div>
         </div>
         <hr>
         <div class="form-group row">
             <label for="assigneeId" class="col-md-4 form-control-label">Due Date:</label>
             <div class="col-md-6">
-                <div class="form-div" data-ng-cloak>{{vm.issue.DueDate}}</div>
+                <div class="box-shadow" data-ng-cloak>{{vm.issue.DueDate}}</div>
             </div>
         </div>
         <hr>
         <div class="form-group row">
             <label class="col-md-4 form-control-label">Author:</label>
             <div class="col-md-6">
-                <div class="form-div" data-ng-cloak>{{vm.issue.Author.Username}}</div>
+                <div class="box-shadow" data-ng-cloak>{{vm.issue.Author.Username}}</div>
             </div>
         </div>
         <hr>
         <div class="form-group row">
             <label class="col-md-4 form-control-label">Project:</label>
             <div class="col-md-6">
-                <div class="form-div" data-ng-cloak>{{vm.issue.Project.Name}}</div>
+                <div class="box-shadow" data-ng-cloak>{{vm.issue.Project.Name}}</div>
             </div>
         </div>
         <hr>
         <div class="form-group row">
             <label class="col-md-4 form-control-label">Status:</label>
             <div class="col-md-6">
-                <div class="form-div"><span data-ng-cloak>{{vm.issue.Status.Name}}</span></div>
+                <div class="box-shadow"><span data-ng-cloak>{{vm.issue.Status.Name}}</span></div>
             </div>
         </div>
         <hr>
         <div class="form-group row">
             <label class="col-md-4">Labels:</label>
             <div class="col-md-6">
-                <div class="form-div">
+                <div class="box-shadow">
                     <span data-ng-if="vm.issue.Labels.length === 0">No labels</span>
                     <span data-ng-repeat="label in vm.issue.Labels" data-ng-cloak>{{label.Name}} {{$last ? '' : ', '}}</span>
                 </div>
@@ -81,7 +81,7 @@
         <header>
             <h4>Available statuses:</h4>
         </header>
-        <div data-ng-if="vm.issue.AvailableStatuses.length === 0"><em>No statuses</em></div>
+        <div class="box-shadow" data-ng-if="vm.issue.AvailableStatuses.length === 0"><em>No statuses</em></div>
         <div class="status" data-ng-repeat="status in vm.issue.AvailableStatuses" data-ng-cloak>
             -----{{status.Name}}
             <button class="btn btn-success" type="button" data-ng-if="(vm.currentUser.Id === vm.issue.Assignee.Id) || vm.currentUser.isAdmin"
@@ -108,10 +108,11 @@
     </div>
 </div>
 <div class="row">
-    <section class="comments col-md-12">
-        <div data-ng-if="vm.comments.length === 0"><em>No comments</em></div>
-        <div class="comment" data-ng-repeat="comment in vm.comments">
-            <div class="author" data-ng-cloak>{{comment.Author.Username}} - {{comment.CreatedOn}}</div>
+    <section class="comments col-md-11">
+        <header><h3>Comments:</h3></header>
+        <div class="comment box-shadow" data-ng-if="vm.comments.length === 0"><em>No comments</em></div>
+        <div class="comment box-shadow" data-ng-repeat="comment in vm.comments">
+            <div class="author" data-ng-cloak>{{comment.Author.Username}} - <span class="date">{{comment.CreatedOn}}</span></div>
             <div class="content" data-ng-cloak>{{comment.Text}}</div>
         </div>
         <form class="add-comment" data-ng-if="(vm.currentUser.Id === vm.issue.Assignee.Id) || (vm.currentUser.Id === vm.issue.Author.Id)">
