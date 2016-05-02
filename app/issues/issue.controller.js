@@ -5,7 +5,6 @@
         .controller('IssueController', IssueController);
 
     IssueController.$inject = ['$routeParams', '$q', 'issues', 'identity'];
-
     function IssueController($routeParams, $q, issues, identity) {
         var vm = this;
 
@@ -35,6 +34,7 @@
         function changeStatus() {
             //TODO
         }
+
     }
 
 } ());

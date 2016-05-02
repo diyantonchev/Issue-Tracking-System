@@ -5,7 +5,6 @@
         .controller('AddIssueController', AddIssueController);
 
     AddIssueController.$inject = ['$scope', '$routeParams', '$q', '$location', 'issues', 'usersData', 'projects', 'getAllUsersService', 'labels', 'toaster'];
-
     function AddIssueController($scope, $routeParams, $q, $location, issues, usersData, projects, getAllUsersService, labels, toaster) {
         var vm = this;
 
@@ -15,10 +14,11 @@
 
         vm.project = {};
         vm.users = getAllUsersService;
-        vm.tags = [];
+        vm.submitIssue = submitIssue;
+
         vm.addLabel = addLabel;
         vm.removeLabel = removeLabel;
-        vm.submitIssue = submitIssue;
+        vm.tags = [];
 
         activate();
 
@@ -45,6 +45,36 @@
             return $q.all(promises);
         }
 
+        function getProjectById(id) {
+            return projects.getProjectById(id)
+                .then(function (data) {
+                    vm.project = data;
+                    return vm.project;
+                });
+        }
+
+        function getAvailableLabels() {
+            labels.getAvailableLabels().then(function (data) {
+                $scope.allLabels = data;
+            });
+        }
+
+        function getUsernames() {
+            vm.usernames = [];
+            vm.users.forEach(function (user) {
+                vm.usernames.push(user.Username);
+            });
+        }
+
+        function addIssue(issue) {
+            return issues.addIssue(issue).then(function (data) {
+                toaster.pop('success', 'Success', 'Issue successfully added');
+                $location.path('/projects/' + $routeParams.id);
+            }).catch(function () {
+                toaster.pop('error', 'Error', 'Chosen Assigne does not exists. Please choose Assignee from the list provided!');
+            });
+        }
+
         function submitIssue(data) {
             if (vm.labels) {
                 vm.issue.labels = convertLabelsToObjects(vm.labels);
@@ -63,46 +93,6 @@
             addIssue(vm.issue);
         }
 
-        function getProjectById(id) {
-            return projects.getProjectById(id)
-                .then(function (data) {
-                    vm.project = data;
-                    return vm.project;
-                });
-        }
-
-        function addIssue(issue) {
-            return issues.addIssue(issue).then(function (data) {
-                toaster.pop('success', 'Success', 'Issue successfully added');
-                $location.path('/projects/' + $routeParams.id);
-            }).catch(function () {
-                toaster.pop('error', 'Error', 'Chosen Assigne does not exists. Please choose Assignee from the list provided!');
-            });
-        }
-
-        function getAvailableLabels() {
-            labels.getAvailableLabels().then(function (data) {
-                $scope.allLabels = data;
-            });
-        }
-
-        function getUsernames() {
-            vm.usernames = [];
-            vm.users.forEach(function (user) {
-                vm.usernames.push(user.Username);
-            });
-        }
-
-        function convertLabelsToObjects(labels) {
-            var labelObjects = [];
-            var labelNames = labels.split(',');
-            labelNames.forEach(function (name, index) {
-                labelObjects[index] = { name: name };
-            });
-
-            return labelObjects;
-        }
-
         function addLabel(newLabel) {
             if (newLabel !== '' && vm.tags.indexOf(newLabel) === -1) {
                 vm.tags.push($('#labels').val());
@@ -117,6 +107,15 @@
             vm.labels = vm.tags.join();
         }
 
+        function convertLabelsToObjects(labels) {
+            var labelObjects = [];
+            var labelNames = labels.split(',');
+            labelNames.forEach(function (name, index) {
+                labelObjects[index] = { name: name };
+            });
+
+            return labelObjects;
+        }
     }
 
 } ());

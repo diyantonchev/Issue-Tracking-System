@@ -7,7 +7,6 @@
         .run(authorization);
 
     config.$inject = ['$routeProvider', '$httpProvider'];
-
     function config($routeProvider, $httpProvider) {
 
         $routeProvider.otherwise({ redirectTo: '/' });

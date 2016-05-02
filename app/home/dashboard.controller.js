@@ -5,7 +5,6 @@
         .controller('DashboardController', DashboardController);
 
     DashboardController.$inject = ['$q', 'projects', 'issues', 'identity', 'PAGE_SIZE'];
-
     function DashboardController($q, projects, issues, identity, PAGE_SIZE) {
         var vm = this;
 
@@ -14,12 +13,12 @@
             pageSize: PAGE_SIZE
         };
 
-        vm.issuesCount = 0;
         vm.issuesParams = {
             pageNumber: 1,
             pageSize: PAGE_SIZE
         };
 
+        vm.issuesCount = 0;
         vm.userProjects = {};
         vm.userIssues = {};
 

@@ -5,30 +5,22 @@
         .controller('MainController', MainController);
 
     MainController.$inject = ['$location', 'identity', 'authentication', 'toaster'];
-
     function MainController($location, identity, authentication, toaster) {
         var vm = this;
 
         vm.isLoggedIn = isLoggedIn;
 
-        vm.registerData = {};
-        vm.register = register;
-
         vm.loginData = {};
         vm.login = login;
         vm.logout = logout;
+
+        vm.registerData = {};
+        vm.register = register;
 
         vm.newPasswordData = {};
         vm.changePassword = changePassword;
 
         vm.makeAdmin = makeAdmin;
-
-        function register(registerData, keepMeLogin) {
-            authentication.register(registerData, keepMeLogin)
-                .then(function success(data) {
-                    toaster.pop('success', 'Success', 'User successfully registered');
-                });
-        }
 
         function login(loginData, keepMeLogin) {
             return authentication.login(loginData, keepMeLogin)
@@ -37,8 +29,22 @@
                 });
         }
 
+        function register(registerData, keepMeLogin) {
+            authentication.register(registerData, keepMeLogin)
+                .then(function success(data) {
+                    toaster.pop('success', 'Success', 'User successfully registered');
+                });
+        }
+
         function isLoggedIn() {
             return authentication.isLoggedIn();
+        }
+
+        function logout() {
+            vm.currentUser = undefined;
+            authentication.logout();
+            toaster.pop('success', 'Success', 'Successfully logged out');
+            $location.path('#/');
         }
 
         function changePassword(data) {
@@ -51,15 +57,8 @@
         function makeAdmin(user) {
             identity.makeAdmin(user)
                 .then(function () {
-                    toaster.notify('success','Success', '');
+                    toaster.notify('success', 'Success', '');
                 });
-        }
-
-        function logout() {
-            vm.currentUser = undefined;
-            authentication.logout();
-            toaster.pop('success', 'Success', 'Successfully logged out');
-            $location.path('#/');
         }
     }
 

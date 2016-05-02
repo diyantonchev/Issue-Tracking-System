@@ -5,16 +5,15 @@
         .controller('ProjectController', ProjectController);
 
     ProjectController.$inject = ['$scope', '$routeParams', '$location', 'identity', 'projects', 'usersData', 'getAllUsersService', 'toaster'];
-
     function ProjectController($scope, $routeParams, $location, identity, projects, usersData, getAllUsersService, toaster) {
         var vm = this;
 
-        vm.issues = [];
         vm.authors = [];
         vm.assignees = [];
-        vm.users = getAllUsersService;
+        vm.issues = [];
         vm.submitEditedProject = submitEditedProject;
-       
+        vm.users = getAllUsersService;
+
         activate();
 
         vm.usersAutocomplete = {
@@ -30,7 +29,7 @@
                             value: ''
                         });
                     }
-                    
+
                     response(data);
                 },
             }
@@ -54,6 +53,13 @@
                 });
         }
 
+
+        function getCurrentUser() {
+            return identity.getCurrentUser().then(function (user) {
+                $scope.currentUser = user;
+            });
+        }
+
         function getProjectById(id) {
             return projects.getProjectById(id)
                 .then(function (data) {
@@ -63,10 +69,26 @@
                 });
         }
 
+        function getUsernames() {
+            vm.usernames = [];
+            vm.users.forEach(function (user) {
+                vm.usernames.push(user.Username);
+            });
+        }
+
         function getProjectIssues(id) {
             return projects.getProjectIssues(id).then(function (data) {
                 vm.issues = data;
                 return vm.issues;
+            });
+        }
+
+        function editProject(project, id) {
+            projects.editProject(project, id).then(function (response) {
+                toaster.pop('success', 'Success', 'Project successfullty edited');
+                $location.path('/projects/' + $routeParams.id);
+            }).catch(function (err) {
+                toaster.pop('error', 'Error', err.Message);
             });
         }
 
@@ -84,27 +106,6 @@
             editProject($scope.project, $routeParams.id);
         }
 
-        function editProject(project, id) {
-            projects.editProject(project, id).then(function (response) {
-                toaster.pop('success', 'Success', 'Project successfullty edited');
-                $location.path('/projects/' + $routeParams.id);
-            }).catch(function (err) {
-                toaster.pop('error', 'Error', err.Message);
-            });
-        }
-
-        function getCurrentUser() {
-            return identity.getCurrentUser().then(function (user) {
-                $scope.currentUser = user;
-            });
-        }
-
-        function getUsernames() {
-            vm.usernames = [];
-            vm.users.forEach(function (user) {
-                vm.usernames.push(user.Username);
-            });
-        }
     }
 
 } ());

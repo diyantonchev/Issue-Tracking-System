@@ -5,7 +5,6 @@
         .config(config);
 
     config.$inject = ['$routeProvider'];
-
     function config($routeProvider) {
         $routeProvider.when('/', {
             templateUrl: 'app/home/partials/home.html',
