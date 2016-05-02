@@ -34,7 +34,7 @@
         function changeStatus() {
             //TODO
         }
-
+        
     }
 
 } ());
