@@ -65,8 +65,8 @@
             <label class="col-md-4">Labels:</label>
             <div class="col-md-6">
                 <div class="form-div">
-                <span data-ng-if="vm.issue.Labels.length === 0">No labels</span>
-                <span data-ng-repeat="label in vm.issue.Labels" data-ng-cloak>{{label.Name}} {{$last ? '' : ', '}}</span>
+                    <span data-ng-if="vm.issue.Labels.length === 0">No labels</span>
+                    <span data-ng-repeat="label in vm.issue.Labels" data-ng-cloak>{{label.Name}} {{$last ? '' : ', '}}</span>
                 </div>
             </div>
         </div>
@@ -89,11 +89,9 @@
         </div>
     </aside>
 </div>
-
 <!-- Modal -->
 <div id="descriptionModal" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="descriptionModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
@@ -107,6 +105,19 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
-
     </div>
+</div>
+<div class="row">
+    <section class="comments col-md-12">
+        <div data-ng-if="vm.comments.length === 0"><em>No comments</em></div>
+        <div class="comment" data-ng-repeat="comment in vm.comments">
+            <div class="author" data-ng-cloak>{{comment.Author.Username}} - {{comment.CreatedOn}}</div>
+            <div class="content" data-ng-cloak>{{comment.Text}}</div>
+        </div>
+        <form class="add-comment" data-ng-if="(vm.currentUser.Id === vm.issue.Assignee.Id) || (vm.currentUser.Id === vm.issue.Author.Id)">
+            <label for="addComment"><strong>Text:</strong></label>
+            <textarea class="form-control" id="addComment" rows="4" data-ng-model="vm.text"></textarea>
+            <button type="button" class="btn btn-primary" data-ng-click="vm.addComment(vm.text)">Add Comment</button>
+        </form>
+    </section>
 </div>

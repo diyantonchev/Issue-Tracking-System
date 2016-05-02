@@ -8,12 +8,30 @@
 
     function issues($http, $q, BASE_SERVICE_URL) {
         var service = {
+            addIssue: addIssue,
             getIssueById: getIssueById,
             getUserIssues: getUserIssues,
-            addIssue: addIssue
+            editIssue: editIssue,
+            getComments: getComments,
+            addComment: addComment
         };
 
         return service;
+
+        function addIssue(data) {
+            var url = BASE_SERVICE_URL + '/issues';
+            var request = {
+                method: 'POST',
+                url: url,
+                data: data
+            };
+
+            return $http(request).then(function (response) {
+                return response.data;
+            }).catch(function err(response) {
+                return $q.reject(response.data);
+            });
+        }
 
         function getIssueById(id) {
             var url = BASE_SERVICE_URL + '/issues/' + id;
@@ -38,10 +56,10 @@
             });
         }
 
-        function addIssue(data) {
-            var url = BASE_SERVICE_URL + '/issues';
+        function editIssue(data, id) {
+            var url = BASE_SERVICE_URL + '/issues' + id;
             var request = {
-                method: 'POST',
+                method: 'PUT',
                 url: url,
                 data: data
             };
@@ -53,12 +71,21 @@
             });
         }
 
-        function editIssue(data, id) {
-            var url = BASE_SERVICE_URL + '/issues' + id;
+        function getComments(id) {
+            var url = BASE_SERVICE_URL + '/issues/' + id + '/comments/';
+            return $http.get(url).then(function (response) {
+                return response.data;
+            }).catch(function err(response) {
+                return $q.reject(response.data);
+            });
+        }
+
+        function addComment(comment, id) {
+            var url = BASE_SERVICE_URL + '/issues/' + id + '/comments/';
             var request = {
-                method: 'PUT',
+                method: 'POST',
                 url: url,
-                data: data
+                data: comment
             };
 
             return $http(request).then(function (response) {
