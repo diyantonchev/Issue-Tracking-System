@@ -18,7 +18,7 @@
         <label for="assigneeId" class="col-md-4">Assignee:</label>
         <div class="col-md-6">
             <input type="text" data-ng-model="vm.assigneeUsername" id="assigneeId" class="form-control" ui-autocomplete="vm.usersAutocomplete"
-                required="required">
+             placeholder="Choose new assignee">
         </div>
     </div>
     <hr>
@@ -29,9 +29,20 @@
         </div>
     </div>
     <hr>
+    <div class="form-group row">
+        <label class="col-md-4">Current Labels:</label>
+        <div class="col-md-6">
+            <div data-ng-if="vm.labels.length === 0">No Labels</div>
+            <div class="label-container" data-ng-repeat="label in vm.labels">
+                <input type="text" data-ng-model="label.Name" class="form-control" placeholder="{{label.Name}}">
+                <img src="img/delete.png" class="delete-bullet" alt="delete" remove-label>
+            </div>
+        </div>
+    </div>
+    <hr>
     <tag-manager tags="tags">
         <div class="form-group row">
-            <label class="col-md-4 form-control-label" for="labels">Labels:</label>
+            <label class="col-md-4 form-control-label" for="labels">Add New Labels:</label>
             <div class="col-md-6">
                 <div class="tags">
                     <div ng-repeat="(index, tag) in vm.tags" class="tag label label-success">{{tag}} <a href="" class="close" ng-click="vm.removeLabel(index)">×</a></div>
@@ -50,16 +61,13 @@
     <div class="form-group row">
         <label for="prioritiy" class="col-md-4">Priority:</label>
         <div class="col-md-6">
-            <select id="priority" class="form-control" data-ng-model="vm.issue.PriorityId" required="required">
-                <option value="">Choose priority</option>
-                <option data-ng-repeat="priority in vm.issue.Priorities" value="{{priority.Id}}">{{priority.Name}}</option>
-            </select>
+            <input type="text" id="priority" class="form-control" data-ng-model="vm.issue.PriorityId" required="required">
         </div>
     </div>
     <hr>
     <div class="form-group row">
         <div class="col-md-9 btn-container">
-            <button type="submit" data-ng-disabled="editIssue.$invalid" data-ng-click="vm.submitIssue(vm.issue)" class="btn btn-success">Add Issue</button>
+            <button type="submit" data-ng-disabled="editIssue.$invalid" data-ng-click="vm.submitIssue()" class="btn btn-success">Edit Issue</button>
             <a href="#/issues/{{vm.issue.Id}}"><button class="btn btn-primary">Back To Issue</button></a>
         </div>
     </div>

@@ -1,11 +1,11 @@
 <div class="row">
     <form name="projectInfo" class="col-md-6 project-info" novalidate>
-        <h3 data-ng-cloak class="project-name">{{project.Name}}</h3>
+        <h3 data-ng-cloak class="project-name">{{vm.project.Name}}</h3>
         <hr>
         <div class="form-group row">
             <label class="col-md-4 form-control-label">Name:</label>
             <div class="col-md-6">
-                <div class="box-shadow" data-ng-cloak>{{project.Name}}</div>
+                <div class="box-shadow" data-ng-cloak>{{vm.project.Name}}</div>
             </div>
         </div>
         <hr>
@@ -15,14 +15,14 @@
                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#descriptionModal">Show Full</button>
             </label>
             <div class="col-md-6">
-                <div class="box-shadow" data-ng-cloak>{{project.Description}}</div>
+                <div class="box-shadow" data-ng-cloak>{{vm.project.Description}}</div>
             </div>
         </div>
         <hr>
         <div class="form-group row">
-            <label for="projectLeadId" class="col-md-4 form-control-label">Lead ID (current: {{project.Lead.Username}})</label>
+            <label for="projectLeadId" class="col-md-4 form-control-label">Lead ID (current: {{vm.project.Lead.Username}})</label>
             <div class="col-md-6">
-                <div class="box-shadow" data-ng-cloak>{{project.Lead.Id}}</div>
+                <div class="box-shadow" data-ng-cloak>{{vm.project.Lead.Id}}</div>
             </div>
         </div>
         <hr>
@@ -30,8 +30,8 @@
             <label class="col-md-4">Labels:</label>
             <div class="col-md-6">
                 <div class="box-shadow" data-ng-cloak>
-                    <span data-ng-if="project.Labels.length === 0">No labels</span>
-                    <span data-ng-repeat="label in project.Labels">{{label.Name}} {{$last ? '' : ', '}}</span>
+                    <span data-ng-if="vm.project.Labels.length === 0">No labels</span>
+                    <span data-ng-repeat="label in vm.project.Labels">{{label.Name}} {{$last ? '' : ', '}}</span>
                 </div>   
             </div>
         </div>
@@ -40,16 +40,16 @@
             <label class="col-md-4">Priorities:</label>
             <div class="col-md-6">
                 <div class="box-shadow" data-ng-cloak>
-                    <span data-ng-if="project.Priorities.length === 0">No Priorities</span>
-                    <span data-ng-repeat="priority in project.Priorities">{{priority.Name}} {{$last ? '' : ', '}}</span>
+                    <span data-ng-if="vm.project.Priorities.length === 0">No Priorities</span>
+                    <span data-ng-repeat="priority in vm.project.Priorities">{{priority.Name}} {{$last ? '' : ', '}}</span>
                 </div>             
             </div>
         </div>
         <hr>
-        <div class="form-group row" ng-if="currentUser.isAdmin || currentUser.Id === project.Lead.Id">
+        <div class="form-group row" ng-if="vm.currentUser.isAdmin || vm.currentUser.Id === project.Lead.Id">
             <div class="col-md-6 btn-container">
-                <a href="#/projects/{{project.Id}}/edit"><button class="btn btn-primary">Edit Project</button></a>
-                <a href="#/projects/{{project.Id}}/add-issue"><button class="btn btn-primary">Add Issue</button></a>
+                <a href="#/projects/{{vm.project.Id}}/edit"><button class="btn btn-primary">Edit Project</button></a>
+                <a href="#/projects/{{vm.project.Id}}/add-issue"><button class="btn btn-primary">Add Issue</button></a>
             </div>
         </div>
         <hr>
@@ -132,7 +132,7 @@
                 <h4 class="modal-title">Description</h4>
             </div>
             <div class="modal-body">
-                <p><span class="overflow">{{project.Description}}</span></p>
+                <p><span class="overflow">{{vm.project.Description}}</span></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

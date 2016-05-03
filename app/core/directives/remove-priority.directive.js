@@ -17,8 +17,8 @@
             element.on('click', function (event) {
                 var input = this.previousElementSibling;
                 var priorityForRemove = input.value;
-                var priorities = scope.project.Priorities;
-                scope.project.Priorities = priorities.filter(function (priority) {
+                var priorities = scope.vm.project.Priorities;
+                scope.vm.project.Priorities = priorities.filter(function (priority) {
                     return priority.Name !== priorityForRemove;
                 });
 

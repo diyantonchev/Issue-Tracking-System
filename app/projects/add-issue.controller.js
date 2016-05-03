@@ -4,8 +4,8 @@
     angular.module('issueTrackingSystem.projects')
         .controller('AddIssueController', AddIssueController);
 
-    AddIssueController.$inject = ['$scope', '$routeParams', '$q', '$location', 'issues', 'usersData', 'projects', 'getAllUsersService', 'labels', 'toaster'];
-    function AddIssueController($scope, $routeParams, $q, $location, issues, usersData, projects, getAllUsersService, labels, toaster) {
+    AddIssueController.$inject = ['$routeParams', '$q', '$location', 'issues', 'usersData', 'projects', 'getAllUsersService', 'labels', 'toaster'];
+    function AddIssueController($routeParams, $q, $location, issues, usersData, projects, getAllUsersService, labels, toaster) {
         var vm = this;
 
         vm.issue = {
@@ -55,7 +55,7 @@
 
         function getAvailableLabels() {
             labels.getAvailableLabels().then(function (data) {
-                $scope.allLabels = data;
+                vm.allLabels = data;
             });
         }
 

@@ -57,7 +57,7 @@
         }
 
         function editIssue(data, id) {
-            var url = BASE_SERVICE_URL + '/issues' + id;
+            var url = BASE_SERVICE_URL + '/issues/' + id;
             var request = {
                 method: 'PUT',
                 url: url,

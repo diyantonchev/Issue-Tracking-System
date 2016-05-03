@@ -4,8 +4,8 @@
     angular.module('issueTrackingSystem.projects')
         .controller('ProjectController', ProjectController);
 
-    ProjectController.$inject = ['$scope', '$routeParams', '$location', 'identity', 'projects', 'usersData', 'getAllUsersService', 'toaster'];
-    function ProjectController($scope, $routeParams, $location, identity, projects, usersData, getAllUsersService, toaster) {
+    ProjectController.$inject = ['$routeParams', '$location', 'identity', 'projects', 'usersData', 'getAllUsersService', 'toaster'];
+    function ProjectController($routeParams, $location, identity, projects, usersData, getAllUsersService, toaster) {
         var vm = this;
 
         vm.authors = [];
@@ -53,18 +53,17 @@
                 });
         }
 
-
         function getCurrentUser() {
             return identity.getCurrentUser().then(function (user) {
-                $scope.currentUser = user;
+                vm.currentUser = user;
             });
         }
 
         function getProjectById(id) {
             return projects.getProjectById(id)
                 .then(function (data) {
-                    $scope.project = data;
-                    $scope.project.LeadId = data.Lead.Id;
+                    vm.project = data;
+                    vm.project.LeadId = data.Lead.Id;
                     return data;
                 });
         }
@@ -99,11 +98,11 @@
                 })[0];
 
                 if (lead) {
-                    $scope.project.LeadId = lead.Id;
+                    vm.project.LeadId = lead.Id;
                 }
             }
 
-            editProject($scope.project, $routeParams.id);
+            editProject(vm.project, $routeParams.id);
         }
 
     }

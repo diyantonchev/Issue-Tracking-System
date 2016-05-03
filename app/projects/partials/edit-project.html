@@ -2,32 +2,32 @@
     <div class="form-group row">
         <label for="projectName" class="col-md-4 form-control-label">Name:</label>
         <div class="col-md-6">
-            <input type="text" data-ng-model="project.Name" class="form-control" id="Name" placeholder="{{project.Name}}" required="required">
+            <input type="text" data-ng-model="vm.project.Name" class="form-control" id="Name" required="required">
         </div>
     </div>
     <hr>
     <div class="form-group row">
         <label for="description" class="col-md-4 form-control-label">Description:</label>
         <div class="col-md-6">
-            <textarea rows="4" type="text" data-ng-model="project.Description" class="form-control" id="description" placeholder="{{project.Description}}"
+            <textarea rows="4" type="text" data-ng-model="vm.project.Description" class="form-control" id="description"
                 required="required">
             </textarea>
         </div>
     </div>
     <hr>
-    <div class="form-group row" data-ng-if="currentUser.isAdmin">
-        <label for="projectLeadId" class="col-md-4 form-control-label">Lead (current: {{project.Lead.Username}})</label>
+    <div class="form-group row" data-ng-if="vm.currentUser.isAdmin">
+        <label for="projectLeadId" class="col-md-4 form-control-label">Lead (current: {{vm.project.Lead.Username}})</label>
         <div class="col-md-6">
-            <input type="text" ui-autocomplete="vm.usersAutocomplete" data-ng-model="vm.leadUsername" class="form-control" id="projectLeadId">
+            <input type="text" ui-autocomplete="vm.usersAutocomplete" data-ng-model="vm.leadUsername" class="form-control" placeholder="Choose new project leader" id="projectLeadId">
         </div>
     </div>
     <hr>
     <div class="form-group row">
-        <label for="projectLabels" class="col-md-4">Labels:</label>
+        <label class="col-md-4">Labels:</label>
         <div class="col-md-6">
-            <div data-ng-if="project.Labels.length === 0">No Labels</div>
-            <div class="label-container" data-ng-repeat="label in project.Labels">
-                <input type="text" id="projectLabels" data-ng-model="label.Name" class="form-control" placeholder="{{label.Name}}">
+            <div data-ng-if="vm.project.Labels.length === 0">No Labels</div>
+            <div class="label-container" data-ng-repeat="label in vm.project.Labels">
+                <input type="text" data-ng-model="label.Name" class="form-control" placeholder="{{label.Name}}">
                 <img src="img/delete.png" class="delete-bullet" alt="delete" remove-label>
             </div>
         </div>
@@ -36,8 +36,8 @@
     <div class="form-group row">
         <label for="projectPriorities" class="col-md-4">Priorities:</label>
         <div class="col-md-6">
-            <div data-ng-if="project.Priorities.length === 0">No Priorities</div>
-            <div class="label-container" data-ng-repeat="priority in project.Priorities">
+            <div data-ng-if="vm.project.Priorities.length === 0">No Priorities</div>
+            <div class="label-container" data-ng-repeat="priority in vm.project.Priorities">
                 <input type="text" data-ng-model="priority.Name" class="form-control">
                 <img src="img/delete.png" class="delete-bullet" alt="delete" remove-priority>
             </div>
@@ -47,7 +47,7 @@
     <div class="form-group row">
         <div class="col-md-7 btn-container">
             <button type="submit" data-ng-disabled="editProject.$invalid" ng-click="vm.submitEditedProject()" class="btn btn-success">Edit Project</button>
-            <a href="#/projects/{{project.Id}}"><button class="btn btn-primary">Back To Project</button></a>
+            <a href="#/projects/{{vm.project.Id}}"><button class="btn btn-primary">Back To Project</button></a>
         </div>
     </div>
 </form>

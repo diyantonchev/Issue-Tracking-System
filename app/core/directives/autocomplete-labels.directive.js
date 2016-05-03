@@ -15,7 +15,7 @@
         function link(scope, element) {
             element.on('keyup', function (event) {
                 var labels = [];
-                scope.allLabels.forEach(function (label) {
+                scope.vm.allLabels.forEach(function (label) {
                     labels.push(label.Name);
                 });
 
