@@ -141,11 +141,11 @@ hr {
    font-weight: bold;
 }
 
-.edit-project-form {
+.edit-project-form, .edit-issue-form {
     padding: 30px;
 }
 
-.edit-project-form input {
+.edit-project-form input, .edit-issue-form input {
    margin-top: 5px;
    margin-bottom: 5px;
 }
