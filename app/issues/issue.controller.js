@@ -19,7 +19,7 @@
         function activate() {
             var promises = [getIssueById($routeParams.id), getCurrentUser(), getComments($routeParams.id)];
             return $q.all(promises).then(function () {
-                    getProjectById(vm.issue.Project.Id);
+                getProjectById(vm.issue.Project.Id);
             });
         }
 

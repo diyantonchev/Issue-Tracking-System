@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('issueTrackingSystem.projects')
+    angular.module('issueTrackingSystem.core')
         .directive('removePriority', removePriority);
 
     function removePriority() {

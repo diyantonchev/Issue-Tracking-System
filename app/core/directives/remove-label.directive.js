@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('issueTrackingSystem.projects')
+    angular.module('issueTrackingSystem.core')
         .directive('removeLabel', removeLabel);
 
     function removeLabel() {

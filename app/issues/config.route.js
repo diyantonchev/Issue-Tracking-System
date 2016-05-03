@@ -5,7 +5,6 @@
         .config(config);
 
     config.$inject = ['$routeProvider'];
-
     function config($routeProvider) {
 
         $routeProvider.when('/issues/:id', {
@@ -14,6 +13,16 @@
             controllerAs: 'vm',
             resolve: {
                 isAuthenticated: isAuthenticated,
+            }
+        });
+        
+        $routeProvider.when('/issues/:id/edit', {
+            templateUrl: 'app/issues/partials/edit-issue-page.html',
+            controller: 'EditIssueController',
+            controllerAs: 'vm',
+            resolve: {
+                isAuthenticated: isAuthenticated,
+                getAllUsersService: getAllUsersService
             }
         });
 
@@ -27,11 +36,6 @@
         }
 
         return $q.reject('Unauthorized Access');
-    }
-
-    getAllPojectsService.$inject = ['projects'];
-    function getAllPojectsService(projects) {
-        return projects.getAllProjects();
     }
 
     getAllUsersService.$inject = ['usersData'];
