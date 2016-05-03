@@ -46,7 +46,7 @@
             </div>
         </div>
         <hr>
-        <div class="form-group row" ng-if="vm.currentUser.isAdmin || vm.currentUser.Id === project.Lead.Id">
+        <div class="form-group row" ng-if="vm.currentUser.isAdmin || vm.currentUser.Id === vm.project.Lead.Id">
             <div class="col-md-6 btn-container">
                 <a href="#/projects/{{vm.project.Id}}/edit"><button class="btn btn-primary">Edit Project</button></a>
                 <a href="#/projects/{{vm.project.Id}}/add-issue"><button class="btn btn-primary">Add Issue</button></a>
