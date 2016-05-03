@@ -26,7 +26,6 @@
         function getIssueById(id) {
             return issues.getIssueById(id).then(function (data) {
                 vm.issue = data;
-                console.log(data);
                 return vm.issue;
             });
         }
@@ -50,6 +49,7 @@
                 getComments($routeParams.id);
                 toaster.pop('success', 'Success', 'You successfully added a comment');
             }).catch(function (data) {
+                console.error(data);
                 toaster.pop('error', 'Error', data.Message);
             });
         }
