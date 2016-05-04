@@ -44,7 +44,8 @@
             resolve: {
                 isAuthenticated: isAuthenticated,
                 getAllPojectsService: getAllPojectsService,
-                isAdminCheck: isAdminCheck
+                isAdminCheck: isAdminCheck,
+                getAllUsersService: getAllUsersService
             }
         });
 

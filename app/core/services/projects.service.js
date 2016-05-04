@@ -8,11 +8,11 @@
 
     function projects($http, $q, BASE_SERVICE_URL) {
         var service = {
+            addProject: addProject,
             getAllProjects: getAllProjects,
             getUserProjects: getUserProjects,
             getProjectById: getProjectById,
             getProjectIssues: getProjectIssues,
-            addProject: addProject,
             editProject: editProject
         };
 
@@ -31,6 +31,21 @@
                 return $q.reject(response.data);
             });
 
+        }
+
+        function addProject(data) {
+            var url = BASE_SERVICE_URL + '/projects';
+            var request = {
+                method: 'POST',
+                url: url,
+                data: data
+            };
+
+            return $http(request).then(function (response) {
+                return response.data;
+            }).catch(function err(response) {
+                return $q.reject(response.data);
+            });
         }
 
         function getAllProjects() {
@@ -60,10 +75,6 @@
             }).catch(function err(response) {
                 return $q.reject(response.data);
             });
-        }
-
-        function addProject() {
-
         }
 
         function editProject(data, id) {

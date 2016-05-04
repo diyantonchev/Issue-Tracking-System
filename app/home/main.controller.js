@@ -30,7 +30,7 @@
         }
 
         function register(registerData, keepMeLogin) {
-            authentication.register(registerData, keepMeLogin)
+            return authentication.register(registerData, keepMeLogin)
                 .then(function success(data) {
                     toaster.pop('success', 'Success', 'User successfully registered');
                 });
@@ -41,21 +41,20 @@
         }
 
         function logout() {
-            vm.currentUser = undefined;
             authentication.logout();
             toaster.pop('success', 'Success', 'Successfully logged out');
             $location.path('#/');
         }
 
         function changePassword(data) {
-            authentication.changePassword(data).then(function () {
+            return authentication.changePassword(data).then(function () {
                 toaster.pop('success', 'Success', 'Password successfully changed');
                 $location.path('#/');
             });
         }
 
         function makeAdmin(user) {
-            identity.makeAdmin(user)
+            return identity.makeAdmin(user)
                 .then(function () {
                     toaster.notify('success', 'Success', '');
                 });

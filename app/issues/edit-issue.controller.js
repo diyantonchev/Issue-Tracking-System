@@ -116,7 +116,7 @@
 
         function removeLabel(index) {
             vm.tags.splice(index, 1);
-            vm.neLabels = vm.tags.join();
+            vm.newLabels = vm.tags.join();
         }
 
         function convertLabelsToObjects(labels) {

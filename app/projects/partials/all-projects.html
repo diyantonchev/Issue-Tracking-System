@@ -21,8 +21,88 @@
             <input type="text" class="form-control" id="search" ng-model="vm.search" placeholder="Search">
         </div>
         <p>Or:</p>
-        <a href="#/projects/add">
-            <button class="btn btn-primary">Add New Project</button>
-        </a>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#addProjectModal">Add New Project</button>
     </form>
+</div>
+
+<!-- Modal -->
+<div id="addProjectModal" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="projectModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Add New Project:</h4>
+            </div>
+            <div class="modal-body">
+                <form name="addProject" class="add-project-form row">
+                    <div class="form-group row">
+                        <label for="projectName" class="col-md-4 form-control-label">Name:</label>
+                        <div class="col-md-6">
+                            <input type="text" data-ng-model="vm.newProject.Name" class="form-control" id="projectName" placeholder="Name" required="required">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group row">
+                        <label for="projectDescription" class="col-md-4 form-control-label">Description:</label>
+                        <div class="col-md-6">
+                            <textarea class="form-control" data-ng-model="vm.newProject.Description" rows="4" id="projectDescription" placeholder="Description"
+                                required="required"></textarea>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group row">
+                        <label for="projectKey" class="col-md-4 form-control-label">Project Key:</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" data-ng-model="vm.newProject.ProjectKey" id="projectKey" required="required">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group row">
+                        <label for="leadId" class="col-md-4">Lead:</label>
+                        <div class="col-md-6">
+                            <input type="text" data-ng-model="vm.LeadId" id="leadId" class="form-control" ui-autocomplete="vm.usersAutocomplete"
+                                placeholder="Choose project lead">
+                        </div>
+                    </div>
+                    <hr>
+                    <tag-manager tags="tags">
+                        <div class="form-group row">
+                            <label class="col-md-4 form-control-label" for="labels">Add Labels:</label>
+                            <div class="col-md-6">
+                                <div class="tags">
+                                    <div ng-repeat="(index, tag) in vm.tags" class="tag label label-success">{{tag}} <a href="" class="close" ng-click="vm.removeLabel(index)">×</a></div>
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" autocomplete-labels data-ng-model="vm.newLabel" class="form-control" id="labels" placeholder="Add Label..."
+                                    />
+                                    <span class="input-group-btn">
+                                     <button class="btn btn-success" ng-click="vm.addLabel(vm.newLabel)" type="button">Add</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </tag-manager>
+                    <hr>
+                    <div class="form-group row">
+                        <label for="priorities" class="col-md-4">Priorities:</label>
+                        <div class="col-md-6">
+                            <input type="text" id="priority" class="form-control" data-ng-model="vm.priorities" required="required">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group row">
+                        <div class="col-md-9 btn-container">
+                            <button type="submit" data-ng-disabled="addProject.$invalid" data-ng-click="vm.submitProject()" data-dismiss="modal" class="btn btn-success">Create Project</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
 </div>

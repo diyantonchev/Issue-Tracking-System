@@ -84,7 +84,7 @@
 
         function editProject(project, id) {
             projects.editProject(project, id).then(function (response) {
-                toaster.pop('success', 'Success', 'Project successfullty edited');
+                toaster.pop('success', 'Success', 'Project successfully edited');
                 $location.path('/projects/' + $routeParams.id);
             }).catch(function (err) {
                 toaster.pop('error', 'Error', err.Message);

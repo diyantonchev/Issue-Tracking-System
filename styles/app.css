@@ -145,7 +145,7 @@ hr {
    font-weight: bold;
 }
 
-.edit-project-form, .edit-issue-form {
+.edit-project-form, .edit-issue-form, .add-project-form  {
     padding: 30px;
 }
 
@@ -227,6 +227,10 @@ textarea {
 
 .add-comment > .btn {
     margin-top: 10px;
+}
+
+.ui-autocomplete {
+    z-index: 5000;
 }
 
 @media all and (max-width: 990px) {        
