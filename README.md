@@ -5,7 +5,7 @@ Each Issue has a title, description, issue key (which is automatically generated
 
 A status transition scheme describes the workflow of an issue. See the image below for an example scheme:
 
-![Status transition sheme](img/status-transition-scheme.png?raw=true)
+![Status transition sheme](resources/status-transition-scheme.png?raw=true)
 
 ### Issue Tracker REST Services
 
