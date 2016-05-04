@@ -145,9 +145,9 @@ hr {
     padding: 30px;
 }
 
-.edit-project-form input, .edit-issue-form input {
-   margin-top: 5px;
-   margin-bottom: 5px;
+.repeat-input {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .label-container {
@@ -238,6 +238,10 @@ textarea {
         
    .table-container {   
          margin-top: 10px;
+    }
+    
+    hr {
+        width: 100%;
     }
     
     .ui-autocomplete {
