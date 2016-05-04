@@ -19,7 +19,9 @@
         function activate() {
             var promises = [getIssueById($routeParams.id), getCurrentUser(), getComments($routeParams.id)];
             return $q.all(promises).then(function () {
-                getProjectById(vm.issue.Project.Id);
+                getProjectById(vm.issue.Project.Id).then(function () {
+                    canComment(vm.currentUser, vm.issue, vm.project);
+                });
             });
         }
 
@@ -39,6 +41,29 @@
         function getComments(id) {
             return issues.getComments(id).then(function (data) {
                 vm.comments = data;
+            });
+        }
+
+        function canComment(currentUser, issue, project) {
+            projects.getProjectIssues(project.Id).then(function (projectIssues) {
+                var userIssues = projectIssues.filter(function (issue) {
+                    return issue.Assignee.Id === currentUser.Id;
+                });
+
+                console.log(userIssues);
+                var isIssueAssignee = currentUser.Id === issue.Assignee.Id;
+                var isProjectLead = currentUser.Id === project.Lead.Id;
+                var hasAssignedIssue = userIssues.length > 0;
+                var isAdmin = currentUser.isAdmin;
+
+                if (isIssueAssignee || isProjectLead || hasAssignedIssue || isAdmin) {
+                    vm.userCanComment = true;
+
+                } else {
+                    vm.userCanComment = false;
+                }
+
+                return vm.userCanComment;
             });
         }
 

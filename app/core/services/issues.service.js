@@ -11,6 +11,7 @@
             addIssue: addIssue,
             getIssueById: getIssueById,
             getUserIssues: getUserIssues,
+            getIssuesByFilter: getIssuesByFilter,
             editIssue: editIssue,
             getComments: getComments,
             addComment: addComment
@@ -43,15 +44,31 @@
         }
 
         function getUserIssues(params) {
+            var url = BASE_SERVICE_URL + '/issues/me?orderBy=DueDate desc';
             var request = {
                 method: 'GET',
-                url: BASE_SERVICE_URL + '/issues/me?orderBy=DueDate desc',
+                url: url,
                 params: params
             };
 
             return $http(request).then(function (response) {
                 return response.data;
             }).catch(function err(response) {
+                return $q.reject(response.data);
+            });
+        }
+
+        function getIssuesByFilter(filter) {
+            var url = BASE_SERVICE_URL + '/issues/?' + filter;
+            var request = {
+                method: 'GET',
+                url: url,
+            };
+
+            return $http(request).then(function (response) {
+                return response.data;
+            }).catch(function err(response) {
+                console.log(response);
                 return $q.reject(response.data);
             });
         }
