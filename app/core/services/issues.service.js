@@ -11,8 +11,8 @@
             addIssue: addIssue,
             getIssueById: getIssueById,
             getUserIssues: getUserIssues,
-            getIssuesByFilter: getIssuesByFilter,
             editIssue: editIssue,
+            changeStatus: changeStatus,
             getComments: getComments,
             addComment: addComment
         };
@@ -58,21 +58,6 @@
             });
         }
 
-        function getIssuesByFilter(filter) {
-            var url = BASE_SERVICE_URL + '/issues/?' + filter;
-            var request = {
-                method: 'GET',
-                url: url,
-            };
-
-            return $http(request).then(function (response) {
-                return response.data;
-            }).catch(function err(response) {
-                console.log(response);
-                return $q.reject(response.data);
-            });
-        }
-
         function editIssue(data, id) {
             var url = BASE_SERVICE_URL + '/issues/' + id;
             var request = {
@@ -82,6 +67,15 @@
             };
 
             return $http(request).then(function (response) {
+                return response.data;
+            }).catch(function err(response) {
+                return $q.reject(response.data);
+            });
+        }
+
+        function changeStatus(issueId, statusId) {
+            var url = BASE_SERVICE_URL + '/issues/' + issueId + '/changestatus?statusid=' + statusId;
+            return $http.put(url).then(function (response) {
                 return response.data;
             }).catch(function err(response) {
                 return $q.reject(response.data);

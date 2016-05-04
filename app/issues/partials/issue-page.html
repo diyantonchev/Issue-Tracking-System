@@ -66,7 +66,7 @@
             <div class="col-md-6">
                 <div class="box-shadow">
                     <span data-ng-if="vm.issue.Labels.length === 0">No labels</span>
-                    <span data-ng-repeat="label in vm.issue.Labels" data-ng-cloak>{{label.Name}} {{$last ? '' : ', '}}</span>
+                    <span data-ng-repeat="label in vm.issue.Labels" data-ng-cloak>{{label.Name}}{{$last ? '' : ', '}}</span>
                 </div>
             </div>
         </div>
@@ -89,8 +89,8 @@
         <div class="box-shadow" data-ng-if="vm.issue.AvailableStatuses.length === 0"><em>No statuses</em></div>
         <div class="status" data-ng-repeat="status in vm.issue.AvailableStatuses" data-ng-cloak>
             -----{{status.Name}}
-            <button class="btn btn-success" type="button" data-ng-if="(vm.currentUser.Id === vm.issue.Assignee.Id) || vm.currentUser.isAdmin"
-                data-ng-click="vm.changeStatus()">Change</button>
+            <button class="btn btn-success" type="button" data-ng-if="(vm.currentUser.Id === vm.issue.Assignee.Id) || vm.currentUser.Id === vm.project.Lead.Id || vm.currentUser.isAdmin"
+                data-ng-click="vm.changeStatus(status.Id)">Change</button>
         </div>
     </aside>
 </div>

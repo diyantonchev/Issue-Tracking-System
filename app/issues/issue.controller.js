@@ -50,7 +50,6 @@
                     return issue.Assignee.Id === currentUser.Id;
                 });
 
-                console.log(userIssues);
                 var isIssueAssignee = currentUser.Id === issue.Assignee.Id;
                 var isProjectLead = currentUser.Id === project.Lead.Id;
                 var hasAssignedIssue = userIssues.length > 0;
@@ -86,8 +85,11 @@
             });
         }
 
-        function changeStatus() {
-            //TODO
+        function changeStatus(statusId) {
+            return issues.changeStatus(vm.issue.Id, statusId).then(function (data) {
+                activate();
+                toaster.pop('info', 'Status Change', 'Status has been change');
+            });
         }
 
     }
