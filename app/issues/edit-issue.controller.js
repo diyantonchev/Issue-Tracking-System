@@ -4,8 +4,8 @@
     angular.module('issueTrackingSystem.issues')
         .controller('EditIssueController', EditIssueController);
 
-    EditIssueController.$inject = ['$routeParams', '$q', '$location', 'issues', 'toaster', 'labels', 'getAllUsersService'];
-    function EditIssueController($routeParams, $q, $location, issues, toaster, labels, getAllUsersService) {
+    EditIssueController.$inject = ['$routeParams', '$q', '$location', 'issues', 'projects', 'toaster', 'labels', 'getAllUsersService'];
+    function EditIssueController($routeParams, $q, $location, issues, projects, toaster, labels, getAllUsersService) {
         var vm = this;
 
         vm.issue = {};
@@ -39,23 +39,33 @@
 
         function activate() {
             var promises = [getIssueById($routeParams.id), getAvailableLabels(), getUsernames()];
-            return $q.all(promises);
+            return $q.all(promises).then(function () {
+                getProjectById(vm.issue.ProjectId);
+            });
         }
 
         function getIssueById(id) {
             return issues.getIssueById(id).then(function (data) {
+                console.log(data);
                 vm.issue = {
                     Id: data.Id,
                     Title: data.Title,
                     Description: data.Description,
                     AssigneeId: data.Assignee.Id,
                     PriorityId: data.Priority.Id,
-
+                    ProjectId: data.Project.Id
                 };
 
                 vm.labels = data.Labels;
 
                 return vm.issue;
+            });
+        }
+
+        function getProjectById(id) {
+            return projects.getProjectById(id).then(function (data) {
+                vm.project = data;
+                return vm.project;
             });
         }
 

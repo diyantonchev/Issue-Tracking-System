@@ -18,7 +18,7 @@
         <label for="assigneeId" class="col-md-4">Assignee:</label>
         <div class="col-md-6">
             <input type="text" data-ng-model="vm.assigneeUsername" id="assigneeId" class="form-control" ui-autocomplete="vm.usersAutocomplete"
-             placeholder="Choose new assignee">
+                placeholder="Choose new assignee">
         </div>
     </div>
     <hr>
@@ -61,7 +61,11 @@
     <div class="form-group row">
         <label for="prioritiy" class="col-md-4">Priority:</label>
         <div class="col-md-6">
-            <input type="text" id="priority" class="form-control" data-ng-model="vm.issue.PriorityId" required="required">
+            <!--<input type="text" id="priority" class="form-control" data-ng-model="vm.issue.PriorityId" required="required">-->
+            <select id="priority" class="form-control" data-ng-model="vm.issue.PriorityId" required="required">
+                <option value="">Choose priority</option>
+                <option data-ng-repeat="priority in vm.project.Priorities" ng-class="{'selected' : vm.issue.PriorityId == priority.Id}" value="{{priority.Id}}">{{priority.Name}}</option>
+            </select>
         </div>
     </div>
     <hr>
