@@ -44,7 +44,7 @@
         function reloadIssues() {
             getUserIssues(vm.issuesParams)
                 .then(function (data) {
-                    // console.log(data.Issues);
+                    //console.log(data.Issues);
                 });
         }
 

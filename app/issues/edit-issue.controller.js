@@ -4,8 +4,8 @@
     angular.module('issueTrackingSystem.issues')
         .controller('EditIssueController', EditIssueController);
 
-    EditIssueController.$inject = ['$routeParams', '$q', '$location', 'issues', 'identity', 'projects', 'toaster', 'labels', 'getAllUsersService'];
-    function EditIssueController($routeParams, $q, $location, issues, identity, projects, toaster, labels, getAllUsersService) {
+    EditIssueController.$inject = ['$routeParams', '$q', '$location', 'issues', 'toaster', 'labels', 'getAllUsersService'];
+    function EditIssueController($routeParams, $q, $location, issues, toaster, labels, getAllUsersService) {
         var vm = this;
 
         vm.issue = {};
@@ -45,7 +45,7 @@
         function getIssueById(id) {
             return issues.getIssueById(id).then(function (data) {
                 vm.issue = {
-                    Id : data.Id,
+                    Id: data.Id,
                     Title: data.Title,
                     Description: data.Description,
                     AssigneeId: data.Assignee.Id,

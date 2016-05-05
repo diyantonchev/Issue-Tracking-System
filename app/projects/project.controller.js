@@ -4,8 +4,8 @@
     angular.module('issueTrackingSystem.projects')
         .controller('ProjectController', ProjectController);
 
-    ProjectController.$inject = ['$routeParams', '$location', 'identity', 'projects', 'usersData', 'getAllUsersService', 'toaster'];
-    function ProjectController($routeParams, $location, identity, projects, usersData, getAllUsersService, toaster) {
+    ProjectController.$inject = ['$routeParams', '$location', 'identity', 'projects', 'getAllUsersService', 'toaster'];
+    function ProjectController($routeParams, $location, identity, projects, getAllUsersService, toaster) {
         var vm = this;
 
         vm.authors = [];

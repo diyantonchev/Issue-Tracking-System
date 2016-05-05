@@ -4,8 +4,8 @@
     angular.module('issueTrackingSystem.projects')
         .controller('AddIssueController', AddIssueController);
 
-    AddIssueController.$inject = ['$routeParams', '$q', '$location', 'issues', 'usersData', 'projects', 'getAllUsersService', 'labels', 'toaster'];
-    function AddIssueController($routeParams, $q, $location, issues, usersData, projects, getAllUsersService, labels, toaster) {
+    AddIssueController.$inject = ['$routeParams', '$q', '$location', 'issues', 'projects', 'getAllUsersService', 'labels', 'toaster'];
+    function AddIssueController($routeParams, $q, $location, issues, projects, getAllUsersService, labels, toaster) {
         var vm = this;
 
         vm.issue = {
