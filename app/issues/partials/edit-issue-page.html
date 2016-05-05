@@ -59,9 +59,9 @@
     </tag-manager>
     <hr>
     <div class="form-group row">
-        <label for="prioritiy" class="col-md-4">Priority:</label>
+        <label for="prioritiyId" class="col-md-4">Priority:</label>
         <div class="col-md-6">
-            <select id="priority" class="form-control" data-ng-model="vm.issue.PriorityId" required="required">
+            <select id="priorityId" class="form-control"  required="required">
                  <option data-ng-repeat="priority in vm.issueProject.Priorities" value="{{priority.Id}}">{{priority.Name}}</option>
             </select>
         </div>

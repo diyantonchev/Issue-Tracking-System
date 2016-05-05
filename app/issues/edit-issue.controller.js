@@ -56,7 +56,6 @@
                 };
 
                 vm.labels = data.Labels;
-
                 return vm.issue;
             });
         }
@@ -90,6 +89,7 @@
                 var newLabels = convertLabelsToObjects(vm.newLabels);
                 newLabels.forEach(function (label) {
                     vm.labels.push(label);
+                    vm.labels = _.uniqBy(vm.labels, 'Name');
                 });
             }
 
@@ -104,6 +104,9 @@
                     vm.issue.AssigneeId = assignee.Id;
                 }
             }
+
+            var priorityId = $('#priorityId').val();
+            vm.issue.PriorityId = priorityId;
 
             editIssue(vm.issue);
         }
@@ -132,7 +135,7 @@
             var labelObjects = [];
             var labelNames = labels.split(',');
             labelNames.forEach(function (name, index) {
-                labelObjects[index] = { name: name };
+                labelObjects[index] = { Name: name };
             });
 
             return labelObjects;

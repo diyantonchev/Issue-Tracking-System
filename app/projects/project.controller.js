@@ -109,8 +109,7 @@
                 var newLabels = convertLabelsToObjects(vm.labels);
                 newLabels.forEach(function (newLabel) {
                     vm.project.Labels.push(newLabel);
-
-                    vm.project.Labels = $.unique(vm.project.Labels);
+                    vm.project.Labels = _.uniqBy(vm.project.Labels, 'Name');
                 });
 
                 vm.labels = '';
@@ -120,6 +119,7 @@
                 var newPriorities = convertPrioritiesToObjects(vm.newPriorities);
                 newPriorities.forEach(function (newPriority) {
                     vm.project.Priorities.push(newPriority);
+                    vm.project.Priorities = _.uniqBy(vm.project.Priorities, 'Name');
                 });
             }
 
@@ -182,7 +182,7 @@
             var labelObjects = [];
             var labelNames = labels.split(',');
             labelNames.forEach(function (name, index) {
-                labelObjects[index] = { name: name };
+                labelObjects[index] = { Name: name };
             });
 
             return labelObjects;
@@ -192,7 +192,7 @@
             var prioritiesObjects = [];
             var priorityNames = priorities.split(/\W+/);
             priorityNames.forEach(function (name, index) {
-                prioritiesObjects[index] = { name: name };
+                prioritiesObjects[index] = { Name: name };
             });
 
             return prioritiesObjects;

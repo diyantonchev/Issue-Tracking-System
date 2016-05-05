@@ -104,7 +104,7 @@
             var labelObjects = [];
             var labelNames = labels.split(',');
             labelNames.forEach(function (name, index) {
-                labelObjects[index] = { name: name };
+                labelObjects[index] = { Name: name };
             });
 
             return labelObjects;
@@ -114,7 +114,7 @@
             var prioritiesObjects = [];
             var priorityNames = priorities.split(/\W+/);
             priorityNames.forEach(function (name, index) {
-                prioritiesObjects[index] = { name: name };
+                prioritiesObjects[index] = { Name: name };
             });
 
             return prioritiesObjects;
