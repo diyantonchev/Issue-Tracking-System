@@ -109,6 +109,8 @@
                 var newLabels = convertLabelsToObjects(vm.labels);
                 newLabels.forEach(function (newLabel) {
                     vm.project.Labels.push(newLabel);
+
+                    vm.project.Labels = $.unique(vm.project.Labels);
                 });
 
                 vm.labels = '';

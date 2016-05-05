@@ -63,8 +63,8 @@
 
         function getProjectById(id) {
             return projects.getProjectById(id).then(function (data) {
-                vm.project = data;
-                return vm.project;
+                vm.issueProject = data;
+                return vm.issueProject;
             });
         }
 

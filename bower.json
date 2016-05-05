@@ -17,6 +17,7 @@
     "AngularJS-Toaster": "angularjs-toaster#^2.0.0",
     "jquery-ui": "^1.11.4",
     "ui-autocomplete": "^0.6.1",
-    "angular-bootstrap": "^1.3.2"
+    "angular-bootstrap": "^1.3.2",
+    "lodash": "^4.11.2"
   }
 }
