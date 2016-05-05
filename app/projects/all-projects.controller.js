@@ -17,25 +17,7 @@
         vm.submitProject = submitProject;
 
         activate();
-
-        vm.usersAutocomplete = {
-            options: {
-                onlySelect: true,
-                source: function (request, response) {
-                    var data = vm.usernames;
-                    data = vm.usersAutocomplete.methods.filter(data, request.term);
-
-                    if (!data.length) {
-                        data.push({
-                            label: 'not found',
-                            value: ''
-                        });
-                    }
-
-                    response(data);
-                },
-            }
-        };
+        configAutocomplete();
 
         function activate() {
             var promises = [getAvailableLabels(), getUsernames()];
@@ -118,6 +100,26 @@
             });
 
             return prioritiesObjects;
+        }
+        
+         function configAutocomplete() {
+            vm.usersAutocomplete = {
+                options: {
+                    onlySelect: true,
+                    source: function (request, response) {
+                        var data = vm.usernames;
+                        data = vm.usersAutocomplete.methods.filter(data, request.term);
+
+                        if (!data.length) {
+                            data.push({
+                                label: 'not found',
+                                value: ''
+                            });
+                        }
+                        response(data);
+                    },
+                }
+            };
         }
     }
 

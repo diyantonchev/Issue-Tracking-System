@@ -12,7 +12,6 @@
 
         return directive;
 
-
         function link(scope, element) {
             element.on('keyup', function (event) {
                 var users = [];
