@@ -4,15 +4,25 @@
     angular.module('issueTrackingSystem.projects')
         .controller('ProjectController', ProjectController);
 
-    ProjectController.$inject = ['$routeParams', '$location', 'identity', 'projects', 'getAllUsersService', 'toaster'];
-    function ProjectController($routeParams, $location, identity, projects, getAllUsersService, toaster) {
+    ProjectController.$inject = ['$q', '$routeParams', '$location', 'identity', 'projects', 'issues', 'labels', 'getAllUsersService', 'toaster'];
+    function ProjectController($q, $routeParams, $location, identity, projects, issues, labels, getAllUsersService, toaster) {
         var vm = this;
 
+        vm.issue = {
+            projectId: $routeParams.id
+        };
+
+        vm.project = {};
+        vm.users = getAllUsersService;
         vm.authors = [];
         vm.assignees = [];
         vm.issues = [];
+        vm.tags = [];
+
         vm.submitEditedProject = submitEditedProject;
-        vm.users = getAllUsersService;
+        vm.submitIssue = submitIssue;
+        vm.addLabel = addLabel;
+        vm.removeLabel = removeLabel;
 
         activate();
 
@@ -36,21 +46,8 @@
         };
 
         function activate() {
-            getCurrentUser();
-            getUsernames();
-            getProjectById($routeParams.id);
-            getProjectIssues($routeParams.id)
-                .then(function (issues) {
-                    issues.forEach(function (issue) {
-                        if (issue.Author && (vm.authors.indexOf(issue.Author.Username) === -1)) {
-                            vm.authors.push(issue.Author.Username);
-                        }
-
-                        if (issue.Assignee && (vm.assignees.indexOf(issue.Assignee.Username) === -1)) {
-                            vm.assignees.push(issue.Assignee.Username);
-                        }
-                    });
-                });
+            var promises = [getCurrentUser(), getProjectById($routeParams.id), getAvailableLabels(), getUsernames(), getProjectById($routeParams.id), getProjectIssues($routeParams.id)];
+            return $q.all(promises);
         }
 
         function getCurrentUser() {
@@ -77,8 +74,24 @@
 
         function getProjectIssues(id) {
             return projects.getProjectIssues(id).then(function (data) {
+                data.forEach(function (issue) {
+                    if (issue.Author && (vm.authors.indexOf(issue.Author.Username) === -1)) {
+                        vm.authors.push(issue.Author.Username);
+                    }
+
+                    if (issue.Assignee && (vm.assignees.indexOf(issue.Assignee.Username) === -1)) {
+                        vm.assignees.push(issue.Assignee.Username);
+                    }
+                });
+
                 vm.issues = data;
                 return vm.issues;
+            });
+        }
+
+        function getAvailableLabels() {
+            labels.getAvailableLabels().then(function (data) {
+                vm.allLabels = data;
             });
         }
 
@@ -103,6 +116,67 @@
             }
 
             editProject(vm.project, $routeParams.id);
+        }
+
+        function addIssue(issue) {
+            return issues.addIssue(issue).then(function (data) {
+                toaster.pop('success', 'Success', 'Issue successfully added');
+                $location.path('/projects/' + $routeParams.id);
+            }).catch(function () {
+                toaster.pop('error', 'Error', 'Chosen Assigne does not exists. Please choose Assignee from the list provided!');
+            });
+        }
+
+        function submitIssue(data) {
+            if (vm.labels) {
+                vm.issue.labels = convertLabelsToObjects(vm.labels);
+            }
+
+            if (vm.assigneeUsername) {
+                var assignee = vm.users.filter(function (user) {
+                    return user.Username === vm.assigneeUsername;
+                })[0];
+
+                if (assignee) {
+                    vm.issue.AssigneeId = assignee.Id;
+                }
+            }
+
+            addIssue(vm.issue);
+        }
+
+        function addLabel(newLabel) {
+            if (newLabel !== '' && vm.tags.indexOf(newLabel) === -1) {
+                vm.tags.push($('#labels').val());
+                vm.labels = vm.tags.join();
+            }
+
+            vm.newLabel = '';
+        }
+
+        function removeLabel(index) {
+            vm.tags.splice(index, 1);
+            vm.labels = vm.tags.join();
+        }
+
+        function convertLabelsToObjects(labels) {
+            var labelObjects = [];
+            var labelNames = labels.split(',');
+            labelNames.forEach(function (name, index) {
+                labelObjects[index] = { name: name };
+            });
+
+            return labelObjects;
+        }
+
+        function convertPrioritiesToObjects(priorities) {
+            var prioritiesObjects = [];
+            var priorityNames = priorities.split(/\W+/);
+            priorityNames.forEach(function (name, index) {
+                prioritiesObjects[index] = { name: name };
+            });
+
+            return prioritiesObjects;
         }
 
     }

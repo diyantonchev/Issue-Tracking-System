@@ -29,7 +29,7 @@
 
         $routeProvider.when('/projects/:id/add-issue', {
             templateUrl: 'app/projects/partials/add-issue.html',
-            controller: 'AddIssueController',
+            controller: 'ProjectController',
             controllerAs: 'vm',
             resolve: {
                 isAuthenticated: isAuthenticated,

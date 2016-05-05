@@ -46,7 +46,6 @@
 
         function getIssueById(id) {
             return issues.getIssueById(id).then(function (data) {
-                console.log(data);
                 vm.issue = {
                     Id: data.Id,
                     Title: data.Title,
