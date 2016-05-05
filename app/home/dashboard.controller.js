@@ -25,8 +25,12 @@
         vm.reloadProjects = reloadProjects;
         vm.reloadIssues = reloadIssues;
 
-        reloadProjects();
-        reloadIssues();
+        activate();
+
+        function activate() {
+            var promises = [reloadProjects(), reloadIssues()];
+            $q.all(promises);
+        }
 
         function reloadProjects() {
             var user = identity.getCurrentUser().then(function (user) {

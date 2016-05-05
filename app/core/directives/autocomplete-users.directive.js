@@ -16,7 +16,7 @@
         function link(scope, element) {
             element.on('keyup', function (event) {
                 var users = [];
-                scope.users.forEach(function (user) {
+                scope.vm.users.forEach(function (user) {
                     users.push(user.Username);
                 });
 

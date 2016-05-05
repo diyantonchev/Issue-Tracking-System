@@ -56,7 +56,7 @@
         function makeAdmin(user) {
             return identity.makeAdmin(user)
                 .then(function () {
-                    toaster.notify('success', 'Success', '');
+                    toaster.notify('success', 'Success', 'User has been made admin');
                 });
         }
     }
