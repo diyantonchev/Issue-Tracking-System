@@ -9,8 +9,7 @@
     <div class="form-group row">
         <label for="description" class="col-md-4 form-control-label">Description:</label>
         <div class="col-md-6">
-            <textarea rows="4" type="text" data-ng-model="vm.project.Description" class="form-control" id="description"
-                required="required">
+            <textarea rows="4" type="text" data-ng-model="vm.project.Description" class="form-control" id="description" required="required">
             </textarea>
         </div>
     </div>
@@ -18,12 +17,13 @@
     <div class="form-group row" data-ng-if="vm.currentUser.isAdmin">
         <label for="projectLeadId" class="col-md-4 form-control-label">Lead (current: {{vm.project.Lead.Username}})</label>
         <div class="col-md-6">
-            <input type="text" ui-autocomplete="vm.usersAutocomplete" data-ng-model="vm.leadUsername" class="form-control" placeholder="Choose new project leader" id="projectLeadId">
+            <input type="text" ui-autocomplete="vm.usersAutocomplete" data-ng-model="vm.leadUsername" class="form-control" placeholder="Choose new project leader"
+                id="projectLeadId">
         </div>
     </div>
     <hr>
     <div class="form-group row">
-        <label class="col-md-4">Labels:</label>
+        <label class="col-md-4">Current Labels:</label>
         <div class="col-md-6">
             <div data-ng-if="vm.project.Labels.length === 0">No Labels</div>
             <div class="label-container" data-ng-repeat="label in vm.project.Labels">
@@ -33,14 +33,39 @@
         </div>
     </div>
     <hr>
+    <tag-manager tags="tags">
+        <div class="form-group row">
+            <label class="col-md-4 form-control-label" for="labels">Add Labels:</label>
+            <div class="col-md-6">
+                <div class="tags">
+                    <div ng-repeat="(index, tag) in vm.tags" class="tag label label-success">{{tag}} <a href="" class="close" ng-click="vm.removeLabel(index)">×</a></div>
+                </div>
+                <div class="input-group">
+                    <input type="text" autocomplete-labels data-ng-model="vm.newLabel" class="form-control" id="labels" placeholder="Add Label..."
+                    />
+                    <span class="input-group-btn">
+                      <button class="btn btn-success" ng-click="vm.addLabel(vm.newLabel)" type="button">Add</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </tag-manager>
+    <hr>
     <div class="form-group row">
-        <label for="projectPriorities" class="col-md-4">Priorities:</label>
+        <label for="projectPriorities" class="col-md-4">Current Priorities:</label>
         <div class="col-md-6">
             <div data-ng-if="vm.project.Priorities.length === 0">No Priorities</div>
             <div class="label-container" data-ng-repeat="priority in vm.project.Priorities">
                 <input type="text" data-ng-model="priority.Name" class="form-control repeat-input">
                 <img src="resources/delete.png" class="delete-bullet" alt="delete" remove-priority>
             </div>
+        </div>
+    </div>
+    <hr>
+    <div class="form-group row">
+        <label for="newPriorities" class="col-md-4">Add Priorities:</label>
+        <div class="col-md-6">
+            <input type="text" id="newPriorities" class="form-control" data-ng-model="vm.newPriorities">
         </div>
     </div>
     <hr>

@@ -105,6 +105,22 @@
         }
 
         function submitEditedProject() {
+            if (vm.labels) {
+                var newLabels = convertLabelsToObjects(vm.labels);
+                newLabels.forEach(function (newLabel) {
+                    vm.project.Labels.push(newLabel);
+                });
+
+                vm.labels = '';
+            }
+
+            if (vm.newPriorities) {
+                var newPriorities = convertPrioritiesToObjects(vm.newPriorities);
+                newPriorities.forEach(function (newPriority) {
+                    vm.project.Priorities.push(newPriority);
+                });
+            }
+
             if (vm.leadUsername) {
                 var lead = vm.users.filter(function (user) {
                     return user.Username === vm.leadUsername;
@@ -130,6 +146,7 @@
         function submitIssue(data) {
             if (vm.labels) {
                 vm.issue.labels = convertLabelsToObjects(vm.labels);
+                vm.labels = '';
             }
 
             if (vm.assigneeUsername) {
