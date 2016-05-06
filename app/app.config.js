@@ -10,7 +10,7 @@
     function config($routeProvider, $httpProvider) {
 
         $routeProvider.otherwise({ redirectTo: '/' });
-
+        
         $httpProvider.interceptors.push(interceptor);
     }
 

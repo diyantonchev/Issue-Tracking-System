@@ -28,7 +28,7 @@
             return projects.addProject(newProject).then(function (data) {
                 toaster.pop('success', 'Success', 'Project successfully added');
             }).catch(function (err) {
-                console.log(err);
+                console.error(err);
                 toaster.pop('error','Error', err.Message);
             });
         }
