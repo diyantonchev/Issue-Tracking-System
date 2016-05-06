@@ -38,6 +38,20 @@
             });
         }
 
+        function getProjectById(id) {
+            return projects.getProjectById(id).then(function (data) {
+                vm.project = data;
+                return vm.project;
+            });
+        }
+
+        function changeStatus(statusId) {
+            return issues.changeStatus(vm.issue.Id, statusId).then(function (data) {
+                activate();
+                toaster.pop('info', 'Status Change', 'Status has been changed');
+            });
+        }
+
         function getComments(id) {
             return issues.getComments(id).then(function (data) {
                 vm.comments = data;
@@ -57,7 +71,6 @@
 
                 if (isIssueAssignee || isProjectLead || hasAssignedIssue || isAdmin) {
                     vm.userCanComment = true;
-
                 } else {
                     vm.userCanComment = false;
                 }
@@ -75,20 +88,6 @@
             }).catch(function (data) {
                 console.error(data);
                 toaster.pop('error', 'Error', data.Message);
-            });
-        }
-
-        function getProjectById(id) {
-            return projects.getProjectById(id).then(function (data) {
-                vm.project = data;
-                return vm.project;
-            });
-        }
-
-        function changeStatus(statusId) {
-            return issues.changeStatus(vm.issue.Id, statusId).then(function (data) {
-                activate();
-                toaster.pop('info', 'Status Change', 'Status has been change');
             });
         }
 

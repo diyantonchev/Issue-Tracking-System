@@ -71,7 +71,7 @@
         return identity.getCurrentUser().then(function (user) {
             if (!user.isAdmin) {
                 $location.path('#/');
-                toaster.pop('info', 'Admins only', 'you cannot access this page');
+                toaster.pop('info', 'Admins only', 'You cannot access this page');
             }
         });
     }

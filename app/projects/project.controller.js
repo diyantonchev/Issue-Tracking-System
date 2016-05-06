@@ -4,7 +4,10 @@
     angular.module('issueTrackingSystem.projects')
         .controller('ProjectController', ProjectController);
 
-    ProjectController.$inject = ['$q', '$routeParams', '$location', 'identity', 'projects', 'issues', 'labels', 'getAllUsersService', 'toaster'];
+    ProjectController.$inject = [
+        '$q', '$routeParams', '$location',
+        'identity', 'projects', 'issues', 'labels',
+        'getAllUsersService', 'toaster'];
     function ProjectController($q, $routeParams, $location, identity, projects, issues, labels, getAllUsersService, toaster) {
         var vm = this;
 
@@ -28,7 +31,13 @@
         configAutocomplete();
 
         function activate() {
-            var promises = [getCurrentUser(), getProjectById($routeParams.id), getAvailableLabels(), getUsernames(), getProjectById($routeParams.id), getProjectIssues($routeParams.id)];
+            var promises = [
+                getCurrentUser(),
+                getProjectById($routeParams.id),
+                getAvailableLabels(), getUsernames(),
+                getProjectById($routeParams.id),
+                getProjectIssues($routeParams.id)];
+
             return $q.all(promises);
         }
 
@@ -47,13 +56,6 @@
                 });
         }
 
-        function getUsernames() {
-            vm.usernames = [];
-            vm.users.forEach(function (user) {
-                vm.usernames.push(user.Username);
-            });
-        }
-
         function getProjectIssues(id) {
             return projects.getProjectIssues(id).then(function (data) {
                 data.forEach(function (issue) {
@@ -68,12 +70,6 @@
 
                 vm.issues = data;
                 return vm.issues;
-            });
-        }
-
-        function getAvailableLabels() {
-            labels.getAvailableLabels().then(function (data) {
-                vm.allLabels = data;
             });
         }
 
@@ -144,6 +140,19 @@
             }
 
             addIssue(vm.issue);
+        }
+
+        function getAvailableLabels() {
+            labels.getAvailableLabels().then(function (data) {
+                vm.allLabels = data;
+            });
+        }
+
+        function getUsernames() {
+            vm.usernames = [];
+            vm.users.forEach(function (user) {
+                vm.usernames.push(user.Username);
+            });
         }
 
         function addLabel(newLabel) {

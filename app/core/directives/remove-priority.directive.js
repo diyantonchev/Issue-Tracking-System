@@ -12,7 +12,6 @@
 
         return directive;
 
-
         function link(scope, element) {
             element.on('click', function (event) {
                 var input = this.previousElementSibling;
