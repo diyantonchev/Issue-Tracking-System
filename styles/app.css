@@ -229,6 +229,10 @@ textarea {
     margin-top: 10px;
 }
 
+.modal {
+     word-wrap: break-word;
+}
+
 .ui-autocomplete {
     z-index: 5000;
 }
