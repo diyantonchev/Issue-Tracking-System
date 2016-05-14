@@ -35,7 +35,6 @@
                 getCurrentUser(),
                 getProjectById($routeParams.id),
                 getAvailableLabels(), getUsernames(),
-                getProjectById($routeParams.id),
                 getProjectIssues($routeParams.id)];
 
             return $q.all(promises);
